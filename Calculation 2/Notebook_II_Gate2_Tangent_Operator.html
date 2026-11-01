@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Notebook II, Gate 2 - Horizontal Screening Jet and Deformation Intertwiner</title>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]]},TeX:{equationNumbers:{autoNumber:"AMS"}}});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<style>
+:root{--ink:#211c18;--muted:#6d6258;--paper:#fbf8f2;--card:#fffdf8;--line:#d9cdbf;--red:#873d33;--green:#315c45;--blue:#34516d;--gold:#896d24;--code:#26221e}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 Georgia,"Times New Roman",serif}
+#shell{display:grid;grid-template-columns:280px minmax(0,1fr);min-height:100vh}nav{position:sticky;top:0;height:100vh;overflow:auto;padding:25px 20px;background:#eee7db;border-right:1px solid var(--line)}nav h2{font:700 15px/1.25 system-ui;margin:0 0 16px}nav a{display:block;color:#4c4037;text-decoration:none;font:13px/1.35 system-ui;padding:5px 0}nav a:hover{color:var(--red)}main{max-width:1040px;padding:55px 64px 90px}h1{font-size:39px;line-height:1.12;margin:0 0 10px}h2{font-size:27px;line-height:1.2;margin:2.1em 0 .7em;border-bottom:1px solid var(--line);padding-bottom:.25em}h3{font-size:20px;margin:1.65em 0 .55em}p{margin:.65em 0}.deck{font-size:19px;color:var(--muted);max-width:900px}.status{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0}.pill{font:700 12px/1 system-ui;padding:8px 11px;border-radius:999px;border:1px solid}.pass{color:var(--green);background:#edf6ef}.new{color:var(--blue);background:#edf3f8}.warn{color:var(--gold);background:#fbf4df}.env{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:8px;padding:14px 17px;margin:18px 0}.env.theorem{border-left-color:var(--green)}.env.warning{border-left-color:var(--gold)}.env.definition{border-left-color:var(--red)}.tag{display:block;font:700 12px/1.25 system-ui;text-transform:uppercase;letter-spacing:.04em;margin-bottom:7px;color:var(--muted)}.boxed{border:2px solid var(--green);background:#f3f8f3;padding:13px 16px;border-radius:8px;margin:18px 0}table{border-collapse:collapse;width:100%;margin:18px 0;background:var(--card);font-size:14px}th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top}th{background:#eee7db;text-align:left;font-family:system-ui}.cell{border:1px solid #453e36;border-radius:7px;overflow:hidden;margin:18px 0}.cell-head{background:#3a332d;color:#fff;padding:8px 11px;font:700 12px system-ui}textarea{display:block;width:100%;min-height:175px;border:0;resize:vertical;background:var(--code);color:#f7f0e7;padding:12px;font:12px/1.4 "DejaVu Sans Mono",monospace}.small{font-size:13px;color:var(--muted)}code{font-family:"DejaVu Sans Mono",monospace}a{color:#744238}.footer{border-top:1px solid var(--line);margin-top:55px;padding-top:18px;color:var(--muted);font-size:13px}@media(max-width:900px){#shell{display:block}nav{position:relative;height:auto}main{padding:35px 22px}}
+@media print{nav{display:none}#shell{display:block}main{max-width:none;padding:0}body{background:white;font-size:10.4pt}h1{font-size:25pt}h2{font-size:18pt}.env,.cell,table{break-inside:avoid;box-shadow:none}textarea{font-size:7pt}}
+</style>
+</head>
+<body><div id="shell">
+<nav><h2>Notebook II, Gate 2</h2>
+<a href="#abstract">Abstract and verdict</a><a href="#s1">1. Frozen input and notation</a><a href="#s2">2. Common completed category</a><a href="#s3">3. Full zero-mode embedding</a><a href="#s4">4. Exact transported vertices</a><a href="#s5">5. Opposite-polarization BCH</a><a href="#s6">6. Periodic logarithmic residue</a><a href="#s7">7. Coefficient operators</a><a href="#s8">8. A1 represented connection</a><a href="#s9">9. Ambiguities and flag</a><a href="#s10">10. Three tangent directions</a><a href="#s11">11. Gate ledger</a><a href="#refs">References</a>
+</nav><main>
+<header id="abstract">
+<h1>Horizontal Finite-\(\varepsilon\) Screening Jet and Deformation Intertwiner</h1>
+<p class="deck">Notebook II, Gate 2 - exact resonant source families, fixed-fibre PBW comparison of the moving targets, regulated opposite-polarization BCH conversion, periodic coefficient extraction, and the represented \(A_1\) connection equation.</p>
+<div class="status"><span class="pill pass">GATE 2 CLOSED</span> <span class="pill new">OUTCOME B AT A1</span> <span class="pill warn">NOT AN ORDINARY SECOND SCREENING</span></div>
+<div class="boxed"><b>Verdict.</b> For each \(A_1\) root component and each integral monodromy label, the two regular parent screenings form exact intertwiners on horizontal resonant Fock families. Canonical PBW-flat source and target frames identify their moving Hom-spaces with one fixed leading Hom-space. After the scalar, \(z\)-independent anti-normal-ordering subtraction, the odd numerator is genuinely divisible by \(t=\varepsilon^2\), and its coefficient \(Q^{[1]}\) is finite, nonzero and linearly independent from \(Q^{[0]}\). The two target representations nevertheless follow different momentum curves. Their first represented-current coefficients do not agree, so \(Q^{[1]}\) obeys an inhomogeneous connection/deformation-intertwiner equation and is not an ordinary screening of the frozen Carrollian algebra in the PBW-flat frame. Gate 2 therefore closes with Outcome B at \(A_1\). Regulator and base-point changes are scalar triangular; general connection changes obey the full source-target gauge law. No quantum screening doublet and no nonlinear \(A_2/W_3\) theorem is claimed.</div>
+<p>The Gate-1 local result remains true: the bounded density symbol \((\beta_1^{\rm sf}\varphi^-+B_{\rm diff}\varphi^+)E\) has remainder \((\beta_1^{\rm sf})^2/4\). Gate 2 does not erase that calculation. It shows why the local criterion was insufficient: the exact plane-to-cylinder one-form carries an affine logarithmic factor, and the barred parent normal ordering becomes anti-normal ordering. The parent-coefficient residue contains both effects and is not the residue of the truncated local symbol.</p>
+</header>
+
+<h2 id="s1">1. Frozen input and notation</h2>
+<p>The immutable upstream artifact is <code>Notebook_II_Gate1_Freeze_Grade_Peer_Review_Corrected.zip</code>. Its SHA-256 is:</p>
+<pre><code>860df721f9de6c266ff4f9016aedce6c1bc908afa66ec36095ec3094de42c871</code></pre>
+<p>Gate 2 uses its constrained Cartan projector \(\kappa_{AB}=\delta_{AB}-1/N\), crossed brackets</p>
+\[
+[J^+_{A,m},J^-_{B,n}]=\frac m2\kappa_{AB}\delta_{m+n,0},\qquad
+[p^-_A,q^+_B]=[p^+_A,q^-_B]=\frac12\kappa_{AB},
+\]
+<p>and the dictionary \(\beta_1^{\rm sf}=-2\mu_1\). The detailed operator proof below is written in the \(N=2\) single-field normalization, where \(\varphi_{\rm sf}^{\pm}=-\alpha_1\mathbin\cdot\varphi^{\pm}/2\), \((\alpha_1,\alpha_1)=2\), and therefore</p>
+\[
+[J^+_m,J^-_n]=\frac m4\delta_{m+n,0},\qquad
+[p^-_{\rm sf},q^+_{\rm sf}]=[p^+_{\rm sf},q^-_{\rm sf}]=\frac14.
+\]
+<p>The root form is recovered by replacing \((\beta_1^{\rm sf})^2/2\) with \(\mu_1^2(\alpha_i,\alpha_i)\).</p>
+
+<div class="env definition"><span class="tag">Definition 1.1 - exact regular branches</span>
+<p>Put \(t=\varepsilon^2\), \(\alpha(t)=\alpha^++t\alpha^-\), and \(\bar\alpha(t)=\alpha^+-t\alpha^-\). Let \(b(t),\bar b(t)\in\mathbb C[[t]]\) be the unique regular solutions with the same nonzero constant term \(b_1=-2/\alpha^+\) of</p>
+\[
+t b(t)^2-2\alpha(t)b(t)-4=0,\qquad
+t\bar b(t)^2-2\bar\alpha(t)\bar b(t)-4=0.
+\]
+<p>Writing \(b=b_1+t b_3+\cdots\), \(\bar b=b_1+t\bar b_3+\cdots\) gives</p>
+\[
+\alpha^+b_3=\frac{b_1^2}{2}-\alpha^-b_1,\qquad
+\alpha^+\bar b_3=\frac{b_1^2}{2}+\alpha^-b_1.
+\]
+</div>
+
+<h2 id="s2">2. Common completed source and target category</h2>
+<div class="env definition"><span class="tag">Definition 2.1 - horizontal Fock families and fixed formal neighborhood</span>
+<p>Let \(R=\mathbb C[[t]]\). For a formal momentum curve \(\lambda(t)=(\lambda^+(t),\lambda^-(t))\), let</p>
+\[
+\mathcal F_R(\lambda(t))=\mathcal P_{\rm fin}\otimes R\lvert\lambda(t)\rangle,
+\qquad
+\widehat{\mathcal F}_R(\lambda(t))=\widehat{\mathcal P}_E\otimes R\lvert\lambda(t)\rangle,
+\quad
+\widehat{\mathcal P}_E=\prod_{E\ge0}\mathcal P[E].
+\]
+<p>The zero modes \(p^\pm\) act diagonally on the vacuum and the negative oscillators give a PBW basis. The canonical PBW-flat trivialization</p>
+\[
+\tau_{\lambda}:X\lvert\lambda(t)\rangle\longmapsto X\lvert\lambda(0)\rangle,
+\qquad X\in\mathcal P_{\rm fin},
+\]
+<p>identifies each moving Fock family coefficientwise with its leading fibre. Requiring preservation of every negative-mode PBW monomial and of a chosen normalized vacuum <em>vector</em> fixes this trivialization uniquely. If only the vacuum line is retained and its normalization is relaxed, scalar frame freedom remains.</p>
+<p>For displaying derivatives of sector translations, but <em>not</em> as the screening source, use the fixed-lattice formal neighborhood</p>
+\[
+\mathscr N_{\Lambda_0}=
+\mathbb C[\Lambda_0]\widehat\otimes
+\mathbb C[[t,\eta^+,\eta^-]],\qquad
+p^\pm=\lambda_0^\pm+\eta^\pm,\qquad
+q^\mp=-\frac12\partial_{\eta^\pm}^{\mathfrak h}.
+\]
+<p>Thus \(e^{\gamma q^+}f(\eta^-)=f(\eta^--\kappa\gamma/2)\), and every moving translation factors exactly as</p>
+\[
+e^{\gamma(t)q^+}=e^{\gamma(0)q^+}
+e^{(\gamma(t)-\gamma(0))q^+},\qquad
+e^{(\gamma(t)-\gamma(0))q^+}=1+O(t).
+\]
+<p>The first factor shifts the discrete leading lattice; the second is a \(t\)-adically small translation generated by the now explicit unexponentiated \(q^+\). This replaces the invalid moving direct-sum group algebra: distinct moving group-algebra basis vectors are never declared equal modulo \(t\).</p>
+</div>
+<div class="env theorem"><span class="tag">Proposition 2.2 - common fixed-fibre Hom-space</span>
+<p>Let \(\lambda_m(t)\) be the horizontal source curve of Proposition 3.2. Since \([p^-_{\rm sf},q^+_{\rm sf}]=[p^+_{\rm sf},q^-_{\rm sf}]=1/4\), the zero-mode exponential \(e^{b(q^++tq^-)}\) shifts \((p^+,p^-)\) by \((tb/4,b/4)\). Hence in the single-field normalization the two vertex shifts are</p>
+\[
+\Delta_{\rm u}(t)=\frac14\big(t b(t),b(t)\big),\qquad
+\Delta_{\rm b}(t)=\frac14\big(-t\bar b(t),\bar b(t)\big),
+\qquad \Delta_{\rm u}(0)=\Delta_{\rm b}(0)=:\Delta_0.
+\]
+<p>Rootwise, the minus component is \(\mu(t)\kappa\alpha_i/2\) and the frozen dictionary is \(\mu=-b/2\). At \(A_1\), reducing with \(p_{\rm sf}=-\alpha_1\mathbin\cdot p/2\) and \((\alpha_1,\alpha_1)=2\) gives, consistently,</p>
+\[
+\Delta p_{\rm sf}^-=-\frac12\alpha_1\mathbin\cdot
+\left(\frac{\mu}{2}\alpha_1\right)
+=-\frac{\mu}{2}=\frac b4.
+\]
+<p>The two target trivializations</p>
+\[
+\tau_{{\rm u},m}:\widehat{\mathcal F}_R(\lambda_m+\Delta_{\rm u})\to
+\widehat{\mathcal F}(\lambda_m(0)+\Delta_0)[[t]],
+\]
+\[
+\tau_{{\rm b},m}:\widehat{\mathcal F}_R(\lambda_m+\Delta_{\rm b})\to
+\widehat{\mathcal F}(\lambda_m(0)+\Delta_0)[[t]]
+\]
+<p>and the source trivialization \(\tau_{{\rm s},m}\) place both parent intertwiners in the same complete module</p>
+\[
+\mathscr H_m={\rm Hom}_{\mathbb C}
+\big(\mathcal F(\lambda_m(0)),\widehat{\mathcal F}(\lambda_m(0)+\Delta_0)\big)[[t]].
+\]
+<p>Creation exponentials are coefficientwise finite in energy, annihilation exponentials truncate on \(\mathcal P_{\rm fin}\), and the PBW maps are continuous. Hence the renormalized ordered vertices define continuous elements of \(\mathscr H_m\{z\}[\ell]\). The source of the screening theorem is the direct sum of the exact horizontal fibres over \(m\in\mathbb Z\); the ambient neighborhood \(\mathscr N_{\Lambda_0}\) is used only to write connection derivatives and to audit off-horizontal monodromy.</p>
+</div>
+
+<h2 id="s3">3. Complete oscillator and zero-mode embeddings</h2>
+<div class="env theorem"><span class="tag">Proposition 3.1 - full Weyl embeddings</span>
+\[
+I_t(a_{A,n})=t^{-1/2}J^+_{A,n}+t^{1/2}J^-_{A,n},\quad
+I_t(\bar a_{A,n})=t^{-1/2}J^+_{A,-n}-t^{1/2}J^-_{A,-n},
+\]
+\[
+I_t(p)=t^{-1/2}p^++t^{1/2}p^-,\quad I_t(q)=t^{-1/2}q^++t^{1/2}q^-,
+\]
+\[
+I_t(\bar p)=t^{-1/2}p^+-t^{1/2}p^-,\quad
+I_t(\bar q)=-t^{-1/2}q^++t^{1/2}q^-.
+\]
+<p>They preserve both parent Weyl algebras and make their images commute. Because the formulas contain \(t^{\pm1/2}\), these embeddings are formed after scalar extension from \(R=\mathbb C[[t]]\) to \(K=\mathbb C((t^{1/2}))\). The transported screening vertices and contracted currents used below lie in the regular \(t\)-adic subcategory. The plane zero modes are obtained by restoring the Feigin-Fuchs shifts \(a_0=\mathcal J_0+\alpha_{\rm pl}/2\) and \(\bar a_0=\bar{\mathcal J}_0+\bar\alpha_{\rm pl}/2\); these shifts are not absorbed into \(p^\pm\).</p>
+</div>
+<div class="env theorem"><span class="tag">Proposition 3.2 - simultaneous monodromy section</span>
+<p>For an integer Fourier label \(m\), define \(\lambda^\pm_m(t)\) by</p>
+\[
+\lambda^+_m=\frac12\left(\frac{m-\delta}{b}+\frac{m-\bar\delta}{\bar b}\right),\qquad
+t\lambda^-_m=\frac12\left(\frac{m-\delta}{b}-\frac{m-\bar\delta}{\bar b}\right),
+\]
+<p>where \(\delta=t b^2/4\), \(\bar\delta=t\bar b^2/4\). Since \(b-\bar b=O(t)\), both \(\lambda^+_m\) and \(\lambda^-_m\) are regular series. They solve simultaneously</p>
+\[
+\delta+b\lambda^+_m+t b\lambda^-_m=m,\qquad
+\bar\delta+\bar b\lambda^+_m-t\bar b\lambda^-_m=m.
+\]
+<p>Thus both parent one-forms have the same integral monodromy on one exact horizontal section of the momentum bundle.</p>
+</div>
+<div class="env warning"><span class="tag">Corollary 3.3 - no off-horizontal screening jets</span>
+<p>If one perturbs the source by \(p^+=\lambda_m^++\xi\), \(p^-=\lambda_m^-+\nu\), the residual exponents are</p>
+\[
+a_{\rm u}=b\xi+t b\nu,\qquad
+a_{\rm b}=\bar b\xi-t\bar b\nu.
+\]
+<p>For generic \(t,b,\bar b\), simultaneous resonance forces \(\xi=\nu=0\). Therefore arbitrary momentum jets are not objects of the finite-parent screening domain. This restriction is essential: the formal neighborhood of Definition 2.1 compares moving target sectors, whereas the source is the horizontal fibre itself.</p>
+</div>
+
+<div class="cell"><div class="cell-head">Cell 1 - branch equations and common monodromy</div><textarea>import sympy as sp
+t, ap, am, b1, b3, bb3, m = sp.symbols('t alpha_plus alpha_minus b1 b3 bbar3 m', nonzero=True)
+b = b1+t*b3; bb = b1+t*bb3
+F = sp.expand(t*b**2-2*(ap+t*am)*b-4)
+Fb = sp.expand(t*bb**2-2*(ap-t*am)*bb-4)
+assert sp.expand(F).coeff(t,0) == -2*ap*b1-4
+assert sp.expand(F).coeff(t,1) == b1**2-2*ap*b3-2*am*b1
+assert sp.expand(Fb).coeff(t,1) == b1**2-2*ap*bb3+2*am*b1
+d, db = t*b**2/4, t*bb**2/4
+lp = sp.Rational(1,2)*((m-d)/b+(m-db)/bb)
+tlm = sp.Rational(1,2)*((m-d)/b-(m-db)/bb)
+assert sp.simplify(d+b*lp+b*tlm-m) == 0
+assert sp.simplify(db+bb*lp-bb*tlm-m) == 0
+xi, nu = sp.symbols('xi nu')
+au, ab = b*xi+t*b*nu, bb*xi-t*bb*nu
+assert sp.simplify(sp.det(sp.Matrix([[b,t*b],[bb,-t*bb]]))+2*t*b*bb) == 0
+assert sp.solve([au,ab],[xi,nu], dict=True) == [{xi:0,nu:0}]
+print('regular horizontal branches pass; off-horizontal simultaneous jets are excluded')</textarea></div>
+
+<h2 id="s4">4. Exact transported finite-\(t\) vertices</h2>
+<div class="env theorem"><span class="tag">Lemma 4.1 - affine one-form factor</span>
+<p>The plane-cylinder potential relations of Gate 1 and the source-plane signs \(\beta_{\rm pl}=-\sqrt t\,b(t)\), \(\bar\beta_{\rm pl}=+\sqrt t\,\bar b(t)\) give</p>
+\[
+\mathbb V_t(z)=z^{\delta(t)}:\!\exp[b(t)(\varphi^+(z)+t\varphi^-(z))]\!:\,,
+\]
+\[
+\mathbb{\bar V}^{\rm raw}_{t,\rho}(z)=z^{\bar\delta(t)}\,\mathop{\circ\!\circ}_{\rho}
+\exp[\bar b(t)(\varphi^+(z)-t\varphi^-(z))]\mathop{\circ\!\circ}_{\rho},
+\]
+<p>with \(\delta=1+\alpha(t)b/2\) and \(\bar\delta=1+\bar\alpha(t)\bar b/2\). The weight-one equations imply the exact identities</p>
+\[
+\boxed{\delta(t)=\frac{t b(t)^2}{4},\qquad \bar\delta(t)=\frac{t\bar b(t)^2}{4}.}
+\]
+<p>The \(z^{\delta}\) factors are part of the transported one-forms. Omitting them reproduces the Gate-1 local obstruction and is not an exact finite-parent comparison.</p>
+</div>
+<div class="env theorem"><span class="tag">Corollary 4.2 - first coefficients before barred subtraction</span>
+<p>With \(E=:\!e^{b_1\varphi^+}\!:\),</p>
+\[
+\mathbb V_t=E+t:\!\left(b_1\varphi^-+b_3\varphi^++\frac{b_1^2}{4}\ell\right)E\!:+O(t^2),
+\]
+\[
+\mathbb{\bar V}^{\rm raw}_t=E+t\,\mathop{\circ\!\circ}
+\left(-b_1\varphi^-+\bar b_3\varphi^++\frac{b_1^2}{4}\ell\right)E
+\mathop{\circ\!\circ}+O(t^2).
+\]
+</div>
+
+<h2 id="s5">5. Opposite-polarization BCH conversion</h2>
+<div class="env theorem"><span class="tag">Theorem 5.1 - regulated conversion factor</span>
+<p>Insert a radial damping \(0&lt;\rho&lt;1\) in each barred contraction. For one \(A_1\) field the annihilation and creation exponents \(A_\rho,B_\rho\) obey</p>
+\[
+[A_\rho,B_\rho]=\frac{t\bar b(t)^2}{2}\sum_{n\ge1}\frac{\rho^n}{n},\mathbf1
+=-\frac{t\bar b(t)^2}{2}\log(1-\rho)\,\mathbf1.
+\]
+<p>Consequently</p>
+\[
+e^{A_\rho}e^{B_\rho}=\bar Z_{t,\rho}\,e^{B_\rho}e^{A_\rho},\qquad
+\boxed{\bar Z_{t,\rho}=(1-\rho)^{-t\bar b(t)^2/2}},\qquad Z_t=1.
+\]
+<p>The factors are scalar, \(z\)-independent, and coefficientwise analytic in \(t\) at fixed \(\rho\). Define the minimal renormalized barred field by \(\widehat{\bar V}_t=\lim_{\rho\uparrow1}\bar Z_{t,\rho}^{-1}\mathbb{\bar V}^{\rm raw}_{t,\rho}\). A finite subtraction multiplies it by \(e^{c(t)}\), \(c(t)\in t\mathbb C[[t]]\). For a root vertex the exponent \(t\bar b^2/2\) is \(t\bar\mu^2(\alpha_i,\alpha_i)\).</p>
+</div>
+<div class="cell"><div class="cell-head">Cell 2 - BCH coefficient and scalar character</div><textarea>import sympy as sp
+n, t, b, rho = sp.symbols('n t b rho', positive=True)
+# [J+_n-tJ-_n, J+_-n-tJ-_-n] = -t*n/2 in the A1 single-field normalization.
+bracket = -t*n/sp.Integer(2)
+coeff = sp.simplify((-b/n)*(b/n)*bracket)
+assert coeff == t*b**2/(2*n)
+H = -sp.log(1-rho)
+Z = sp.exp(t*b**2*H/2)
+assert sp.diff(sp.log(Z), sp.Symbol('z')) == 0
+print('barred BCH factor = exp(t*b^2*H_rho/2), scalar and z-independent')</textarea></div>
+
+<h2 id="s6">6. Periodic logarithmic residue</h2>
+<div class="env definition"><span class="tag">Definition 6.1 - based logarithmic residue</span>
+<p>Fix \(z_0\in\mathbb C^\times\) and the branch \(z=z_0e^{i\theta}\), \(0\le\theta\le2\pi\), \(\ell=\log(z/z_0)=i\theta\). Define continuously on logarithmic Laurent fields</p>
+\[
+\mathop{\rm LRes}_{z_0}f:=\frac1{2\pi i}\int_{0}^{2\pi} f(z_0e^{i\theta})\,i z_0e^{i\theta}d\theta.
+\]
+<p>Equivalently, for \(r\in\mathbb Z\) and formal \(a\),</p>
+\[
+\boxed{\mathop{\rm LRes}_{z_0}\big(z^{r-1}e^{a\ell}\big)
+=z_0^r\frac{e^{2\pi ia}-1}{2\pi i(r+a)},}
+\]
+<p>with the removable value at \(r+a=0\). It reduces to the usual residue at \(a=0\), but \(\mathop{\rm LRes}_{z_0}(d\ell)=1\). This is why a local total derivative cannot be discarded before the branch prescription.</p>
+</div>
+<div class="env theorem"><span class="tag">Proposition 6.2 - horizontal periodicity and the boundary term</span>
+<p>For a weight-one field with residual exponent \(a\), the based integral of the total derivative is</p>
+\[
+\mathop{\rm LRes}_{z_0}\partial_z\big(z^{n+1}V(z)\big)
+=\frac{e^{2\pi i a}-1}{2\pi i}\,z_0^{n+1}V(z_0).
+\]
+<p>This off-horizontal logarithmic boundary anomaly is generically nonzero on the ambient neighborhood. On the exact source curves of Proposition 3.2, however, \(a_{\rm u}(t)=a_{\rm b}(t)=0\) identically as formal series, not merely at \(t=0\). Both boundary terms therefore vanish before coefficient extraction. The two finite-parent cylinder integrals are ordinary periodic screening modes on their horizontal fibres, and coefficient extraction in \(t\) commutes with the integral in the energy-product topology.</p>
+<p>The logarithmic formula is consequently a derived representative of the primary horizontal parent-family prescription. Its separate logarithmic terms must be summed before applying the boundary test; differentiating the exact resonance equation cancels their first-order monodromy anomaly.</p>
+</div>
+<div class="cell"><div class="cell-head">Cell 3 - logarithmic residue expansion</div><textarea>import sympy as sp
+a, z0 = sp.symbols('a z0'); r = sp.symbols('r', integer=True, nonzero=True)
+Rr = z0**r*(sp.exp(2*sp.pi*sp.I*a)-1)/(2*sp.pi*sp.I*(r+a))
+assert sp.simplify(sp.limit(Rr,a,0)) == 0
+assert sp.simplify(sp.diff(Rr,a).subs(a,0)-z0**r/r) == 0
+R0 = (sp.exp(2*sp.pi*sp.I*a)-1)/(2*sp.pi*sp.I*a)
+assert sp.simplify(sp.limit(R0,a,0)) == 1
+assert sp.simplify(sp.limit(sp.diff(R0,a),a,0)-sp.pi*sp.I) == 0
+boundary = (sp.exp(2*sp.pi*sp.I*a)-1)/(2*sp.pi*sp.I)
+assert boundary.subs(a,0) == 0
+assert sp.diff(boundary,a).subs(a,0) == 1
+print('based residue verified: off-horizontal anomaly nonzero, horizontal boundary exactly zero')</textarea></div>
+
+<h2 id="s7">7. Coefficient operators</h2>
+<div class="env definition"><span class="tag">Definition 7.1 - renormalized parent charges and channels</span>
+\[
+\widehat Q_t=2\pi i\,{\rm LRes}_{z_0}\mathbb V_t,\qquad
+\widehat{\bar Q}_t=2\pi i\,{\rm LRes}_{z_0}\widehat{\bar V}_t,
+\]
+<p>These first act between their moving horizontal Fock families. Put them in the common fixed fibre by</p>
+\[
+\mathscr Q_{\rm u}(t)=\tau_{{\rm u},m}\widehat Q_t\tau_{{\rm s},m}^{-1},\qquad
+\mathscr Q_{\rm b}(t)=\tau_{{\rm b},m}\widehat{\bar Q}_t\tau_{{\rm s},m}^{-1}.
+\]
+\[
+Q^{(0)}(t)=\frac{\mathscr Q_{\rm u}(t)+\mathscr Q_{\rm b}(t)}{2},\qquad
+Q^{(1)}(t)=\frac{\mathscr Q_{\rm u}(t)-\mathscr Q_{\rm b}(t)}{2t}.
+\]
+<p>Set \(Q^{[0]}={\rm Coeff}_{t^0}Q^{(0)}(t)\) and \(Q^{[1]}={\rm Coeff}_{t^0}Q^{(1)}(t)\). The superscript in square brackets is a coefficient/flag label, not a mode number.</p>
+</div>
+<div class="env theorem"><span class="tag">Theorem 7.2 - finiteness, source/target, and nonvanishing</span>
+<p>Both trivialized charges belong to the same topologically free module \(\mathscr H_m\). Their constant terms are the same leading vertex map. Equality of the constant coefficients in this fixed PBW basis means, now legitimately, that \(\mathscr Q_{\rm u}-\mathscr Q_{\rm b}\in t\mathscr H_m\). Therefore \(Q^{[1]}\) is finite and continuous, with</p>
+\[
+Q^{[1]}:\mathcal F(\lambda_m(0))\longrightarrow
+\widehat{\mathcal F}\left(\lambda_m(0)+\frac{\mu_1}{2}\kappa\alpha_i\right),
+\qquad \mu_1=-\frac12b_1.
+\]
+<p>In the canonical affine formal-neighborhood gauge, its density representative begins</p>
+\[
+\boxed{\mathcal S_{\rm odd}^{[1]}
+=:\!\big(b_1\varphi^-+B_{\rm diff}\varphi^+\big)E\!:,}
+\]
+<p>where \(B_{\rm diff}=(b_3-\bar b_3)/2=-\alpha^-b_1/\alpha^+\). Both \(q^+\) and \(q^-\) in this representative are the explicit connection derivatives of Definition 2.1; they are not undeclared operators on a moving group algebra.</p>
+<p>Nonvanishing does not rely on an off-resonant source jet. Take the horizontal vacuum with \(m=-2\). In the coefficient of \(z^{-1}\), the projection of \(Q^{[1]}\lvert\lambda_{-2}(0)\rangle\) onto the PBW vector \(J^-_{-1}\lvert\lambda_{-2}(0)+\Delta_0\rangle\) is proportional to \(b_1\), hence is nonzero. The corresponding projection of \(Q^{[0]}\) contains only the \(J^+_{-1}\) creation direction. Thus \(Q^{[1]}\ne0\) and the two coefficient maps are linearly independent.</p>
+</div>
+<div class="cell"><div class="cell-head">Cell 4 - fixed-target divisibility and PBW nonvanishing witness</div><textarea>import sympy as sp
+ap, am, b1 = sp.symbols('alpha_plus alpha_minus b1', nonzero=True)
+b3 = b1**2/(2*ap)-am*b1/ap
+bb3 = b1**2/(2*ap)+am*b1/ap
+B = sp.simplify((b3-bb3)/2); D = sp.simplify((b3+bb3)/2)
+assert B == -am*b1/ap
+assert D == b1**2/(2*ap)
+t, eta = sp.symbols('t eta')
+su, sb = b1/4+t*b3/4, b1/4+t*bb3/4
+f = 1+2*eta+3*eta**2
+Tu = sp.series(f.subs(eta,eta-(su-b1/4)),t,0,2).removeO()
+Tb = sp.series(f.subs(eta,eta-(sb-b1/4)),t,0,2).removeO()
+assert sp.expand(Tu-Tb).coeff(t,0) == 0
+assert sp.simplify(sp.expand(Tu-Tb).coeff(t,1)+(b3-bb3)*sp.diff(f,eta)/4) == 0
+Jm1 = sp.symbols('Jminus_1')
+odd_level_one = b1*Jm1+B*sp.symbols('Jplus_1')
+assert sp.expand(odd_level_one).coeff(Jm1) == b1
+print('fixed-target difference is t-divisible; m=-2 PBW witness has nonzero Jminus_-1 coefficient')</textarea></div>
+
+<h2 id="s8">8. The represented \(A_1\) coefficient equation</h2>
+<div class="env theorem"><span class="tag">Proposition 8.1 - universal currents versus represented actions</span>
+<p>Let \(T_{\rm p}(t)\), \(\bar T_{\rm p}(t)\) be the two parent Feigin-Fuchs tensors with symmetric parent normal ordering, transported with the embeddings above. Define</p>
+\[
+M(t)=t\big(T_{\rm p}(t)+\bar T_{\rm p}(t)\big),\qquad
+L(t)=T_{\rm p}(t)-\bar T_{\rm p}(t).
+\]
+<p>Direct expansion of the universal fields, with the barred contribution converted before the limit, gives, up to commuting vacuum constants,</p>
+\[
+M(t)=M^{[0]}+t^2M^{[2]},\qquad L(t)=L^{[0]},
+\]
+\[
+M^{[0]}=2J^+J^++2\alpha^+\partial J^+,\quad
+L^{[0]}=4\langle J^+J^-\rangle_{\rm av}+2\alpha^+\partial J^-+2\alpha^-\partial J^+.
+\]
+<p>Thus the universal noncentral current formulas have no explicit order-\(t\) coefficient. This statement does <em>not</em> set the first coefficient of the PBW-trivialized source and target representations to zero: their zero-mode eigenvalues move with their momentum curves.</p>
+</div>
+<div class="env theorem"><span class="tag">Theorem 8.2 - PBW-flat deformation-intertwiner equations</span>
+<p>On each horizontal source fibre, the own-factor weight-one commutator is the boundary term of Proposition 6.2 and vanishes because \(a_{\rm u}=a_{\rm b}=0\) identically. The cross-factor commutators vanish because the two embedded Weyl algebras commute. The scalar BCH subtraction does not change an intertwining equation. Hence, before taking any coefficient,</p>
+\[
+[\widehat Q_t,L(t)]=[\widehat Q_t,M(t)]=[\widehat{\bar Q}_t,L(t)]=[\widehat{\bar Q}_t,M(t)]=0.
+\]
+<p>Write the PBW-trivialized source and target actions separately as \(U_{\rm S}(t)\), \(U_{{\rm T,u}}(t)\), and \(U_{{\rm T,b}}(t)\). Here \([Q,U]=U_{\rm T}Q-QU_{\rm S}\) is intertwiner notation. Applying the PBW maps preserves the exact equations but does not freeze the represented zero-mode eigenvalues. The two target paths are</p>
+\[
+p^+_{{\rm T,u}}=\lambda_m^++\frac{tb}{4},\qquad
+p^+_{{\rm T,b}}=\lambda_m^+-\frac{t\bar b}{4},
+\]
+\[
+p^-_{{\rm T,u}}=\lambda_m^-+\frac{b}{4},\qquad
+p^-_{{\rm T,b}}=\lambda_m^-+\frac{\bar b}{4}.
+\]
+<p>Their relative first tangent is therefore</p>
+\[
+\boxed{\Delta p^+=\frac{b_1}{2},\qquad
+\Delta p^-=\frac{B_{\rm diff}}{2}=\frac{b_3-\bar b_3}{4}.}
+\]
+<p>Using the mode formulas of [FH25, eqs. (2.15a)-(2.15b)], conjugating the leading currents through the PBW frames gives the target-action differences</p>
+\[
+\boxed{\Delta M^{[1]}_{{\rm T},n}
+=\frac{b_1}{2}\bigl(4J_n^+-2\alpha^+\delta_{n,0}\bigr),}
+\]
+\[
+\boxed{\Delta L^{[1]}_{{\rm T},n}
+=\frac{b_1}{2}\bigl(4J_n^--2\alpha^-\delta_{n,0}\bigr)
++\frac{B_{\rm diff}}{2}\bigl(4J_n^+-2\alpha^+\delta_{n,0}\bigr).}
+\]
+<p>The common source first correction cancels when the two exact order-\(t\) intertwining equations are subtracted. Dividing by two yields, for every \(n\in\mathbb Z\),</p>
+\[
+\boxed{
+[Q^{[1]},U_n^{[0]}]_{\rm PBW}
++\frac12\Delta U^{[1]}_{{\rm T},n}Q^{[0]}=0,
+\qquad U=L,M.}
+\]
+<p>This is the correct connection/deformation-intertwiner equation. It is inhomogeneous even though the universal fields have no explicit order-\(t\) term. For \(M_0\), with \(p^+_0=m/b_1\) and \(\alpha^+b_1=-2\),</p>
+\[
+\Delta M^{[1]}_{{\rm T},0}=2(m+1),\qquad
+\boxed{[Q^{[1]},M_0]_{\rm PBW}=-(m+1)Q^{[0]}.}
+\]
+<p>On the \(m=-2\) component used in Theorem 7.2, this becomes \([Q^{[1]},M_0]_{\rm PBW}=Q^{[0]}\ne0\). Likewise \(\lambda_m^-(0)=\alpha^-m/(\alpha^+b_1)\), while the leading target minus momentum is \(p^-_{{\rm T},0}=\lambda_m^-(0)+b_1/4\). This gives \(\Delta L^{[1]}_{{\rm T},0}=b_1^2/2\), hence \([Q^{[1]},L_0]_{\rm PBW}=-b_1^2Q^{[0]}/4\ne0\). Therefore the PBW-flat coefficient is nonzero but is not an ordinary screening of the limiting algebra. This proves Outcome B rather than Outcome A.</p>
+</div>
+<div class="cell"><div class="cell-head">Cell 5 - represented A1 target connection and coefficient equation</div><textarea>import sympy as sp
+t,ap,am,b1,m = sp.symbols('t alpha_plus alpha_minus b1 m', nonzero=True)
+b3=b1**2/(2*ap)-am*b1/ap; bb3=b1**2/(2*ap)+am*b1/ap
+B=sp.simplify((b3-bb3)/2)
+# Frozen A1 Weyl normalization shifts (p+,p-) by (t*b/4,b/4).
+dp,dm=b1/2,B/2
+p0=m/b1; q0=am*m/(ap*b1)+b1/4
+p,q=sp.symbols('p q')
+hM=2*p**2-2*ap*p
+hL=4*p*q-2*ap*q-2*am*p
+dM=sp.simplify(sp.diff(hM,p).subs(p,p0)*dp)
+dL=sp.simplify(sp.diff(hL,p).subs({p:p0,q:q0})*dp
+               +sp.diff(hL,q).subs({p:p0,q:q0})*dm)
+assert sp.simplify(dM.subs(b1,-2/ap)-2*(m+1)) == 0
+assert sp.simplify(dL-b1**2/2) == 0
+assert sp.simplify((-dM/2).subs({b1:-2/ap,m:-2})-1) == 0
+assert sp.simplify(-dL/2+b1**2/4) == 0
+# Abstract subtraction of the two represented order-t intertwining equations.
+UT0,US0,Qu1,Qb1,Q0,dUT=sp.symbols('UT0 US0 Qu1 Qb1 Q0 dUT',commutative=False)
+Q1=(Qu1-Qb1)/2
+odd=sp.expand(UT0*Q1-Q1*US0+dUT*Q0/2)
+expected=UT0*Q1-Q1*US0+dUT*Q0/2
+assert sp.expand(odd-expected) == 0
+print('Outcome B verified: target connection survives and the PBW-flat equation is inhomogeneous')</textarea></div>
+
+<h2 id="s9">9. Regularization, base point, and triangular flag</h2>
+<div class="env theorem"><span class="tag">Proposition 9.1 - regulator, base point, and connection covariance</span>
+<p>A finite barred subtraction \(e^{c_1t+O(t^2)}\) changes the odd coefficient by \(-c_1Q^{[0]}/2\). Changing the logarithmic branch or the base point on a fixed horizontal monodromy component changes the coefficient by a componentwise scalar multiple of \(Q^{[0]}\).</p>
+<p>The PBW-flat connection is part of Definition 2.1. More generally, let the two branch frames change by \(g_{{\rm s},r}=1+tA_{{\rm s},r}+O(t^2)\) and \(g_{{\rm t},r}=1+tA_{{\rm t},r}+O(t^2)\), \(r={\rm u,b}\), and define their relative half-differences \(A_{\rm s}=(A_{{\rm s,u}}-A_{{\rm s,b}})/2\), \(A_{\rm t}=(A_{{\rm t,u}}-A_{{\rm t,b}})/2\). The odd coefficient obeys the exact gauge law</p>
+\[
+Q^{[1]}\longmapsto Q^{[1]}+A_{\rm t}Q^{[0]}-Q^{[0]}A_{\rm s}.
+\]
+<p>A common frame change on both branches has zero relative half-difference and leaves \(Q^{[1]}\) unchanged. The chosen normalized vacuum vectors make the canonical PBW-flat frames unique. If branch-relative vacuum normalization is relaxed while every PBW monomial and only the vacuum lines are preserved, \(A_{\rm s},A_{\rm t}\) are scalar; together with finite subtraction and base-point changes this gives</p>
+\[
+\boxed{Q^{[1]}\longmapsto Q^{[1]}+cQ^{[0]}}
+\]
+<p>A momentum-differential re-trivialization produces additional \(q^+\)- or \(q^-\)-type terms according to the displayed general gauge law. Simultaneously, \(\Delta U_{\rm T}^{[1]}\mapsto\Delta U_{\rm T}^{[1]}+2[A_{\rm t},U_{\rm T}^{[0]}]\) and \(\Delta U_{\rm S}^{[1]}\mapsto\Delta U_{\rm S}^{[1]}+2[A_{\rm s},U_{\rm S}^{[0]}]\). Thus the general equation \([Q^{[1]},U^{[0]}]+\Delta U_{\rm T}^{[1]}Q^{[0]}/2-Q^{[0]}\Delta U_{\rm S}^{[1]}/2=0\) is gauge covariant; the canonical construction has \(\Delta U_{\rm S}^{[1]}=0\). Such a re-trivialization changes the connection category and is not silently identified with a scalar scheme change or used to claim an ordinary screening on the original PBW-flat fibres. In the canonical affine formal-neighborhood gauge, \(B_{\rm diff}\) is fixed. This separates: (i) the parameter correction \(D\partial_{b_1}Q^{[0]}\); (ii) the BCH finite subtraction; (iii) scalar triangular flag mixing; and (iv) a genuine connection change.</p>
+</div>
+
+<h2 id="s10">10. Classification of the three first-order directions</h2>
+<table><thead><tr><th>Direction</th><th>Actual operator status after Gate 2</th><th>Coefficient</th></tr></thead><tbody>
+<tr><td>Strict odd channel</td><td>Nonzero horizontal connection/deformation coefficient \(Q^{[1]}\); not an ordinary \(A_1\) screening in the PBW-flat frame; regulator/base-point ambiguity is modulo \(Q^{[0]}\), while general connection changes obey Proposition 9.1</td><td>\(B_{\rm diff}=-\alpha^-b_1/\alpha^+\) in the canonical affine gauge</td></tr>
+<tr><td>Local corrected / unbarred first coefficient</td><td>Horizontal coefficient intertwiner \(Q_{\rm u}^{[1]}=Q^{[1]}+Q_{\rm even}^{[1]}\); its truncated local representative has \(B_{\rm loc}=b_3\)</td><td>\(B_{\rm loc}=B_{\rm diff}+b_1^2/(2\alpha^+)=b_3\)</td></tr>
+<tr><td>Even parameter derivative</td><td>Not a third flag generator; it is the horizontal parameter tangent \(D\partial_{b_1}Q^{[0]}\), the affine logarithmic contribution whose monodromy cancels on the exact section, and a possible triangular scalar</td><td>\(D=(b_3+\bar b_3)/2=b_1^2/(2\alpha^+)\)</td></tr>
+</tbody></table>
+<p>The Gate-1 quotient by parameter derivatives is therefore realized by horizontal coefficient maps: the strict odd and local-corrected representatives determine the same rank-two coefficient flag after the even parameter tangent is removed. The flag is \(\langle Q^{[0]}\rangle\subset\langle Q^{[0]},Q^{[1]}\rangle\), but only \(Q^{[0]}\) is an ordinary limiting screening. The second generator is a deformation intertwiner carrying the represented target-connection term of Theorem 8.2.</p>
+
+<h2 id="s11">11. Gate-2 acceptance ledger</h2>
+<table><thead><tr><th>Criterion</th><th>Status</th><th>Witness</th></tr></thead><tbody>
+<tr><td>G2.1 common completed category</td><td>PASS</td><td>Fixed-lattice neighborhood and PBW-flat fixed-fibre Hom-space, Definitions 2.1-2.2</td></tr>
+<tr><td>G2.2 oscillator and zero-mode Weyl embeddings</td><td>PASS</td><td>Propositions 3.1-3.2 and explicit exclusion of off-horizontal jets</td></tr>
+<tr><td>G2.3 explicit BCH factors</td><td>PASS</td><td>Theorem 5.1; \(Z_t=1\), \(\bar Z_{t,\rho}=(1-\rho)^{-t\bar b^2/2}\)</td></tr>
+<tr><td>G2.4 finite nonzero \(Q^{[1]}\)</td><td>PASS</td><td>Fixed-basis \(t\)-divisibility and the \(m=-2\), \(J^-_{-1}\) PBW witness in Theorem 7.2</td></tr>
+<tr><td>G2.5 dependence and connection covariance</td><td>PASS</td><td>Scalar regulator/base-point ambiguity and the separate general source-target connection gauge law, Proposition 9.1</td></tr>
+<tr><td>G2.6 periodic logarithmic prescription</td><td>PASS</td><td>Definition 6.1 and exact horizontal cancellation of the boundary anomaly, Proposition 6.2</td></tr>
+<tr><td>G2.7 mixed \(A_1\) equations for \(L,M\)</td><td>PASS</td><td>Separate source/target action expansions and the inhomogeneous PBW-flat connection equations, including explicit \(M_0\) and \(L_0\) tests, Theorem 8.2</td></tr>
+<tr><td>G2.8 three corrections classified</td><td>PASS</td><td>§§9-10</td></tr>
+</tbody></table>
+<div class="boxed"><b>Authorized sequencing.</b> Gate 2 is closed with Outcome B. Notebook III may use \(Q_i^{[0]}\) as ordinary leading screenings and may transport \(Q_i^{[1]}\) only as connection/deformation coefficients. It must derive the nonlinear \(U_3^\pm\) source and target action families and their mixed inhomogeneous equations. The phrase "quantum screening doublet" is not authorized by Notebook II.</div>
+
+<h2 id="refs">References and provenance</h2>
+<p><b>[FH25]</b> S. Fredenhagen and L. Hörl, <i>Free-field construction of Carrollian W_N-algebras</i>, JHEP 02 (2026) 218, arXiv:2509.14441v3. Used for the symmetric contraction, mode reversal, averaged ordering, Miura currents and the exact \(A_1\) stress-tensor contraction.</p>
+<p><b>[DDF26]</b> E. D'Arcy, A. Delfante and S. Fredenhagen, <i>Holographic realization of higher-spin Carrollian free fields</i>, arXiv:2604.27068v1. Context for the classical screening charges and the bulk target.</p>
+<p><b>[TK86]</b> A. Tsuchiya and Y. Kanie, <i>Fock Space Representations of the Virasoro Algebra - Intertwining Operators -</i>, Publ. RIMS Kyoto Univ. 22 (1986) 259-327.</p>
+<p><b>[HLZ11]</b> Y.-Z. Huang, J. Lepowsky and L. Zhang, <i>Logarithmic tensor category theory for generalized modules for a conformal vertex algebra, I-II</i>, arXiv:1012.4193 and arXiv:1110.1929. Used only as background for Hom-valued fields with powers of a formal logarithm; the based residue in §6 is defined directly here.</p>
+<p><b>[AR19]</b> D. Adamović and G. Radobolja, <i>Self-dual and logarithmic representations of the twisted Heisenberg-Virasoro algebra at level zero</i>, Commun. Contemp. Math. 21 (2019) 1850008, arXiv:1703.00531.</p>
+<p class="small">All Gate-2 formulas beyond the cited parent conventions are derivations in this notebook. The package verifier checks algebraic identities and document consistency; it does not certify novelty, analytic Hilbert-space closure, or the future nonlinear \(A_2/W_3\) theorem.</p>
+<div class="footer">Notebook II, Gate 2 - Carrollian Screening Programme. Generated 2 August 2026. Gate 1 remains frozen upstream; this continuation closes the finite-\(\varepsilon\) \(A_1\) gate with Outcome B, a nonzero connection/deformation intertwiner.</div>
+</main></div></body></html>
