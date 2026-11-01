@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Semantic release NIV-36a2530aab4feb7d" />
+  <meta name="dcterms.date" content="2026-08-04" />
+  <title>Notebook IV: Semiclassical Bulk Normalization and the N=2 Anchors</title>
+  <style>
+    html {
+      font-size: 9pt;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+  :root{--ink:#17212b;--muted:#5b6671;--line:#ccd7df;--blue:#174e76;--pale:#eef5f9;--green:#175f47;--amber:#86520b;--paper:#fbfcfd}
+  html{scroll-behavior:smooth}body{max-width:1080px;margin:0 auto;padding:36px 56px 72px;background:var(--paper);color:var(--ink);font:16px/1.58 Georgia,"Times New Roman",serif}
+  h1,h2,h3{font-family:Arial,Helvetica,sans-serif;color:#163d59;line-height:1.18}h1{font-size:2.1rem;border-bottom:2px solid var(--blue);padding-bottom:.3em}h2{font-size:1.5rem;margin-top:2.1em;border-bottom:1px solid var(--line);padding-bottom:.2em}h3{font-size:1.15rem;margin-top:1.6em}
+  header{text-align:center;margin-bottom:2.5em}.subtitle{color:var(--muted)}#TOC{border:1px solid var(--line);background:white;padding:18px 24px;margin:24px 0}#TOC ul{columns:2;column-gap:32px}a{color:var(--blue)}
+  table{border-collapse:collapse;width:100%;font-size:.9rem;margin:1.2em 0;background:#fff}th,td{border:1px solid var(--line);padding:.48em .62em;vertical-align:top}th{background:#e8f0f5;text-align:left}
+  pre{overflow:auto;background:#202832;color:#eef5f9;padding:14px 16px;border-radius:5px;font:12px/1.48 "DejaVu Sans Mono",Consolas,monospace}code{font-family:"DejaVu Sans Mono",Consolas,monospace}.cell-code{border-left:5px solid var(--green)}
+  blockquote{border-left:4px solid var(--amber);margin:1.2em 0;padding:.2em 1em;color:#4f4a42;background:#fffaf0}.math.display{overflow-x:auto;padding:.3em 0}
+  @media(max-width:760px){body{padding:24px 18px}#TOC ul{columns:1}}
+  @media print{body{max-width:none;padding:0;background:#fff}#TOC{display:none}a{color:inherit;text-decoration:none}pre{white-space:pre-wrap}}
+  </style>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Notebook IV: Semiclassical Bulk Normalization and the
+N=2 Anchors</h1>
+<p class="subtitle">Final normalization checkpoint for the symmetric
+Carrollian W3 screening programme</p>
+<p class="author">Semantic release NIV-36a2530aab4feb7d</p>
+<p class="date">4 August 2026</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#result-scope-and-immutable-dependencies"
+id="toc-result-scope-and-immutable-dependencies">1. Result, scope, and
+immutable dependencies</a></li>
+<li><a href="#convention-firewall" id="toc-convention-firewall">2.
+Convention firewall</a>
+<ul>
+<li><a href="#circle-fourier-and-bracket-conventions"
+id="toc-circle-fourier-and-bracket-conventions">2.1 Circle, Fourier, and
+bracket conventions</a></li>
+<li><a
+href="#fh-real-current-versus-the-frozen-euclidean-cylinder-current"
+id="toc-fh-real-current-versus-the-frozen-euclidean-cylinder-current">2.2
+FH real current versus the frozen Euclidean cylinder current</a></li>
+<li><a href="#ordering-and-derivative-namespaces"
+id="toc-ordering-and-derivative-namespaces">2.3 Ordering and derivative
+namespaces</a></li>
+</ul></li>
+<li><a href="#semiclassical-normalization-triangle"
+id="toc-semiclassical-normalization-triangle">3. Semiclassical
+normalization triangle</a>
+<ul>
+<li><a href="#resolution-of-the-printed-n2-square-root-tension"
+id="toc-resolution-of-the-printed-n2-square-root-tension">3.1 Resolution
+of the printed N=2 square-root tension</a></li>
+</ul></li>
+<li><a href="#internal-bulk-n2-reduction"
+id="toc-internal-bulk-n2-reduction">4. Internal bulk N=2
+reduction</a></li>
+<li><a href="#boundarybulk-n2-normalization-firewall"
+id="toc-boundarybulk-n2-normalization-firewall">5. Boundary/bulk N=2
+normalization firewall</a></li>
+<li><a href="#n2-screening-charges-and-generated-transformations"
+id="toc-n2-screening-charges-and-generated-transformations">6. N=2
+screening charges and generated transformations</a></li>
+<li><a
+href="#the-general-diagonal-bracket-has-a-factor-two-inconsistency"
+id="toc-the-general-diagonal-bracket-has-a-factor-two-inconsistency">7.
+The general diagonal bracket has a factor-two inconsistency</a></li>
+<li><a href="#a2-weights-diagonal-map-and-root-symplectic-form"
+id="toc-a2-weights-diagonal-map-and-root-symplectic-form">8. A2 weights,
+diagonal map, and root symplectic form</a></li>
+<li><a href="#four-a2-miura-observables"
+id="toc-four-a2-miura-observables">9. Four A2 Miura observables</a>
+<ul>
+<li><a href="#the-printed-spin-three-polynomial-is-inconsistent"
+id="toc-the-printed-spin-three-polynomial-is-inconsistent">9.1 The
+printed spin-three polynomial is inconsistent</a></li>
+</ul></li>
+<li><a href="#a2-simple-root-screenings-and-generated-transformations"
+id="toc-a2-simple-root-screenings-and-generated-transformations">10. A2
+simple-root screenings and generated transformations</a></li>
+<li><a href="#evenaffine-coefficient-and-bch-power-counting"
+id="toc-evenaffine-coefficient-and-bch-power-counting">11. Even/affine
+coefficient and BCH power counting</a></li>
+<li><a href="#raw-moving-frame-and-canonical-pbw-frame"
+id="toc-raw-moving-frame-and-canonical-pbw-frame">12. Raw moving frame
+and canonical PBW frame</a></li>
+<li><a href="#composite-screening-diagnostic"
+id="toc-composite-screening-diagnostic">13. Composite screening
+diagnostic</a></li>
+<li><a href="#theorems-and-outcome" id="toc-theorems-and-outcome">14.
+Theorems and outcome</a>
+<ul>
+<li><a href="#theorem-iv.1---exact-semiclassical-normalization"
+id="toc-theorem-iv.1---exact-semiclassical-normalization">Theorem IV.1 -
+exact semiclassical normalization</a></li>
+<li><a href="#theorem-iv.2---simple-root-screening-map"
+id="toc-theorem-iv.2---simple-root-screening-map">Theorem IV.2 -
+simple-root screening map</a></li>
+<li><a href="#corollary-iv.3---canonical-frame-interpretation"
+id="toc-corollary-iv.3---canonical-frame-interpretation">Corollary IV.3
+- canonical-frame interpretation</a></li>
+<li><a href="#disposition" id="toc-disposition">Disposition</a></li>
+</ul></li>
+<li><a href="#claim-boundary" id="toc-claim-boundary">15. Claim
+boundary</a></li>
+<li><a href="#reproducibility-ledger"
+id="toc-reproducibility-ledger">16. Reproducibility ledger</a></li>
+<li><a href="#references" id="toc-references">References</a></li>
+</ul>
+</nav>
+<section id="result-scope-and-immutable-dependencies" class="level1">
+<h1>1. Result, scope, and immutable dependencies</h1>
+<p>This notebook proves the convention-complete semiclassical dictionary
+between the frozen boundary screening family and the classical bulk
+Noether screenings. It is a normalization and interpretation
+calculation. It does not reopen the tangent OPE or any Gate-3
+theorem.</p>
+<p>The load-bearing Gate-3B dependency is the portable archive</p>
+<pre class="text"><code>Notebook_III_Gate3B_Definitive_Freeze_Grade_Portable.zip
+SHA-256 a77a670b5e7ff4811cdf30094702ccdd772bdd8b9f157b4329f502bb2989a0cb</code></pre>
+<p>The four earlier frozen archives and their exact hashes are:</p>
+<p><strong>Notebook I</strong></p>
+<pre class="text"><code>Notebook_I_Freeze_Grade_Merged_Final.zip
+SHA-256 662de55b99f9e61f8e3c66d646972e286973f75e6a04165c5cbd4b3e172a3b5f</code></pre>
+<p><strong>Notebook II, Gate 1</strong></p>
+<pre class="text"><code>Notebook_II_Gate1_Freeze_Grade_Peer_Review_Corrected.zip
+SHA-256 860df721f9de6c266ff4f9016aedce6c1bc908afa66ec36095ec3094de42c871</code></pre>
+<p><strong>Notebook II, Gate 2</strong></p>
+<pre class="text"><code>Notebook_II_Gate2_Closed_Outcome_B_Normalization_Corrected_Final.zip
+SHA-256 522f0a57b5e128bd9fda861d036d30b1ee36f98f98d34cfd4cf5d98862a16481</code></pre>
+<p><strong>Notebook III, Gate 3A</strong></p>
+<pre class="text"><code>Notebook_III_Gate3A_Final_Freeze_Grade_Provenance_Corrected.zip
+SHA-256 45e9bfdf2906527ea2175513dff447e9052d06a14c94dd979904d07323962c82</code></pre>
+<p>The frozen operator relation is</p>
+<p><span class="math display">\[
+Q_i^{[1]}=\widetilde Q_i^{[1]}-\mathsf A_{{\rm T},i}Q_i^{[0]},
+\qquad
+\mathsf A_{{\rm T},i}=\mu\,\alpha_i\!\cdot q^-+\nu\,\alpha_i\!\cdot q^+.
+\]</span></p>
+<p>Here <span class="math inline">\(\widetilde Q_i^{[1]}\)</span> is the
+raw horizontal coefficient between moving target fibres. The
+fixed-target operator <span class="math inline">\(Q_i^{[1]}\)</span> is
+its PBW covariantization and is <strong>not an ordinary second quantum
+screening</strong>.</p>
+</section>
+<section id="convention-firewall" class="level1">
+<h1>2. Convention firewall</h1>
+<section id="circle-fourier-and-bracket-conventions" class="level2">
+<h2>2.1 Circle, Fourier, and bracket conventions</h2>
+<p>The bulk circle has period <span class="math inline">\(2\pi\)</span>.
+For an ordinary bulk field,</p>
+<p><span class="math display">\[
+X(\phi)=\sum_{n\in\mathbb Z}X_ne^{in\phi},
+\qquad
+X_n=\frac1{2\pi}\int_0^{2\pi}e^{-in\phi}X(\phi)\,d\phi.
+\]</span></p>
+<p>We use</p>
+<p><span class="math display">\[
+[A,B]_{\rm cl}=i\{A,B\},
+\qquad
+\delta&#39;(\phi-\phi&#39;)=\partial_\phi\delta(\phi-\phi&#39;).
+\]</span></p>
+<p>Consequently,</p>
+<p><span class="math display">\[
+\{\psi&#39;(\phi),\bar\psi(\phi&#39;)\}=8\pi G\delta(\phi-\phi&#39;)
+\]</span></p>
+<p>implies</p>
+<p><span class="math display">\[
+\{\psi&#39;(\phi),\bar\psi&#39;(\phi&#39;)\}=-8\pi
+G\delta&#39;(\phi-\phi&#39;),
+\qquad
+[\psi&#39;_m,\bar\psi&#39;_n]_{\rm cl}=4Gm\,\delta_{m+n,0}.
+\]</span></p>
+<p>The sign follows from differentiating in the second argument and then
+integrating by parts. It is not imported from a mode formula.</p>
+</section>
+<section
+id="fh-real-current-versus-the-frozen-euclidean-cylinder-current"
+class="level2">
+<h2>2.2 FH real current versus the frozen Euclidean cylinder
+current</h2>
+<p>Fredenhagen and Hörl use the real cylinder expansion [FH, eqs. (3.2),
+(3.11)]</p>
+<p><span class="math display">\[
+J_{\rm FH}(\phi)=i\sum_{n\in\mathbb Z}J_ne^{in\phi}.
+\]</span></p>
+<p>The frozen plane/cylinder bridge from Notebook II is</p>
+<p><span class="math display">\[
+w=\tau-i\phi,
+\qquad z=e^w,
+\qquad
+\mathcal J_w=zj_{\rm pl}-\frac\alpha2,
+\qquad
+J_{\rm FH}=i\mathcal J_w.
+\]</span></p>
+<p>Thus</p>
+<p><span class="math display">\[
+\mathcal J_{w,n}=a_n-\frac\alpha2\delta_{n0}.
+\]</span></p>
+<p>The factor <span class="math inline">\(i\)</span> in the FH field
+expansion is indispensable. If it is omitted while the ordinary bulk
+Fourier convention is retained, the crossed mode bracket changes
+sign.</p>
+</section>
+<section id="ordering-and-derivative-namespaces" class="level2">
+<h2>2.3 Ordering and derivative namespaces</h2>
+<p>The quantum minus currents use the symmetric averaged product of [FH,
+eqs. (2.14), (4.29)-(4.31)]. The reduction</p>
+<p><span class="math display">\[
+\Av{NP}\longrightarrow NP
+\]</span></p>
+<p>is made only after the strict classical limit. The verifier
+distinguishes four derivative namespaces,</p>
+<p><span class="math display">\[
+D_{\rm boundary},\quad D_{\rm bulk},\quad D_{\rm circle},\quad D_{\rm
+plane},
+\]</span></p>
+<p>and four ordering tags: commutative, averaged, parent-normal, and
+parent-antinormal. A jet from one namespace cannot be differentiated by
+another.</p>
+</section>
+</section>
+<section id="semiclassical-normalization-triangle" class="level1">
+<h1>3. Semiclassical normalization triangle</h1>
+<p>Write the bulk Chern-Simons level and invariant-trace normalization
+as [DDF, eqs. (4.23), (6.3)-(6.5)]</p>
+<p><span class="math display">\[
+k_{\rm CS}=\frac1{8\pi G},
+\qquad
+\tau_s=\frac{12}{s(s^2-1)},
+\qquad
+a_s=\sqrt{\pi k_{\rm CS}\tau_s}.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+a_s^2=\frac{3}{2Gs(s^2-1)}.
+\]</span></p>
+<p>For the symmetric Carrollian free fields [FH, eqs. (3.30)-(3.31),
+(4.16)-(4.17)],</p>
+<p><span class="math display">\[
+c_L=-4s(s^2-1)\alpha^+\alpha^-,
+\qquad
+c_M=-2s(s^2-1)(\alpha^+)^2.
+\]</span></p>
+<p>The gravity branch is</p>
+<p><span class="math display">\[
+\boxed{\alpha^-=0,\qquad \alpha^+=+ia_s}.
+\]</span></p>
+<p>It gives</p>
+<p><span class="math display">\[
+c_L=0,
+\qquad
+c_M=-2s(s^2-1)(ia_s)^2=\frac3G.
+\]</span></p>
+<p>The semiclassical parameter is</p>
+<p><span class="math display">\[
+g_s=a_s^{-1}=O(\sqrt G),
+\qquad
+\mu=(\alpha^+)^{-1}=-\frac{i}{a_s}=O(\sqrt G).
+\]</span></p>
+<pre class="python cell-code" data-cell="1"><code>import sympy as s
+G,r=s.symbols(&#39;G r&#39;,positive=True)
+a2=s.Rational(3,2)/(G*r*(r**2-1))
+assert s.simplify(-2*r*(r**2-1)*(s.I**2*a2)-3/G)==0
+assert s.simplify(a2.subs(r,2)-1/(4*G))==0
+assert s.simplify(a2.subs(r,3)-1/(16*G))==0
+print(&#39;CELL_IV_1_PASS&#39;)</code></pre>
+<section id="resolution-of-the-printed-n2-square-root-tension"
+class="level2">
+<h2>3.1 Resolution of the printed N=2 square-root tension</h2>
+<p>At <span class="math inline">\(s=2\)</span>,</p>
+<p><span class="math display">\[
+a_2=\frac1{2\sqrt G},
+\qquad
+\alpha^+=\frac{i}{2\sqrt G}.
+\]</span></p>
+<p>The sentence after [FH, eq. (2.16)] prints <span
+class="math inline">\(i/\sqrt{2G}\)</span>. The two displayed equations
+immediately preceding that sentence give</p>
+<p><span class="math display">\[
+c_M=-12(\alpha^+)^2,
+\qquad
+c_M=\frac3G.
+\]</span></p>
+<p>They require <span
+class="math inline">\((\alpha^+)^2=-1/(4G)\)</span>, not <span
+class="math inline">\(-1/(2G)\)</span>. The printed value produces <span
+class="math inline">\(6/G\)</span>. The general trace normalization, the
+complete Miura coefficient solve, and the crossed bracket below all give
+<span class="math inline">\(i/(2\sqrt G)\)</span>. No scalar-to-weight
+rescaling modifies the central-charge identity. The special sentence is
+therefore inconsistent with the source’s own equations.</p>
+</section>
+</section>
+<section id="internal-bulk-n2-reduction" class="level1">
+<h1>4. Internal bulk N=2 reduction</h1>
+<p>Choose the <span class="math inline">\(\mathfrak{sl}_2\)</span>
+weights</p>
+<p><span class="math display">\[
+\epsilon_1=\frac1{\sqrt2},
+\qquad
+\epsilon_2=-\frac1{\sqrt2}.
+\]</span></p>
+<p>Equation [DDF, (6.49)] reads</p>
+<p><span class="math display">\[
+(D_0)_{jj}=\frac{i}{a_2}\epsilon_j\boldsymbol\psi&#39;,
+\qquad
+(D_1)_{jj}=\frac{i}{a_2}\epsilon_j\bar{\boldsymbol\psi}&#39;.
+\]</span></p>
+<p>Matching <span class="math inline">\(D_0=\psi&#39;J_0\)</span>, <span
+class="math inline">\(D_1=\bar\psi&#39;P_0\)</span>, with <span
+class="math inline">\(J_0=\mathrm{diag}(1/2,-1/2)\)</span>, fixes the
+same conversion in both sectors:</p>
+<p><span class="math display">\[
+\boxed{
+\boldsymbol\psi=-\frac{ia_2}{\sqrt2}\psi,
+\qquad
+\bar{\boldsymbol\psi}=-\frac{ia_2}{\sqrt2}\bar\psi.
+}
+\]</span></p>
+<p>The unbarred and one-bar row determinants become</p>
+<p><span class="math display">\[
+(a_2\partial+i\epsilon_1\boldsymbol\psi&#39;)
+(a_2\partial+i\epsilon_2\boldsymbol\psi&#39;)
+=a_2^2\left(\partial^2+M_{\rm bulk}\right),
+\]</span></p>
+<p><span class="math display">\[
+\sum_{j=1}^2
+(a_2\partial+i\epsilon_1\boldsymbol\psi&#39;)\cdots
+(i\epsilon_j\bar{\boldsymbol\psi}&#39;)\cdots
+(a_2\partial+i\epsilon_2\boldsymbol\psi&#39;)
+=a_2^2L_{\rm bulk},
+\]</span></p>
+<p>where [DDF, eq. (4.41)]</p>
+<p><span class="math display">\[
+M_{\rm bulk}=-\frac14(\psi&#39;)^2-\frac12\psi&#39;&#39;,
+\qquad
+L_{\rm bulk}=-\frac12\psi&#39;\bar\psi&#39;-\frac12\bar\psi&#39;&#39;.
+\]</span></p>
+<pre class="python cell-code" data-cell="2"><code>import sympy as s
+a=s.symbols(&#39;a&#39;,nonzero=True)
+eps=(1/s.sqrt(2),-1/s.sqrt(2)); C=-s.I*a/s.sqrt(2)
+assert [s.simplify(s.I*e*C/a) for e in eps]==[s.Rational(1,2),-s.Rational(1,2)]
+x,xp,y,yp=s.symbols(&#39;x xp y yp&#39;)
+assert s.expand((x/2)*(-x/2)-xp/2+x**2/4+xp/2)==0
+assert s.expand((y/2)*(-x/2)-yp/2+(x/2)*(-y/2)+x*y/2+yp/2)==0
+print(&#39;CELL_IV_2_PASS&#39;)</code></pre>
+</section>
+<section id="boundarybulk-n2-normalization-firewall" class="level1">
+<h1>5. Boundary/bulk N=2 normalization firewall</h1>
+<p>Start without imposing a current normalization:</p>
+<p><span class="math display">\[
+J^+=A\psi&#39;,
+\qquad
+J^-=B\bar\psi&#39;+C\psi&#39;,
+\qquad
+\alpha^+=Da_2,
+\]</span></p>
+<p><span class="math display">\[
+M_{\rm bdry}=\rho_M M_{\rm bulk},
+\qquad
+L_{\rm bdry}=\rho_L L_{\rm bulk}+\rho_{LM}M_{\rm bulk}.
+\]</span></p>
+<p>Substitution in [FH, eqs. (3.32), (3.34)] gives eight independent
+polynomial equations after including the central branch and crossed
+bracket. Their only solutions are the two globally conjugate branches.
+The selected branch is</p>
+<p><span class="math display">\[
+\boxed{
+A=B=\frac{ia_2}{2},
+\quad C=0,
+\quad D=i,
+\quad
+\rho_M=\rho_L=2a_2^2,
+\quad \rho_{LM}=0.
+}
+\]</span></p>
+<p>The same sign for <span class="math inline">\(A\)</span> and <span
+class="math inline">\(B\)</span> is forced by the FH factor <span
+class="math inline">\(i\)</span>. Indeed,</p>
+<p><span class="math display">\[
+[J_m^+,J_n^-]_{\rm cl}
+=-AB\,[\psi&#39;_m,\bar\psi&#39;_n]_{\rm cl}
+=\frac m4\delta_{m+n,0}.
+\]</span></p>
+<p>The extra minus sign is <span class="math inline">\((-i)^2\)</span>,
+because the ordinary Fourier coefficient of <span
+class="math inline">\(J_{\rm FH}\)</span> is <span
+class="math inline">\(iJ_n\)</span>. Reversing only the barred current
+gives <span class="math inline">\(-m/4\)</span> and fails.</p>
+<p>Equivalently, in terms of the diagonal matrices,</p>
+<p><span class="math display">\[
+\boxed{
+\mathcal P_j=-a_s(D_0)_{jj},
+\quad
+\mathcal N_j=-a_s(D_1)_{jj},
+\quad
+P_j^{\rm FH}=-ia_s(D_0)_{jj},
+\quad
+N_j^{\rm FH}=-ia_s(D_1)_{jj}.
+}
+\]</span></p>
+<pre class="python cell-code" data-cell="3"><code>import sympy as s
+A,B,C,D,rM,rL,rLM,a=s.symbols(&#39;A B C D rM rL rLM a&#39;)
+eq=[2*A**2+rM/4,2*D*a*A+rM/2,4*A*B+rL/2,2*D*a*B+rL/2,
+    4*A*C+rLM/4,2*D*a*C+rLM/2,D**2+1,A*B+a**2/4]
+sol=s.solve(eq,[A,B,C,D,rM,rL,rLM],dict=True)
+target={A:s.I*a/2,B:s.I*a/2,C:0,D:s.I,rM:2*a**2,rL:2*a**2,rLM:0}
+assert len(sol)==2 and target in sol
+print(&#39;CELL_IV_3_PASS&#39;)</code></pre>
+</section>
+<section id="n2-screening-charges-and-generated-transformations"
+class="level1">
+<h1>6. N=2 screening charges and generated transformations</h1>
+<p>The primitive map follows by differentiating the current map and
+fixing the inherited basepoint constants:</p>
+<p><span class="math display">\[
+\boxed{
+\mu\Phi^+=-\psi,
+\qquad
+\mu\Phi^-=-\bar\psi.
+}
+\]</span></p>
+<p>Therefore</p>
+<p><span class="math display">\[
+E^{\rm cl}=e^{-\psi},
+\qquad
+\mathcal S_{\rm odd}^{[1],\rm cl}=-\bar\psi e^{-\psi}.
+\]</span></p>
+<p>These are precisely the two integrands of [DDF, eq. (4.35)]:</p>
+<p><span class="math display">\[
+S_{\kappa_4}=\frac{\kappa_4}{4\pi G}\int e^{-\psi}\,d\phi,
+\qquad
+S_{\kappa_2}=-\frac{\kappa_2}{4\pi G}\int\bar\psi e^{-\psi}\,d\phi.
+\]</span></p>
+<p>The bracket gives [DDF, eq. (4.40)]</p>
+<p><span class="math display">\[
+\{S,\psi&#39;\}=2\kappa_2e^{-\psi},
+\qquad
+\{S,\bar\psi&#39;\}=2(\kappa_4-\kappa_2\bar\psi)e^{-\psi}.
+\]</span></p>
+<p>Substitution shows <span class="math inline">\(\delta M_{\rm
+bulk}=\delta L_{\rm bulk}=0\)</span> coefficientwise. If the boundary
+circle charges are normalized as unit integrals, then</p>
+<p><span class="math display">\[
+Q^{[0],\rm cl}=\frac{4\pi G}{\kappa_4}S_{\kappa_4},
+\qquad
+\widetilde Q^{[1],\rm cl}=\frac{4\pi G}{\kappa_2}S_{\kappa_2}.
+\]</span></p>
+</section>
+<section
+id="the-general-diagonal-bracket-has-a-factor-two-inconsistency"
+class="level1">
+<h1>7. The general diagonal bracket has a factor-two inconsistency</h1>
+<p>Equation [DDF, (6.23c)] prints</p>
+<p><span class="math display">\[
+\{(D_0)_{ii},(D_1)_{jj}\}_{\rm print}
+=-\frac1{2k_{\rm CS}\tau_s}
+\left(\delta_{ij}-\frac1s\right)\delta&#39;.
+\]</span></p>
+<p>This is incompatible with both explicit sectors after using the
+paper’s own diagonal map (6.49).</p>
+<p>For <span class="math inline">\(s=2\)</span>, its <span
+class="math inline">\(i=j=1\)</span> component is <span
+class="math inline">\(-\pi G\delta&#39;\)</span>, whereas (4.39) and
+<span class="math inline">\(D_{11}=\psi&#39;/2\)</span> give <span
+class="math inline">\(-2\pi G\delta&#39;\)</span>. For <span
+class="math inline">\(s=3\)</span>, the printed component is <span
+class="math inline">\(-16\pi G\delta&#39;/3\)</span>, whereas (5.23)
+and</p>
+<p><span class="math display">\[
+(D_0)_{11}=\psi_{(L)}&#39;+\frac23\psi_{(W)}&#39;
+\]</span></p>
+<p>give <span class="math inline">\(-32\pi G\delta&#39;/3\)</span>. Both
+explicit sectors agree with</p>
+<p><span class="math display">\[
+\boxed{
+\{(D_0)_{ii},(D_1)_{jj}\}_{\rm explicit}
+=-\frac1{k_{\rm CS}\tau_s}
+\left(\delta_{ij}-\frac1s\right)\delta&#39;.
+}
+\]</span></p>
+<p>Machine token: <code>1/(kCS*tau_s)</code>. Notebook IV uses the
+explicit <span class="math inline">\(s=2,3\)</span> brackets for the
+theorem and records the disagreement rather than absorbing it into
+separate field rescalings.</p>
+</section>
+<section id="a2-weights-diagonal-map-and-root-symplectic-form"
+class="level1">
+<h1>8. A2 weights, diagonal map, and root symplectic form</h1>
+<p>Choose the fundamental weights</p>
+<p><span class="math display">\[
+\epsilon_1=\left(\frac1{\sqrt2},\frac1{\sqrt6}\right),
+\quad
+\epsilon_2=\left(-\frac1{\sqrt2},\frac1{\sqrt6}\right),
+\quad
+\epsilon_3=\left(0,-\frac2{\sqrt6}\right).
+\]</span></p>
+<p>They obey</p>
+<p><span class="math display">\[
+\epsilon_i\cdot\epsilon_j=\delta_{ij}-\frac13,
+\qquad
+\sum_i\epsilon_i=0,
+\qquad
+\sum_i\epsilon_i\epsilon_i^{\rm T}=I_2.
+\]</span></p>
+<p>With <span class="math inline">\(J_0=\mathrm{diag}(1,0,-1)\)</span>
+and <span
+class="math inline">\(U_0=\tfrac23\mathrm{diag}(1,-2,1)\)</span>, the
+explicit diagonal field [DDF, eq. (5.12)] is</p>
+<p><span class="math display">\[
+D_0=\mathrm{diag}\left(
+\psi_{(L)}&#39;+\frac23\psi_{(W)}&#39;,
+-\frac43\psi_{(W)}&#39;,
+-\psi_{(L)}&#39;+\frac23\psi_{(W)}&#39;
+\right),
+\]</span></p>
+<p>and similarly for <span class="math inline">\(D_1\)</span>. Equation
+(6.49) fixes one map in both sectors,</p>
+<p><span class="math display">\[
+\boldsymbol\psi=-ia_3
+\begin{pmatrix}
+1/\sqrt2&amp;\sqrt2\\
+\sqrt6/2&amp;-\sqrt6/3
+\end{pmatrix}
+\binom{\psi_{(L)}}{\psi_{(W)}},
+\]</span></p>
+<p>with the same matrix for <span
+class="math inline">\(\bar{\boldsymbol\psi}\)</span>.</p>
+<p>Define <span
+class="math inline">\(\alpha_1=\epsilon_1-\epsilon_2\)</span>, <span
+class="math inline">\(\alpha_2=\epsilon_2-\epsilon_3\)</span>. Then</p>
+<p><span class="math display">\[
+\alpha_i\cdot\alpha_j=A_{ij},
+\qquad
+A=\begin{pmatrix}2&amp;-1\\-1&amp;2\end{pmatrix},
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\chi_1=\psi_{(L)}+2\psi_{(W)},
+\qquad
+\chi_2=\psi_{(L)}-2\psi_{(W)}
+\]</span></p>
+<p>satisfy</p>
+<p><span class="math display">\[
+\chi_i=\frac{i}{a_3}\alpha_i\cdot\boldsymbol\psi.
+\]</span></p>
+<p>The explicit brackets [DDF, eq. (5.23)] give</p>
+<p><span class="math display">\[
+\boxed{
+\{\chi_i&#39;(\phi),\bar\chi_j(\phi&#39;)\}
+=16\pi G A_{ij}\delta(\phi-\phi&#39;).
+}
+\]</span></p>
+<pre class="python cell-code" data-cell="4"><code>import sympy as s
+R=s.Matrix([[1,2],[1,-2]])
+A=s.Matrix([[2,-1],[-1,2]])
+assert R*s.diag(8,6)*R.T==16*A
+E=s.Matrix([[1/s.sqrt(2),1/s.sqrt(6)],[-1/s.sqrt(2),1/s.sqrt(6)],[0,-2/s.sqrt(6)]])
+assert s.simplify(E*E.T-(s.eye(3)-s.ones(3)/3))==s.zeros(3)
+print(&#39;CELL_IV_4_PASS&#39;)</code></pre>
+</section>
+<section id="four-a2-miura-observables" class="level1">
+<h1>9. Four A2 Miura observables</h1>
+<p>The primitive dictionary is now forced, rather than guessed:</p>
+<p><span class="math display">\[
+\boxed{
+\mu\Phi_i^+=-\chi_i,
+\qquad
+\mu\Phi_i^-=-\bar\chi_i.
+}
+\]</span></p>
+<p>Machine tokens: <code>mu*Phi_i_plus=-chi_i</code> and
+<code>mu*Phi_i_minus=-bar_chi_i</code>.</p>
+<p>Differentiating and solving the traceless constraints gives</p>
+<p><span class="math display">\[
+P_1=-\frac{2\chi_1&#39;+\chi_2&#39;}{3\mu},
+\qquad
+P_2=\frac{\chi_1&#39;-\chi_2&#39;}{3\mu},
+\]</span></p>
+<p><span class="math display">\[
+N_1=-\frac{2\bar\chi_1&#39;+\bar\chi_2&#39;}{3\mu},
+\qquad
+N_2=\frac{\bar\chi_1&#39;-\bar\chi_2&#39;}{3\mu}.
+\]</span></p>
+<p>Substitution into the frozen primary Miura fields yields four exact
+identities:</p>
+<p><span class="math display">\[
+\boxed{
+U_2^+=-\frac4{\mu^2}M_{(L)},
+\qquad
+U_2^-=-\frac4{\mu^2}L_{(L)},
+}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{
+\mathcal U_3^+=-\frac8{\mu^3}M_{(W)},
+\qquad
+\mathcal U_3^-=-\frac8{\mu^3}L_{(W)}.
+}
+\]</span></p>
+<p>No root-dependent factor and no spin-mixing improvement is
+present.</p>
+<section id="the-printed-spin-three-polynomial-is-inconsistent"
+class="level2">
+<h2>9.1 The printed spin-three polynomial is inconsistent</h2>
+<p>Equation [DDF, (5.28c)] prints a term <span
+class="math inline">\(9(\psi_{(L)}&#39;&#39;)^2\)</span> inside the
+parenthesis multiplying <span
+class="math inline">\(\psi_{(W)}&#39;\)</span>. Its differential weight
+is five, although <span class="math inline">\(M_{(W)}\)</span> has spin
+three. The general row determinant (6.51) and the coefficient solve both
+require a linear <span
+class="math inline">\(9\psi_{(L)}&#39;&#39;\)</span>. Thus the
+expression used above contains</p>
+<pre class="text"><code>9*psi_L_double_prime</code></pre>
+<p>and not its square. Reinstating the square makes the <span
+class="math inline">\(\mathcal U_3^+\)</span> identity fail.</p>
+<pre class="python cell-code" data-cell="5"><code>import sympy as s
+mu=s.symbols(&#39;mu&#39;,nonzero=True)
+x1,x2,x1p,x2p,x1pp,x2pp=s.symbols(&#39;x1 x2 x1p x2p x1pp x2pp&#39;)
+P1=-(2*x1+x2)/(3*mu);P2=(x1-x2)/(3*mu);a=1/mu
+dP1=-(2*x1p+x2p)/(3*mu);dP2=(x1p-x2p)/(3*mu);d2P2=(x1pp-x2pp)/(3*mu)
+U3=s.expand(-P1**2*P2-P1*P2**2+a*(s.Rational(3,2)*P1*dP2+s.Rational(1,2)*dP1*P2+P2*dP2)-a**2*d2P2/2)
+l=(x1+x2)/2;w=(x1-x2)/4;lp=(x1p+x2p)/2;wp=(x1p-x2p)/4;wpp=(x1pp-x2pp)/4
+MW=s.expand((w*(18*l**2-8*w**2+9*lp)+27*l*wp+9*wpp)/108)
+assert s.simplify(U3+8*MW/mu**3)==0
+print(&#39;CELL_IV_5_PASS&#39;)</code></pre>
+</section>
+</section>
+<section id="a2-simple-root-screenings-and-generated-transformations"
+class="level1">
+<h1>10. A2 simple-root screenings and generated transformations</h1>
+<p>The four simple charges [DDF, eq. (5.26)] are</p>
+<p><span class="math display">\[
+S_{8,i}=\frac{\kappa_{8,i}}{8\pi G}\int e^{-\chi_i}\,d\phi,
+\qquad
+S_{2,i}=-\frac{\kappa_{2,i}}{8\pi G}\int\bar\chi_i e^{-\chi_i}\,d\phi,
+\]</span></p>
+<p>where <span
+class="math inline">\((\kappa_{8,1},\kappa_{8,2})=(\kappa_8,\kappa_9)\)</span>
+and <span
+class="math inline">\((\kappa_{2,1},\kappa_{2,2})=(\kappa_2,\kappa_3)\)</span>.
+The exponent labels fix</p>
+<p><span class="math display">\[
+Q_1^{[0]}\leftrightarrow S_{\kappa_8},
+\qquad
+Q_2^{[0]}\leftrightarrow S_{\kappa_9}.
+\]</span></p>
+<p>The root bracket gives the transformations</p>
+<p><span class="math display">\[
+\delta_{8,i}\chi_j&#39;=0,
+\qquad
+\delta_{8,i}\bar\chi_j&#39;=2\kappa_{8,i}A_{ij}e^{-\chi_i},
+\]</span></p>
+<p><span class="math display">\[
+\delta_{2,i}\chi_j&#39;=2\kappa_{2,i}A_{ij}e^{-\chi_i},
+\qquad
+\delta_{2,i}\bar\chi_j&#39;=-2\kappa_{2,i}A_{ij}\bar\chi_i e^{-\chi_i}.
+\]</span></p>
+<p>Applying these variations, with <span
+class="math inline">\(D(e^{-\chi_i})=-\chi_i&#39;e^{-\chi_i}\)</span>,
+annihilates all four observables for both roots. The main verifier
+performs all sixteen root/charge/observable checks.</p>
+<p>For unit circle-integral normalization,</p>
+<p><span class="math display">\[
+Q_i^{[0],\rm cl}=\frac{8\pi G}{\kappa_{8,i}}S_{8,i},
+\qquad
+\widetilde Q_i^{[1],\rm cl}=\frac{8\pi G}{\kappa_{2,i}}S_{2,i}.
+\]</span></p>
+<pre class="python cell-code" data-cell="6"><code>import sympy as s
+G=s.symbols(&#39;G&#39;,positive=True);pi=s.pi
+A=s.Matrix([[2,-1],[-1,2]])
+assert s.simplify((1/(8*pi*G))*(16*pi*G)-2)==0
+assert s.simplify((-1/(8*pi*G))*(-16*pi*G)-2)==0
+chi,bchi=s.symbols(&#39;chi bchi&#39;)
+assert s.exp(-chi)==s.exp(-chi)
+assert -bchi*s.exp(-chi)==-bchi*s.exp(-chi)
+print(&#39;CELL_IV_6_PASS&#39;)</code></pre>
+</section>
+<section id="evenaffine-coefficient-and-bch-power-counting"
+class="level1">
+<h1>11. Even/affine coefficient and BCH power counting</h1>
+<p>At the gravity point, <span
+class="math inline">\(\alpha^-=\nu=0\)</span>. Gate 3B gives</p>
+<p><span class="math display">\[
+\mathcal S_{i,{\rm odd}}^{[1]}=:\mu\Phi_i^-E_i:,
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\mathcal S_{i,{\rm even}}^{[1]}
+=:\left(-\mu^3\Phi_i^++\mu^2\log(w/w_0)\right)E_i:.
+\]</span></p>
+<p>Since <span class="math inline">\(\mu\Phi_i^+=O(1)\)</span> and <span
+class="math inline">\(\mu^2=O(G)\)</span>,</p>
+<p><span class="math display">\[
+\mathcal S_{i,{\rm odd}}^{[1]}=O(1),
+\qquad
+\mathcal S_{i,{\rm even}}^{[1]}=O(G).
+\]</span></p>
+<p>The barred BCH conversion is</p>
+<p><span class="math display">\[
+\bar Z_{t,\rho}=(1-\rho)^{-2t\bar\mu(t)^2},
+\qquad
+\log\bar Z_{t,\rho}=-2t\bar\mu(t)^2\log(1-\rho)=O(tG).
+\]</span></p>
+<p>It is scalar and insertion-coordinate independent. It changes only
+the allowed triangular multiple of <span
+class="math inline">\(Q_i^{[0]}\)</span>; it cannot supply a new <span
+class="math inline">\(O(G^0)\)</span> local charge.</p>
+<pre class="python cell-code" data-cell="7"><code>import sympy as s
+G,c,t,rho=s.symbols(&#39;G c t rho&#39;)
+mu2=c*G
+logZ=-2*t*mu2*s.log(1-rho)
+assert s.diff(logZ,t).has(G)
+qraw,q0,qm,mu=s.symbols(&#39;qraw q0 qm mu&#39;)
+qcanonical=qraw-mu*qm*q0
+assert s.expand(qcanonical-(qraw-mu*qm*q0))==0
+print(&#39;CELL_IV_7_PASS&#39;)</code></pre>
+</section>
+<section id="raw-moving-frame-and-canonical-pbw-frame" class="level1">
+<h1>12. Raw moving frame and canonical PBW frame</h1>
+<p>The bulk Noether charges act on one classical phase space and
+annihilate the Miura invariants homogeneously. They therefore realize
+the raw horizontal coefficient:</p>
+<p><span class="math display">\[
+\boxed{
+S_i^{(1)}\longleftrightarrow\widetilde Q_i^{[1],\rm cl}.
+}
+\]</span></p>
+<p>At <span class="math inline">\(\nu=0\)</span>, decompose</p>
+<p><span class="math display">\[
+\Phi_i^-=q_i^-+p_i^-\log z+\Phi_{i,{\rm osc}}^-.
+\]</span></p>
+<p>The bulk field <span class="math inline">\(\bar\chi_i\)</span>
+includes its constant mode unless a basepoint condition is imposed.
+Hence the bulk barred-linear charge contains the image of <span
+class="math inline">\(\mu q_i^-Q_i^{[0]}\)</span> and is the raw
+representative. A fixed-target PBW trivialization subtracts precisely
+this target-frame derivative:</p>
+<p><span class="math display">\[
+\boxed{
+Q_i^{[1]}=\widetilde Q_i^{[1]}-\mu\,\alpha_i\cdot q^-\,Q_i^{[0]}.
+}
+\]</span></p>
+<p>Changing the bulk basepoint shifts <span
+class="math inline">\(\bar\chi_i\)</span> by a constant and therefore
+changes the barred-linear charge by a scalar multiple of the leading
+charge. This is the same triangular ambiguity already allowed by Gate
+3B; it does not create an additional screening.</p>
+</section>
+<section id="composite-screening-diagnostic" class="level1">
+<h1>13. Composite screening diagnostic</h1>
+<p>The nonlocal composite charges in [DDF, eq. (5.27)] depend on a
+basepoint <span class="math inline">\(\phi_0\)</span>. The source also
+notes below eq. (6.37) that higher-upper-diagonal transformations can
+involve field-dependent integration constants. Notebook IV therefore
+assigns the optional composite gate Outcome C: no basepoint-independent
+quantum screening-screening conclusion is extracted. This does not
+affect the simple-root theorem.</p>
+</section>
+<section id="theorems-and-outcome" class="level1">
+<h1>14. Theorems and outcome</h1>
+<section id="theorem-iv.1---exact-semiclassical-normalization"
+class="level2">
+<h2>Theorem IV.1 - exact semiclassical normalization</h2>
+<p>Let</p>
+<p><span class="math display">\[
+k_{\rm CS}=\frac1{8\pi G},
+\qquad
+\tau_s=\frac{12}{s(s^2-1)},
+\qquad
+a_s=\sqrt{\pi k_{\rm CS}\tau_s},
+\]</span></p>
+<p>and choose <span class="math inline">\(\alpha^-=0\)</span>, <span
+class="math inline">\(\alpha^+=ia_s\)</span>. Then <span
+class="math inline">\(c_L=0\)</span>, <span
+class="math inline">\(c_M=3/G\)</span>. For <span
+class="math inline">\(s=2,3\)</span>, the single scalar-to-weight map,
+the FH factor <span class="math inline">\(i\)</span>, and the common
+current map derived above identify the bulk row-determinant invariants
+with the semiclassical symmetric Carrollian Miura fields. For <span
+class="math inline">\(s=3\)</span>, the exact relations are</p>
+<p><span class="math display">\[
+U_2^\pm=-\frac4{\mu^2}(M_{(L)},L_{(L)})^\pm,
+\qquad
+\mathcal U_3^\pm=-\frac8{\mu^3}(M_{(W)},L_{(W)})^\pm.
+\]</span></p>
+</section>
+<section id="theorem-iv.2---simple-root-screening-map" class="level2">
+<h2>Theorem IV.2 - simple-root screening map</h2>
+<p>For <span class="math inline">\(s=2,3\)</span>,</p>
+<p><span class="math display">\[
+E_i^{\rm cl}=e^{-\chi_i},
+\qquad
+\mathcal S_{i,{\rm odd}}^{[1],\rm cl}=-\bar\chi_i e^{-\chi_i}.
+\]</span></p>
+<p>After fixing the bulk gauge parameters, <span
+class="math inline">\(Q_i^{[0],\rm cl}\)</span> and <span
+class="math inline">\(\widetilde Q_i^{[1],\rm cl}\)</span> equal the
+corresponding leading and barred-linear bulk Noether charges up to the
+explicitly displayed universal prefactors. Both root labels and both
+absolute signs are fixed by generated transformations. The common
+even/affine coefficient is <span
+class="math inline">\(O(G)\)</span>.</p>
+</section>
+<section id="corollary-iv.3---canonical-frame-interpretation"
+class="level2">
+<h2>Corollary IV.3 - canonical-frame interpretation</h2>
+<p>The classical bulk barred-linear screening realizes the raw
+horizontal coefficient. The canonical <span
+class="math inline">\(Q_i^{[1]}\)</span> is its PBW-covariantized
+deformation intertwiner. It is not an ordinary second quantum
+screening.</p>
+</section>
+<section id="disposition" class="level2">
+<h2>Disposition</h2>
+<p><span class="math display">\[
+\boxed{\text{Notebook IV closes with Outcome B.}}
+\]</span></p>
+<p>The only convention transformation is one global analytic
+continuation and plane/cylinder conversion, used uniformly in the <span
+class="math inline">\(s=2\)</span>, <span
+class="math inline">\(s=3\)</span>, unbarred, barred, current, Miura,
+and screening sectors. There is no root-dependent normalization.</p>
+</section>
+</section>
+<section id="claim-boundary" class="level1">
+<h1>15. Claim boundary</h1>
+<p>This notebook does not establish a quantum screening doublet,
+equality of quantum kernels, a BRST complex, a quantum-group structure,
+quantum Serre relations, complete screening-screening closure, equality
+of quantum correlation functions, or a full holographic duality. The two
+primary-source formula inconsistencies and the general-bracket
+factor-two inconsistency are local source audits, not claims that the
+remaining results of either paper fail.</p>
+</section>
+<section id="reproducibility-ledger" class="level1">
+<h1>16. Reproducibility ledger</h1>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>Required evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Upstream</td>
+<td>five exact archive hashes; portable Gate-3B checkpoint</td>
+</tr>
+<tr class="even">
+<td>Main model</td>
+<td>normalization, Fourier, <span class="math inline">\(s=2\)</span>,
+<span class="math inline">\(A_2\)</span>, four Miura fields,
+transformations, power counting, frame</td>
+</tr>
+<tr class="odd">
+<td>Independent model</td>
+<td>no import from the main verifier; separate 29-check
+reconstruction</td>
+</tr>
+<tr class="even">
+<td>Source anchors</td>
+<td>dedicated <span class="math inline">\(s=2\)</span> and <span
+class="math inline">\(s=3\)</span> programs</td>
+</tr>
+<tr class="odd">
+<td>Embedded cells</td>
+<td>seven isolated SymPy processes</td>
+</tr>
+<tr class="even">
+<td>Adversarial</td>
+<td>all roadmap mutations plus real unmutated controls</td>
+</tr>
+<tr class="odd">
+<td>Archive</td>
+<td>strict manifest, safe paths, exact payload set, fresh
+extraction</td>
+</tr>
+<tr class="even">
+<td>Static record</td>
+<td>A4, embedded fonts, page-by-page rendered inspection, HTML/PDF
+theorem synchronization</td>
+</tr>
+</tbody>
+</table>
+<p>Synchronization tokens: <code>raw horizontal coefficient</code>;
+<code>i/(2*sqrt(G))</code>; <code>9*psi_L_double_prime</code>;
+<code>1/(kCS*tau_s)</code>; <code>mu*Phi_i_minus=-bar_chi_i</code>;
+<code>not an ordinary second quantum screening</code>;
+<code>Outcome B</code>; <code>NIV-36a2530aab4feb7d</code>.</p>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<ol type="1">
+<li>S. Fredenhagen and L. Hörl, “Free-field construction of Carrollian
+<span class="math inline">\(W_N\)</span>-algebras,” <em>JHEP</em>
+<strong>02</strong> (2026) 218, <a
+href="https://arxiv.org/abs/2509.14441">arXiv:2509.14441v3</a>.</li>
+<li>E. D’Arcy, A. Delfante and S. Fredenhagen, “Holographic realization
+of higher-spin Carrollian free fields,” <a
+href="https://arxiv.org/abs/2604.27068">arXiv:2604.27068v1</a>.</li>
+<li>V. A. Fateev and S. L. Lukyanov, “The models of two-dimensional
+conformal quantum field theory with <span
+class="math inline">\(Z_n\)</span> symmetry,” <em>Int. J. Mod. Phys.
+A</em> <strong>3</strong> (1988) 507, DOI: <a
+href="https://doi.org/10.1142/S0217751X88000205">10.1142/S0217751X88000205</a>.</li>
+<li>P. Bouwknegt and K. Schoutens, “W-symmetry in conformal field
+theory,” <em>Phys. Rept.</em> <strong>223</strong> (1993) 183-276, <a
+href="https://arxiv.org/abs/hep-th/9210010">arXiv:hep-th/9210010</a>.</li>
+</ol>
+</section>
+</body>
+</html>
