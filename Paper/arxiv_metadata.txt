@@ -1,0 +1,25 @@
+Title: Quantum screening jets and deformation intertwiners for the symmetric Carrollian $W_3$-algebra
+Authors: Shubham Kumar
+Primary category: hep-th
+Cross-list: math-ph
+Comments: 23 pages, 1 figure
+
+Abstract:
+We construct the simple-root quantum screening jets of the proper symmetric Carrollian
+$W_3$-algebra obtained from the contracted Miura transformation. For each simple root, the
+two relativistic Fateev--Lukyanov screening families contract to one such jet. Its leading
+coefficients $Q_i^{[0]}$ are finite, non-zero intertwiners on completed horizontal Fock
+families and screen the spin-two and primary spin-three generators precisely on
+$\alpha^+\mu=1$. The parent reciprocity $\beta_+\beta_-=-4$ becomes
+$\alpha^+\beta_1=-2$: one branch remains a local screening, whereas the reciprocal branch is
+absorbed into the background charge. The first relative coefficients are also finite and
+non-zero, but their target representations have different first tangents. In a fixed PBW
+frame the canonical coefficients $Q_i^{[1]}$ therefore satisfy an inhomogeneous
+deformation-intertwiner equation, rather than an ordinary commutant relation. We verify its
+nonlinear spin-three form directly from the two finite-parent orderings; their average
+supplies a fixed contact term, and no additional counterterm is introduced. Finally, on the
+gravity branch $\alpha^-=0$, $\alpha^+=\mathrm{i} a_s$, we establish the semiclassical
+dictionary to flat higher-spin gravity. The bulk leading and barred-linear Noether charges
+realize $Q_i^{[0],\mathrm{cl}}$ and the raw coefficient
+$\widetilde Q_i^{[1],\mathrm{cl}}$; the canonical $Q_i^{[1]}$ is the corresponding PBW
+covariantization and is not an ordinary second screening.
