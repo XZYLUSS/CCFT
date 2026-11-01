@@ -1,0 +1,41 @@
+# SOURCE MANIFEST -- Notebook I (Carrollian screening programme)
+# Generated 2026-08-01 20:16 UTC
+# Environment: CPython (tested under 3.12.3 and 3.13.5) / SymPy 1.14.0 -- see requirements.txt
+#
+# Gate, in a clean extracted directory:
+#     sha256sum -c SOURCE_MANIFEST.sha256 \
+#  && python3 verify_notebook_I.py \
+#  && python3 test_freeze_gate_mutations.py \
+#  && python3 freeze_check.py
+#
+# freeze_check.py additionally runs divisibility.py's positive/negative controls and
+# cross-witnesses test_freeze_gate_mutations.py. All subprocesses are bounded; staged
+# mutation cases use a caller-side recursion guard. verify_notebook_I.py self-checks
+# this manifest (sec. 11).
+#
+# --- the eight distributed artifacts (all actively hash-checked) ---
+247d7b3e626bdae784effa68035fab3f8f6914bc7d80ad96ecab4fc4888e5f1f  Notebook_I_Setup.html
+e5b75a4dd3a202bde1311b65deea839d075d04e229a0264f49507517da10acc8  Notebook_I_Setup_Static.pdf
+6e1cbbf579e6490fd7767284202211111ef7c91b9a73eb0b9a33b3b6ab57352e  verify_notebook_I.py
+51861687e416e17ae499b591457773ad06fa7514f050eace7298836ecafbf819  freeze_check.py
+022b0e0b18cddc8f2dcde1140a6be1226c9f2e2d3f2f7c734d12700aad1fb561  divisibility.py
+89658afb959fd925a8d0642cfcad931eda6d4cc28a36d86d089764712b3b09ff  test_freeze_gate_mutations.py
+256e64a1c62ba9a6a9a81d105ad9878ccdad01785ef18322274582a168256063  requirements.txt
+1073c9dc652d4db919ce92c1addbd4add742f6eab44cadf8ea439d2989dffeac  ROADMAP.md
+#
+# --- primary sources: provenance only, NOT distributed ---
+# These three files are not redistributed with the package, because third-party source
+# files are not ours to redistribute. They are ordinary arXiv-generated PDFs with text
+# layers. Their SHA-256 digests have been independently recomputed by two separate
+# parties and agree exactly with the values below. If a freeze bundle does include the
+# PDFs, promote these three lines to active hash-checked entries.
+#
+#   5f617eaf715ffa78e7dda7910c573dc8c5c01277ba0a1e5c99556e2f389ee38d  2509.14441v3.pdf
+#       S. Fredenhagen and L. Hoerl, JHEP 02 (2026) 218
+#   84cbf5a4c6c3c84aef3242af42e037a73243e1bb09b7d8c0da75e74a656cbe0e  2604.27068v1.pdf
+#       E. D'Arcy, A. Delfante and S. Fredenhagen
+#   9c1bb39f49fea398b92a3d7e929192771564b7b7cb43dfc92bb4d18b1996fa38  2604.22745v2.pdf
+#       S. Fredenhagen, S. Prohazka and R. Tiefenbacher
+#
+# Equation-level verification was performed against these exact files, together with the
+# arXiv HTML rendering of 2604.27068v1 for footnote 9 after eq. (6.51) and eqs. (6.49)-(6.51).

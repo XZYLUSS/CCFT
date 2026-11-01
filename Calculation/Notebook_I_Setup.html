@@ -1,0 +1,2743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notebook I — Conventions and Setup: Quantum Screening Doublets for the Symmetric Carrollian W&#8323; Algebra</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    processEscapes: true,
+    skipTags: ['script','noscript','style','textarea','pre','code'],
+    ignoreClass: 'nomath'
+  },
+  TeX: {
+    extensions: ["AMSmath.js","AMSsymbols.js","color.js"],
+    Macros: {
+      Jp: ["{J^{+}}"], Jm: ["{J^{-}}"],
+      vp: ["{\\varphi^{+}}"], vm: ["{\\varphi^{-}}"],
+      ap: ["{\\alpha^{+}}"], am: ["{\\alpha^{-}}"],
+      Up: ["{U^{+}}"], Um: ["{U^{-}}"],
+      Scr: ["{\\mathscr{S}}"],
+      no: [":\\!#1\\!:",1],
+      av: ["\\vdots\\,#1\\,\\vdots",1],
+      eps: ["{\\epsilon}"],
+      kap: ["{\\kappa}"],
+      Res: ["{\\operatorname{Res}}"],
+      Tr: ["{\\operatorname{tr}}"]
+    }
+  },
+  "HTML-CSS": { availableFonts: ["TeX"], scale: 104, linebreaks: { automatic: true } },
+  CommonHTML: { linebreaks: { automatic: true } }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS_HTML" async></script>
+
+<style>
+:root{
+  --bg:#f6efe3;
+  --panel:#fbf8f1;
+  --panel2:#f2e9d9;
+  --ink:#2f2721;
+  --ink-soft:#4a3f36;
+  --muted:#7a6a5a;
+  --rule:#e2d5be;
+  --rule-strong:#cbb894;
+  --terra:#b1502e;
+  --ochre:#bf8a3c;
+  --olive:#5f6b4a;
+  --plum:#7a4a5e;
+  --teal:#456b68;
+  --rust:#8d3b1e;
+  --code-bg:#f0e7d6;
+  --shadow:0 1px 2px rgba(70,50,30,.06),0 6px 22px rgba(70,50,30,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:'EB Garamond',Georgia,serif;font-size:18.5px;line-height:1.68;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--rust);text-decoration:none;border-bottom:1px solid rgba(141,59,30,.28)}
+a:hover{border-bottom-color:var(--rust)}
+
+/* ---------- layout ---------- */
+#shell{display:flex;min-height:100vh}
+#toc{
+  width:310px;flex:0 0 310px;position:sticky;top:0;height:100vh;overflow-y:auto;
+  background:linear-gradient(180deg,#efe4cf 0%,#ece0c9 100%);
+  border-right:1px solid var(--rule-strong);padding:26px 18px 60px 22px;
+}
+#toc h2{
+  font-family:'Cormorant Garamond',serif;font-size:1.05rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--rust);margin:0 0 4px;font-weight:700;
+}
+#toc .sub{font-size:.82rem;color:var(--muted);font-style:italic;margin:0 0 18px;line-height:1.4}
+#toc ol{list-style:none;margin:0;padding:0;counter-reset:none}
+#toc li{margin:0}
+#toc a{
+  display:block;padding:4px 8px 4px 10px;font-size:.92rem;color:var(--ink-soft);
+  border-bottom:none;border-left:2px solid transparent;line-height:1.35;
+}
+#toc a:hover{background:rgba(255,255,255,.45);border-left-color:var(--ochre)}
+#toc a.lvl2{padding-left:26px;font-size:.86rem;color:var(--muted)}
+#toc a.active{border-left-color:var(--terra);background:rgba(255,255,255,.62);color:var(--rust);font-weight:600}
+#toc .tocnum{color:var(--ochre);font-variant-numeric:tabular-nums;margin-right:.45em;font-weight:600}
+
+main{flex:1;min-width:0;padding:52px 6vw 140px;max-width:1180px}
+
+/* ---------- masthead ---------- */
+.masthead{border-bottom:2px solid var(--rule-strong);padding-bottom:26px;margin-bottom:38px}
+.kicker{font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ochre);font-weight:600}
+h1{
+  font-family:'Cormorant Garamond',serif;font-weight:700;font-size:2.85rem;line-height:1.12;
+  margin:.28em 0 .18em;color:var(--ink);letter-spacing:-.01em;
+}
+.subtitle{font-size:1.12rem;color:var(--muted);font-style:italic;margin:0 0 14px}
+.meta{font-size:.9rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 22px}
+.meta b{color:var(--ink-soft);font-weight:600}
+
+/* ---------- headings ---------- */
+h2{
+  font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.95rem;
+  margin:2.5em 0 .55em;padding-bottom:.18em;border-bottom:1px solid var(--rule);
+  color:var(--ink);scroll-margin-top:18px;
+}
+h2 .num{color:var(--terra);margin-right:.4em}
+h3{
+  font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.42rem;
+  margin:1.9em 0 .4em;color:var(--ink-soft);scroll-margin-top:18px;
+}
+h3 .num{color:var(--ochre);margin-right:.4em;font-size:.95em}
+h4{font-family:'EB Garamond',serif;font-weight:600;font-size:1.08rem;margin:1.4em 0 .3em;color:var(--rust);letter-spacing:.01em}
+p{margin:.72em 0}
+ul,ol{margin:.6em 0 .8em;padding-left:1.4em}
+li{margin:.3em 0}
+strong{font-weight:600;color:var(--ink)}
+em{font-style:italic}
+
+/* ---------- environments ---------- */
+.env{
+  position:relative;margin:1.5em 0;padding:16px 20px 14px;border-radius:3px;
+  background:var(--panel);border:1px solid var(--rule);border-left:4px solid var(--ochre);
+  box-shadow:var(--shadow);
+}
+.env>.tag{
+  display:block;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.02rem;
+  letter-spacing:.04em;color:var(--ochre);margin-bottom:.35em;
+}
+.env>.tag .id{font-variant-numeric:tabular-nums}
+.env p:first-of-type{margin-top:.1em}
+.env p:last-child{margin-bottom:.1em}
+
+.def{border-left-color:var(--olive)}      .def>.tag{color:var(--olive)}
+.thm{border-left-color:var(--terra);background:#fbf4ee} .thm>.tag{color:var(--terra)}
+.conv{border-left-color:var(--ochre);background:#faf4e6} .conv>.tag{color:#9a6c22}
+.warn{border-left-color:var(--rust);background:#f9eee9} .warn>.tag{color:var(--rust)}
+.novel{border-left-color:var(--plum);background:#f8f1f3} .novel>.tag{color:var(--plum)}
+.intu{border-left-color:var(--teal);background:#eff4f2} .intu>.tag{color:var(--teal)}
+.check{border-left-color:#6d8a3f;background:#f2f5e9} .check>.tag{color:#55702f}
+.open{border-left-color:#8a7f6d;background:#f4f1ea} .open>.tag{color:#6f6455}
+.der{border-left-color:var(--rule-strong);background:#f8f4ec} .der>.tag{color:var(--muted)}
+.rem{border-left-color:#9a8b76;background:#f7f4ee} .rem>.tag{color:#7a6a5a}
+
+/* ---------- callout for key results ---------- */
+.keybox{
+  margin:1.6em 0;padding:2px;border-radius:4px;
+  background:linear-gradient(135deg,var(--ochre),var(--terra));
+}
+.keybox .inner{background:var(--panel);border-radius:3px;padding:16px 22px}
+.keybox .tag{display:block;font-family:'Cormorant Garamond',serif;font-weight:700;
+  color:var(--terra);font-size:1.05rem;margin-bottom:.25em;letter-spacing:.03em}
+
+/* ---------- tables ---------- */
+table{border-collapse:collapse;width:100%;margin:1.3em 0;font-size:.94rem;background:var(--panel);
+  box-shadow:var(--shadow);border-radius:3px;overflow:hidden}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+th{background:var(--panel2);font-family:'Cormorant Garamond',serif;font-weight:700;
+  font-size:1rem;color:var(--rust);letter-spacing:.02em}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#fdfbf6}
+td.c,th.c{text-align:center}
+.stat{font-family:'IBM Plex Mono',monospace;font-size:.78rem;padding:1px 7px;border-radius:9px;white-space:nowrap}
+.s-verb{background:#e6eed9;color:#4d6b23}
+.s-der{background:#f3e6cf;color:#8a6417}
+.s-nov{background:#efe0e6;color:#7a4a5e}
+.s-imp{background:#e2e9ea;color:#3c6360}
+.s-open{background:#eae5db;color:#6f6455}
+.s-rew{background:#e0e6ef;color:#3c4f70}
+
+/* ---------- code / cells ---------- */
+.cell{margin:1.5em 0;border:1px solid var(--rule-strong);border-radius:4px;overflow:hidden;
+  background:var(--code-bg);box-shadow:var(--shadow)}
+.cell-head{display:flex;align-items:center;gap:10px;padding:7px 12px;background:#e8dcc4;
+  border-bottom:1px solid var(--rule-strong)}
+.cell-head .lang{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;
+  text-transform:uppercase;color:#8a6417;font-weight:600}
+.cell-head .title{font-size:.9rem;color:var(--ink-soft);flex:1;font-style:italic}
+.cell-head button{
+  font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.06em;
+  background:var(--terra);color:#fff;border:none;padding:5px 13px;border-radius:3px;cursor:pointer;
+  text-transform:uppercase;font-weight:600;
+}
+.cell-head button:hover{background:#96401f}
+.cell-head button:disabled{background:#b6a894;cursor:default}
+.cell textarea{
+  width:100%;border:none;background:var(--code-bg);color:#3a3128;padding:12px 14px;resize:vertical;
+  font-family:'IBM Plex Mono',monospace;font-size:13.2px;line-height:1.55;outline:none;display:block;
+  min-height:80px;
+}
+.cell .out{
+  border-top:1px dashed var(--rule-strong);background:#fdfaf3;padding:10px 14px;
+  font-family:'IBM Plex Mono',monospace;font-size:12.8px;line-height:1.5;white-space:pre-wrap;
+  color:#3c3229;max-height:460px;overflow:auto;
+}
+.cell .out:empty{display:none}
+.cell .out .ok{color:#4d6b23}
+.cell .out .err{color:#a12f18}
+code.inl{font-family:'IBM Plex Mono',monospace;font-size:.86em;background:var(--code-bg);
+  padding:1px 5px;border-radius:2px;color:#6b4a1c}
+
+#pystatus{
+  position:fixed;right:16px;bottom:16px;z-index:50;font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;background:var(--panel);border:1px solid var(--rule-strong);
+  padding:6px 12px;border-radius:14px;color:var(--muted);box-shadow:var(--shadow)
+}
+
+/* ---------- misc ---------- */
+.cite{font-size:.72em;vertical-align:super;line-height:0}
+.cite a{border:none;color:var(--terra);font-weight:600}
+.eqref{font-family:'IBM Plex Mono',monospace;font-size:.82em;color:#8a6417}
+hr.sep{border:none;border-top:1px solid var(--rule);margin:2.6em 0}
+.lede{font-size:1.05rem;color:var(--ink-soft);border-left:3px solid var(--ochre);
+  padding-left:16px;margin:1.2em 0;font-style:italic}
+.bib{font-size:.92rem;line-height:1.5}
+.bib div{margin:.55em 0;padding-left:3.6em;text-indent:-3.6em}
+.bib .key{font-family:'IBM Plex Mono',monospace;color:var(--terra);font-weight:600}
+.footer{margin-top:4em;padding-top:1.2em;border-top:1px solid var(--rule);
+  font-size:.85rem;color:var(--muted);font-style:italic}
+@media(max-width:980px){
+  #toc{display:none} main{padding:32px 22px 100px}
+}
+</style>
+</head>
+<body>
+
+<div id="shell">
+<nav id="toc">
+  <h2>Notebook I</h2>
+  <p class="sub">Conventions &amp; Setup — Carrollian screening doublets</p>
+  <ol>
+    <li><a href="#s0"><span class="tocnum">0</span>Purpose, scope, audit protocol</a></li>
+    <li><a href="#s1"><span class="tocnum">1</span>The programme and the gap</a></li>
+    <li><a href="#s1-1" class="lvl2">1.1 Notebooks I–IV; papers 1–3</a></li>
+    <li><a href="#s1-2" class="lvl2">1.2 Target theorems</a></li>
+    <li><a href="#s2"><span class="tocnum">2</span>Parent relativistic \(W_N\)</a></li>
+    <li><a href="#s2-1" class="lvl2">2.1 Free fields and brackets</a></li>
+    <li><a href="#s2-2" class="lvl2">2.2 Miura transformation</a></li>
+    <li><a href="#s2-3" class="lvl2">2.3 The \(N=2\) anchor</a></li>
+    <li><a href="#s2-4" class="lvl2">2.4 Potentials and the log sign</a></li>
+    <li><a href="#s3"><span class="tocnum">3</span>Parent screenings (bridge)</a></li>
+    <li><a href="#s3-1" class="lvl2">3.1 The weight computation</a></li>
+    <li><a href="#s3-2" class="lvl2">3.2 Branches and \(b+1/b\)</a></li>
+    <li><a href="#s3-3" class="lvl2">3.3 \(A_{N-1}\) roots</a></li>
+    <li><a href="#s4"><span class="tocnum">4</span>The Carrollian contraction</a></li>
+    <li><a href="#s4-1" class="lvl2">4.1 Carroll-compatible fields</a></li>
+    <li><a href="#s4-2" class="lvl2">4.2 \(\epsilon\)-exactness (oscillators)</a></li>
+    <li><a href="#s4-3" class="lvl2">4.3 Contracted Miura</a></li>
+    <li><a href="#s4-4" class="lvl2">4.4 \(N=2\) explicit</a></li>
+    <li><a href="#s5"><span class="tocnum">5</span>Quantum layer &amp; ordering</a></li>
+    <li><a href="#s5-1" class="lvl2">5.1 Flipped vs symmetric</a></li>
+    <li><a href="#s5-2" class="lvl2">5.2 Averaged ordering</a></li>
+    <li><a href="#s5-3" class="lvl2">5.3 Filtration Lemma</a></li>
+    <li><a href="#s6"><span class="tocnum">6</span>Zero modes and the module</a></li>
+    <li><a href="#s7"><span class="tocnum">7</span>Formal screening jet</a></li>
+    <li><a href="#s7-1" class="lvl2">7.1 Jet expansion</a></li>
+    <li><a href="#s7-2" class="lvl2">7.2 \(F_0\): two routes</a></li>
+    <li><a href="#s7-3" class="lvl2">7.3 \(F_1\) and \(B\)</a></li>
+    <li><a href="#s7-4" class="lvl2">7.4 Branch counting</a></li>
+    <li><a href="#s8"><span class="tocnum">8</span>The bulk targets</a></li>
+    <li><a href="#s9"><span class="tocnum">9</span>Problem statement</a></li>
+    <li><a href="#s10"><span class="tocnum">10</span>Audit ledger</a></li>
+    <li><a href="#s11"><span class="tocnum">11</span>References</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<div class="masthead">
+  <div class="kicker">Research Notebook · Volume I of IV</div>
+  <h1>Conventions, Free Fields, and the Precise Setup of the Carrollian Screening Problem</h1>
+  <p class="subtitle">Preparatory notebook for <em>Quantum Screening Doublets for the Symmetric Carrollian \(W_3\) Algebra</em></p>
+  <div class="meta">
+    <span><b>Status</b> setup / conventions-locking</span>
+    <span><b>Primary sources</b> [FH25], [DDF26], [FPT26]</span>
+    <span><b>Computation</b> Python (Pyodide + SymPy) inline</span>
+    <span><b>Date</b> 1 August 2026</span>
+  </div>
+</div>
+
+<!-- ============================ 0 ============================ -->
+<h2 id="s0"><span class="num">0</span>Purpose, scope, and the audit protocol</h2>
+
+<p class="lede">This notebook fixes the conventions, signs and normalisations needed for the <em>formal
+oscillator and parameter</em> calculations of the screening programme, derives the objects the paper's theorems
+will be about, and itemises the operator-level data deliberately deferred to Notebook II. It is a formal
+algebraic setup notebook, not a complete operator construction.</p>
+
+<p>The notebook is executable. Python cells run in your browser via Pyodide with SymPy. <b>What the cells
+cover</b>, exactly: the classical Miura polynomial identities; the single-field and general-root screening
+weights; the parent residue identity of Proposition 3.4; the contracted oscillator brackets on the
+\(\delta\)-support; the \(N=2\) contraction of \(T,\bar T\); the \(F_0/F_1\) parameter hierarchy; the
+zero-mode half-shift and cylinder mode factor; the formal associated-graded jet; and the projector identities
+of the index space. <b>What they do not cover:</b> source transcription, averaged ordering, contour
+orientation, cocycles, the even-jet commutant question, and the bulk normalisation dictionary — all of which
+are prose, inference, or open, and are marked accordingly.</p>
+
+<div class="env conv"><span class="tag">Audit protocol <span class="id">(P0)</span></span>
+<p><b>The rule, stated so that the document actually satisfies it</b> — this is a
+<em>load-bearing displayed claim</em> protocol, not an every-box protocol: every load-bearing displayed
+claim — anything the paper will cite or build on — is marked and appears in the Section&nbsp;10 ledger.
+Purely definitional or expository boxes (conventions, definitions, intuition) may be unmarked; they introduce
+notation rather than assert results. Marks attach to boxes, not to individual lines; where a box mixes
+provenance, the surrounding text says which equation is which. The marks are:</p>
+<ul>
+  <li><span class="stat s-verb">verbatim</span> — faithful transcription from a primary source, with the source's own equation number given: no mathematical change (typographic reformatting and our notation macros are permitted).</li>
+  <li><span class="stat s-der">derived</span> — obtained here from verbatim input by a computation shown in full. Reproducible by the accompanying Python cell.</li>
+  <li><span class="stat s-imp">imported</span> — standard material from the wider literature, translated into our locked conventions. The translation is always shown explicitly, never assumed.</li>
+  <li><span class="stat s-rew">rewrite</span> — a convention-preserving algebraic rewrite of source material (e.g. cylinder modes to plane OPE), or a field redefinition. The redefinition is always exhibited.</li>
+  <li><span class="stat s-nov">formulated here</span> — formulated in this notebook; no prior statement was located in the dated search protocol of §1.1. This is a literature-search status, not a categorical claim of global novelty. Always accompanied by a full justification and an explicit statement of what would falsify it.</li>
+  <li><span class="stat s-open">open</span> — a conjecture or an unresolved item. Never used as an input to anything downstream.</li>
+</ul>
+<p>A load-bearing claim absent from the ledger is not licensed for the paper. Section&nbsp;10 collects the ledger, including the zero-mode, ordering, contour and module assumptions that are not themselves displayed equations.</p>
+<p><b>Layer discipline.</b> Six layers are kept apart throughout and are never allowed to borrow each other's authority: (a) classical Poisson/mode identities; (b) quantum normal-ordered OPEs; (c) cylinder versus plane conventions; (d) formal \(\eps\)-jets of commuting symbols; (e) vertex-operator intertwiners on a specified module; (f) Hilbert-space/AQFT representations. Most of what follows lives in (a)–(d). Layer (e) is set up but not completed here; layer (f) is out of scope for Paper 1.</p>
+</div>
+
+<div class="env warn"><span class="tag">Scope discipline</span>
+<p>This notebook does <em>not</em> prove the commutant theorem, and does not close the operator layer. It sets
+up the problem so that the commutant
+theorem becomes a finite, well-posed computation at the level of <em>formal densities and parameters</em>.
+It does <b>not</b> close the operator layer: contour orientation, the barred equal-time map, vertex normal
+ordering, the zero-mode cocycle, multiplicative renormalisations and the logarithmic residue for
+\(\vm e^{\beta\vp}\) are all explicitly deferred (the "Missing data" box of §7.1, D4, §9). <b>Notebook I is a formal algebraic setup
+notebook</b>, and its results should be cited as such. Two things in
+particular are deliberately deferred: (i) the operator layer and the quantum ordering analysis of the tangent
+screening, to Notebook II; and (ii) the \(A_2\) computation with \(U_3^\pm\), to Notebook III. What <em>is</em> settled here — and this was not obvious
+at the outset — is the leading screening condition \(F_0\), obtained by two independent routes in §7.2.</p>
+</div>
+
+<h4>Running the Python cells</h4>
+<p>The first cell you run will download the Pyodide runtime and SymPy (roughly 10&nbsp;MB, cached thereafter).
+Allow a few seconds. A status pill appears in the lower right. All later cells share one interpreter session,
+so definitions persist between cells; run them in order the first time.</p>
+
+<div class="cell" data-lang="py">
+  <div class="cell-head"><span class="lang">python</span><span class="title">Cell 0 — environment and shared symbols</span><button onclick="runCell(this)">Run</button></div>
+  <textarea spellcheck="false">import sympy as sp
+
+# --- shared symbolic alphabet used throughout this notebook -------------------
+eps      = sp.symbols('epsilon', positive=True)      # contraction parameter
+alpha    = sp.symbols('alpha')                       # parent background charge (unbarred copy)
+alphab   = sp.symbols('alphabar')                    # parent background charge (barred copy)
+ap, am   = sp.symbols('alpha^+ alpha^-')             # Carrollian background charges
+b        = sp.symbols('b')                           # TODA COUPLING ONLY (beta_+ = 2b)
+beta, betabar = sp.symbols('beta betabar')           # full single-field screening momenta
+b1       = sp.symbols('beta_1')                      # leading Carrollian screening momentum
+b3, b3b  = sp.symbols('beta_3 beta_3bar')            # subleading screening momenta
+z, w     = sp.symbols('z w')
+N        = sp.symbols('N', positive=True, integer=True)
+
+print("SymPy", sp.__version__, "ready.")
+print("Shared symbols:", [str(s) for s in (eps,alpha,alphab,ap,am,b,beta,betabar,b1,b3,b3b)])</textarea>
+  <div class="out"></div>
+</div>
+
+<!-- ============================ 1 ============================ -->
+<h2 id="s1"><span class="num">1</span>The programme and the precise gap</h2>
+
+<h3 id="s1-1"><span class="num">1.1</span>Where this sits: four notebooks, three papers</h3>
+
+<div class="env conv"><span class="tag">Programme map (authoritative)</span>
+<p>Two sequences must not be confused. The <b>notebooks</b> are the working record:</p>
+\[
+\underbrace{\text{I}}_{\text{formal setup}}\;\to\;
+\underbrace{\text{II}}_{A_1\ \text{operator layer}}\;\to\;
+\underbrace{\text{III}}_{A_2/W_3\ \text{commutation}}\;\to\;
+\underbrace{\text{IV}}_{\text{bulk match},\ N=2\ \text{anchors}}\;\to\;\text{manuscript}
+\]
+<p>The <b>papers</b> are the intended outputs: Paper 1, the screening theorem (this programme);
+Paper 2, the boundary Carrollian \(W_3\) algebra; Paper 3, the nonlocal screening algebra and its quantum
+group. Notebook IV may be merged into III only under the conditions recorded in <code class="inl">ROADMAP.md</code>.</p>
+</div>
+
+<p>Three recent results define the frontier. Fredenhagen and Hörl<span class="cite"><a href="#FH25">[FH25]</a></span>
+construct the <em>proper symmetric quantum Carrollian</em> \(W_N\)-algebra by contracting two copies of a
+relativistic \(W_N\)-algebra at the level of the Miura operator, and prove that with an averaged ordering
+prescription the basic structure constants coincide with the classical ones. D'Arcy, Delfante and
+Fredenhagen<span class="cite"><a href="#DDF26">[DDF26]</a></span> derive, from asymptotically flat higher-spin
+Chern–Simons gravity in a flat diagonal gauge, a <em>classical</em> Carrollian Coulomb gas: celestial free
+bosons, Carrollian screening charges generating the residual pure-gauge transformations, and Carrollian
+Miura currents as the invariants. Fredenhagen, Prohazka and Tiefenbacher<span class="cite"><a href="#FPT26">[FPT26]</a></span>
+show that massless Carrollian free fields generically require nonregular states with a nonseparable
+zero-mode sector.</p>
+
+<p>The gap is precise and is stated in the sources themselves. [FH25] lists as open both the role of
+screening charges in the Carrollian setting and the construction of representations from the free fields.
+[DDF26] constructs the screening charges only classically and presents quantisation as the next step.
+We have found no construction of the <em>quantum</em> screening operators of the symmetric Carrollian algebra
+as of 1 August 2026, on the basis of the following dated protocol: full-text bibliography searches for the
+identifiers <code class="inl">2509.14441</code> and <code class="inl">2604.27068</code>; INSPIRE/publisher
+citation trackers on those two papers and on Fateev–Lukyanov; and keyword sweeps on
+<em>Carrollian screening</em>, <em>Carrollian Coulomb gas</em>, <em>Carrollian Toda</em>, <em>quantum Carrollian
+W</em>. The sweep is to be repeated at each drafting milestone and on submission day; a null result from a
+search engine is not a proof of absence, and unpublished work inside the originating group is not visible to
+it.</p>
+
+<div class="keybox"><div class="inner">
+<span class="tag">The object this programme builds</span>
+<p>The quantum operators \(Q_i^{(0)},Q_i^{(1)}\) such that the currents of the proper symmetric quantum
+Carrollian \(W_3\)-algebra of [FH25] lie in their joint commutant,</p>
+\[
+\mathcal W_3^{\rm Car}\;\subseteq\;\bigcap_{i,a}\ker\big(\operatorname{ad}Q^{(a)}_i\big),
+\]
+<p>and whose semiclassical limit is the set of four elementary bulk screening charges of [DDF26],
+eqs.&nbsp;(5.26a–d). <b>Inclusion, not equality.</b> Proving that the commutant is <em>exactly</em>
+\(\mathcal W_3^{\rm Car}\) requires a screening-kernel theorem — a graded character comparison, a
+cohomological (Felder-type) resolution, or a strong-generation argument — none of which is attempted in
+Paper 1. The semiclassical limit is the \(G\to0\) limit of the bulk normalisation D5, not an \(\hbar\to0\)
+limit: no \(\hbar\) appears anywhere in our oscillator algebra, and the earlier use of that phrase was
+meaningless.</p>
+</div></div>
+
+<h3 id="s1-2"><span class="num">1.2</span>The five target statements</h3>
+
+<p>Notebooks II–IV and the manuscript will establish the following, in the allocation fixed by
+<code class="inl">ROADMAP.md</code>. They are recorded here so that every convention fixed below can be
+checked against what it is ultimately for.</p>
+
+<table>
+<thead><tr><th style="width:15%">Label</th><th>Statement</th><th style="width:20%">Notebook</th></tr></thead>
+<tbody>
+<tr><td><b>Theorem 1</b></td><td>Contraction theorem: the elementary \(A_2\) screening doublets \(\Scr_i^{(0)},\Scr_i^{(1)}\) are <em>derived</em> as limits of the two parent chiral screening systems, including zero-mode factors, ordering prescription and momentum scaling.</td><td>I (jet) → II (\(A_1\) operators) → III (\(A_2\))</td></tr>
+<tr><td><b>Lemma 2</b></td><td>Filtration/truncation lemma: the contraction order of \(U_k^\sigma\) against \(\Scr_i^{(a)}\) is bounded by \(\sigma+a\in\{0,1,1,2\}\). Proved abstractly, before any OPE.</td><td>I §5.3</td></tr>
+<tr><td><b>Theorem 3</b></td><td>Commutation theorem: \([Q_i^{(a)},U^{\sigma}_{k,n}]=0\) for \(k=2,3\), \(a=0,1\), \(\sigma=\pm\), as identities of intertwiners between specified free-field modules. Establishes <em>inclusion</em> \(\mathcal W_3^{\rm Car}\subseteq\bigcap\ker\operatorname{ad}Q\); equality is not claimed.</td><td>III</td></tr>
+<tr><td><b>Theorem 4</b></td><td>Parameter relations: the hierarchy \(F_0(\ap,\beta_1)=0\), \(F_1(\ap,\am,\beta_1,\beta_3,\bar\beta_3)=0\), settling where the relativistic reciprocal quantum relation survives; and the existence of the limiting operators. \(F_0\) is already exact and ordering-independent (Prop. 7.3b); the open part is existence, \(F_1\), and \(N=3\).</td><td>I (\(A_1\) parameters) → II (operators) → III (\(A_2\))</td></tr>
+<tr><td><b>Theorem 5</b></td><td>Semiclassical (\(G\to0\)) holographic matching to [DDF26] (5.26a–d) at the locus \(\am=0\), completing the dictionary D5 (root basis, \(8\pi G\) vs \(6\pi G\), the constants \(\kappa_n\)).</td><td>IV</td></tr>
+<tr><td><b>Stretch</b></td><td>Closure of \([Q_i^{(a)},Q_j^{(b)}]\) onto quantum analogues of the composite nonlocal charges [DDF26] (5.27a–b). <em>Not a submission gate.</em></td><td>Paper 3 horizon</td></tr>
+</tbody>
+</table>
+
+<!-- ============================ 2 ============================ -->
+<h2 id="s2"><span class="num">2</span>The parent relativistic \(W_N\)-algebra: conventions locked</h2>
+
+<p>The <em>current</em> and <em>Miura</em> conventions of this section are taken verbatim from [FH25], and we
+adopt their normalisations without modification even where another choice would be more familiar. §2.4 is the
+exception and is marked as such. <b>[FH25] do introduce a potential</b> — their §3.1 states
+\(J_j=i\,\partial\phi^{\rm FH}_j\) on the cylinder — so what §2.4 supplies is not a potential from nothing but
+an explicitly <em>named notation bridge</em>,</p>
+\[
+\varphi_j:=i\,\phi^{\rm FH}_j,
+\qquad\text{so that}\qquad
+J_j=\partial\varphi_j .
+\]
+<p>The two symbols are kept distinct throughout: \(\phi^{\rm FH}\) is [FH25]'s field, \(\varphi\) is ours, and
+every reality or Hermiticity statement is made in terms of \(\phi^{\rm FH}\).</p>
+
+<h3 id="s2-1"><span class="num">2.1</span>Free fields and their brackets</h3>
+
+<div class="env conv"><span class="tag">Convention C1 — parent currents <span class="stat s-verb">verbatim</span> [FH25] (3.14), (3.4)</span>
+<p>\(N\) spin-one currents \(J_i\), \(i=1,\dots,N\), with classical brackets and traceless constraint</p>
+\[
+[J_{i,m},J_{j,n}]^{\rm cl}\;=\;m\,\delta_{m,-n}\Big(\delta_{ij}-\tfrac1N\Big),
+\qquad
+J_1+J_2+\cdots+J_N=0 .
+\]
+<div class="env warn" style="margin-top:1em"><span class="tag">Source note S1 — which equation this is</span>
+<p>[FH25] states the free-field bracket twice: at (3.3), in setting up the classical Miura transformation, and
+again at (3.14), when preparing the contraction. <b>We cite (3.14)</b>, and every calculation below uses it.</p>
+<p>The reason for being explicit: <b>equation (3.3) as printed omits the mode factor \(m\), while (3.14)
+contains it.</b> This has been confirmed by direct inspection of the canonical arXiv v3 PDF (whose SHA-256 is
+recorded in the manifest). We record it as a <b>source erratum note</b>, not as a new result, and we do not
+speculate about its cause. It is immaterial either way: the \(m\)-carrying form is fixed independently and
+redundantly by (3.14), by the contracted brackets (3.15), and by the \(N=2\) normalisation (2.10), with which
+Check 2.1 shows it agrees. Anyone reproducing this notebook should read (3.14).</p>
+</div>
+<p>We abbreviate the pairing matrix as \(\kap_{ij}:=\delta_{ij}-\tfrac1N\), the projector onto the traceless
+subspace. <b>Two distinct statements, kept apart.</b> The displayed relation is [FH25]'s <em>classical</em>
+cylinder mode bracket (their \([\,\cdot,\cdot\,]^{\rm cl}=i\{\cdot,\cdot\}\)). Separately, we
+<em>adopt</em> the quantum radial plane OPE</p>
+\[
+J_i(z)J_j(w)\sim\frac{\kap_{ij}}{(z-w)^{2}}
+\qquad\text{\small\color{#8d3b1e}{(adopted quantum convention, }}
+\text{\small\color{#8d3b1e}{not derived from the line above)}}
+\]
+<p><span class="stat s-imp">imported</span> — it is [FH25]'s own quantum free-field normalisation (their §2,
+footnote 3, and §4.1), and it is the convention in which §§3 and 7.2 are computed. <b>A classical cylinder
+Poisson bracket does not become a quantum radial OPE by a coordinate change</b>, and an earlier draft wrongly
+labelled the passage a "rewrite". The two are used in different sections — OPE form in §§3, 7.2, mode form in
+§§4–6 — and their exact bridge is deferred (see the scope decision in §6 and Erratum E1).</p>
+</div>
+
+<div class="env conv"><span class="tag">Convention C2 — the \(N=2\) single-field normalisation <span class="stat s-verb">verbatim</span> [FH25] (2.10), fn.&nbsp;3</span>
+\[
+[J_m,J_n]=\tfrac{m}{2}\,\delta_{m,-n},
+\qquad\text{equivalently}\qquad
+J(z)J(w)\sim\frac{1/2}{(z-w)^{2}} .
+\]
+</div>
+
+<div class="env check"><span class="tag">Consistency check 2.1 <span class="stat s-der">derived</span></span>
+<p>C1 and C2 must agree. For \(N=2\) the constraint gives \(J_1=-J_2\); writing \(J:=J_2\) we get
+\(\kap_{22}=1-\tfrac12=\tfrac12\), hence \([J_m,J_n]=m\kap_{22}\delta_{m,-n}=\tfrac m2\delta_{m,-n}\).
+Agreement is exact. This is the first of several checks that C1 and the \(N=2\) section of [FH25] are one
+convention, not two — a fact we will lean on heavily.</p>
+</div>
+
+<h3 id="s2-2"><span class="num">2.2</span>The Miura transformation</h3>
+
+<div class="env conv"><span class="tag">Convention C3 — Miura operator <span class="stat s-verb">verbatim</span> [FH25] (3.1), (3.5), (3.6)</span>
+\[
+\prod_{i=1}^{N}\big(\alpha\partial-J_i\big)\;=\;(\alpha\partial)^{N}-\sum_{k=2}^{N}u_k\,(\alpha\partial)^{N-k},
+\]
+\[
+T=u_2=-\sum_{i<j}J_iJ_j+\alpha\sum_{j>1}(j-1)\,\partial J_j,
+\qquad
+c^{\rm cl}=-(N-1)N(N+1)\alpha^{2}.
+\]
+<p>The product is ordered with increasing \(i\) from left to right, and \(\partial\) acts on everything to its right.</p>
+</div>
+
+<div class="env intu"><span class="tag">Physical intuition — what the Miura map is doing</span>
+<p>The Miura transformation is a statement about <em>factorising a differential operator</em>. The \(N\)-th order
+operator \(\mathcal L=(\alpha\partial)^N-\sum u_k(\alpha\partial)^{N-k}\) is the object whose kernel transforms
+covariantly; the currents \(u_k\) are its coefficients, i.e. its <em>invariants</em>. Writing \(\mathcal L\) as a
+product of first-order factors \((\alpha\partial-J_i)\) is a Miura/Darboux factorisation: the \(J_i\) are
+"square roots" carrying the gauge redundancy, and the \(u_k\) are what survives. In the Chern–Simons picture
+of [DDF26] this is literally a gauge choice — the diagonal gauge — with the \(J_i\) the diagonal entries and the
+\(u_k\) the gauge invariants. The screening charges will be the generators of the residual redundancy: they
+move the \(J_i\) and fix the \(u_k\). That is the entire logic of the Coulomb gas, and it is why "screening"
+and "pure gauge" are the same statement viewed from the two sides of the duality.<span class="cite"><a href="#DDF26">[DDF26]</a></span></p>
+</div>
+
+<div class="cell" data-lang="py">
+  <div class="cell-head"><span class="lang">python</span><span class="title">Cell 1 — CLASSICAL differential-operator Miura expansion vs eq. (3.5), N = 2,3,4</span><button onclick="runCell(this)">Run</button></div>
+  <textarea spellcheck="false">import sympy as sp
+zz = sp.Symbol('z')
+
+def miura_coeffs(n):
+    """Expand prod_i (alpha*d - J_i) acting on a test function; return u_k, k=2..n,
+       using the constraint sum_i J_i = 0."""
+    a  = sp.Symbol('alpha')
+    Js = [sp.Function('J%d'%(i+1))(zz) for i in range(n)]
+    f  = sp.Function('f')(zz)
+    # apply factors right-to-left:  (a d - J_1)(a d - J_2)...(a d - J_n) f
+    expr = f
+    for i in reversed(range(n)):
+        expr = a*sp.diff(expr, zz) - Js[i]*expr
+    expr = sp.expand(expr)
+    # subtract (a d)^n f and read off -u_k (a d)^{n-k} f
+    us = {}
+    rem = sp.expand(expr - a**n*sp.diff(f, zz, n))
+    for k in range(1, n+1):
+        dk   = sp.diff(f, zz, n-k)
+        coef = sp.expand(rem.coeff(dk))
+        # strip terms that involve higher derivatives of f
+        coef = coef.subs({sp.diff(f, zz, j): 0 for j in range(1, n+1)})
+        us[k] = sp.simplify(-coef/a**(n-k))
+        rem   = sp.expand(rem - (-us[k])*a**(n-k)*dk)
+    return us, Js, a
+
+for n in (2,3,4):
+    us, Js, a = miura_coeffs(n)
+    # impose the traceless constraint J_1 = -(J_2+...+J_n)
+    sub = {Js[0]: -sum(Js[1:])}
+    u1  = sp.simplify(us[1].subs(sub))
+    u2  = sp.expand(sp.simplify(us[2].subs(sub)))
+    # FH (3.5):  T = u_2 = -sum_{i<j} J_i J_j + alpha * sum_{j>1} (j-1) dJ_j
+    fh  = -sum(Js[i]*Js[j] for i in range(n) for j in range(i+1,n)) \
+          + a*sum((j)*sp.diff(Js[j], zz) for j in range(1,n))
+    fh  = sp.expand(sp.simplify(fh.subs(sub)))
+    print("N =", n, "|  u_1 (must vanish):", sp.simplify(u1),
+          "|  u_2 matches FH(3.5):", sp.simplify(u2-fh) == 0)</textarea>
+  <div class="out"></div>
+</div>
+
+<h3 id="s2-3"><span class="num">2.3</span>The \(N=2\) anchor</h3>
+
+<div class="env conv"><span class="tag">Convention C4 — Virasoro free-field construction <span class="stat s-verb">verbatim</span> [FH25] (2.8), (2.9)</span>
+\[
+T=\no{JJ}+\alpha\,\partial J,
+\qquad
+L_m=\sum_n \no{J_{m-n}J_n}-(m+1)\alpha J_m,
+\qquad
+c=1-6\alpha^{2}.
+\]
+<p>Here \(\no{\;\cdot\;}\) is standard mode normal ordering (positive modes to the right).</p>
+</div>
+
+<div class="env check"><span class="tag">Consistency check 2.2 <span class="stat s-der">derived</span></span>
+<p>Setting \(N=2\) in C3 with \(J=J_2=-J_1\): \(u_2=-J_1J_2+\alpha\partial J_2=J^2+\alpha\partial J\), matching C4.
+For the central charge, C3 gives \(c^{\rm cl}=-(1)(2)(3)\alpha^2=-6\alpha^2\), and C4 gives \(c=1-6\alpha^2\):
+the difference is exactly the quantum \(+1\) from the free boson, as it must be. Both are consistent.</p>
+</div>
+
+<h3 id="s2-4"><span class="num">2.4</span>Potentials, and the sign of the logarithm</h3>
+
+<p>Screening operators are exponentials of the <em>potential</em>, not of the current, so we must fix the
+potential's two-point function. This is the single most dangerous convention in the entire project: the sign
+here propagates into the screening condition, and a slip would flip \(F_0\).</p>
+
+<div class="env warn"><span class="tag">Convention trap W1 — the logarithm sign is <em>not</em> free</span>
+<p>Define \(\varphi_i\) by \(J_i=\partial\varphi_i\) and postulate \(\varphi_i(z)\varphi_j(w)\sim A_{ij}\log(z-w)\).
+Then, since \(\partial_w\log(z-w)=-(z-w)^{-1}\) and \(\partial_z\partial_w\log(z-w)=+(z-w)^{-2}\),</p>
+\[
+J_i(z)J_j(w)=\partial_z\partial_w\big[\varphi_i(z)\varphi_j(w)\big]\sim \frac{A_{ij}}{(z-w)^{2}} .
+\]
+<p>Matching to C1, \(J_i(z)J_j(w)\sim\kap_{ij}(z-w)^{-2}\), forces</p>
+\[
+\boxed{\;\varphi_i(z)\varphi_j(w)\sim +\,\kap_{ij}\log(z-w)\;}
+\qquad\text{\small\color{#8d3b1e}{(note the \(+\) sign)}}
+\]
+<p>The plus sign is a direct consequence of [FH25]'s choice \(J(z)J(w)\sim+\tfrac12(z-w)^{-2}\) (their footnote 3),
+which is itself opposite to the more common \(-\) convention of much of the Coulomb-gas literature. In the
+common convention one writes \(\varphi\varphi\sim-\log\) and inserts factors of \(i\) into vertex operators.
+<b>This is a field redefinition, and it must be exhibited, not hidden.</b> Let \(\phi_i\) be a canonically
+normalised real boson with the standard sign \(\phi_i(z)\phi_j(w)\sim-\kap_{ij}\log(z-w)\). Then</p>
+\[
+\varphi_i:=i\,\phi_i
+\qquad\Longrightarrow\qquad
+\varphi_i\varphi_j\sim i^{2}\big(-\kap_{ij}\log\big)=+\kap_{ij}\log(z-w),
+\qquad
+J_i=\partial\varphi_i=i\,\partial\phi_i .
+\]
+<p>So [FH25]'s current normalisation is the statement \(J=i\partial\phi\) in terms of a real boson — consistent
+with the explicit factor of \(i\) in their cylinder mode expansions \(J_j(\theta)=i\sum_nJ_{j,n}e^{in\theta}\),
+\(\bar J_j(\theta)=i\sum_n\bar J_{j,n}e^{-in\theta}\) <span class="eqref">(3.11)–(3.12)</span>.
+<b>Three consequences must be carried everywhere:</b></p>
+<ul>
+<li>A vertex operator with <em>real</em> momentum in our convention,
+\(\no{e^{\beta\alpha_i\cdot\varphi}}\), is a vertex operator with <em>imaginary</em> momentum in the
+real-boson convention, \(\no{e^{i\beta\alpha_i\cdot\phi}}\). The factor of \(i\) has not disappeared; it has
+been absorbed into the field.</li>
+<li>Hermiticity and reality conditions must therefore be stated in terms of \(\phi\), not \(\varphi\).
+\(\varphi\) is anti-Hermitian in the real form; \(\no{e^{\beta\varphi}}\) is unitary, not positive.</li>
+<li>Every screening momentum, zero mode and cocycle below is transported through
+\(\varphi=i\phi\). Claims of "verbatim" adoption apply to [FH25]'s <em>current</em> normalisation
+\(J_iJ_j\sim\kap_{ij}(z-w)^{-2}\); the potential is introduced here, and the redefinition above is the bridge.</li>
+</ul>
+<p>We nonetheless work with \(\varphi\) rather than \(\phi\), because it makes every <em>current</em> formula
+directly comparable with [FH25]. It does <b>not</b> make the vertex operators comparable with the standard
+Coulomb-gas literature without the translation above: in [FH25]'s own potential the screening momentum is
+imaginary. The price of the choice is exactly the bookkeeping listed above, and it must be paid explicitly in
+the paper's conventions section.</p>
+</div>
+
+<div class="env def"><span class="tag">Definition D1 — vertex operator</span>
+<p>For a constant covector \(\lambda=(\lambda_i)\) we write \(V_\lambda(z):=\no{e^{\lambda\cdot\varphi(z)}}\).
+The basic contraction, derived from W1, is</p>
+\[
+J_i(z)\,V_\lambda(w)\;\sim\;\frac{(\kap\lambda)_i}{z-w}\,V_\lambda(w),
+\qquad (\kap\lambda)_i=\sum_j\kap_{ij}\lambda_j .
+\]
+</div>
+
+<!-- ============================ 3 ============================ -->
+<h2 id="s3"><span class="num">3</span>The parent screening operators — the missing bridge</h2>
+
+<div class="env warn"><span class="tag">Why this section exists</span>
+<p>[FH25] does not contain screening operators. The entire project consists of contracting objects that its
+authors never wrote down. Therefore the parent screenings must be <em>imported</em> from the Coulomb-gas
+literature<span class="cite"><a href="#FL88">[FL88]</a>,<a href="#BS93">[BS93]</a></span> and
+<em>translated</em> into [FH25]'s normalisation. Until that translation is done, symbols like \(b\) or \(\beta\)
+are meaningless and any statement of the form "\(F_0\) fixes \(\beta\)" is vacuous. We do the translation from
+first principles rather than quoting a formula, because the sign convention of W1 is nonstandard and quoted
+formulas would not apply.</p>
+</div>
+
+<h3 id="s3-1"><span class="num">3.1</span>The weight computation, done explicitly</h3>
+
+<p>We work first at \(N=2\) in the single-field language of C2/C4, where \(J=J_2\), \(\varphi=\varphi_2\), and by
+W1 with \(\kap_{22}=\tfrac12\),</p>
+\[
+\varphi(z)\varphi(w)\sim\tfrac12\log(z-w),
+\qquad
+J(z)\varphi(w)\sim\frac{1/2}{z-w}.
+\]
+
+<div class="env der"><span class="tag">Derivation 3.1 — conformal weight of \(V_\beta=\no{e^{\beta\varphi}}\) <span class="stat s-der">derived</span></span>
+<p>With \(T=\no{JJ}+\alpha\partial J\) (C4), collect the three contributions to the singular part of
+\(T(z)V_\beta(w)\).</p>
+<p><b>(i) Double contraction of \(\no{JJ}\).</b> Each \(J\) contracts with the exponent, giving
+\(\big(\tfrac{\beta}{2}\big)^2(z-w)^{-2}V_\beta=\tfrac{\beta^2}{4}(z-w)^{-2}V_\beta\).</p>
+<p><b>(ii) Single contraction of \(\no{JJ}\).</b> Two ways, each giving
+\(\tfrac{\beta}{2}(z-w)^{-1}\no{J(z)V_\beta(w)}\); total \(\beta(z-w)^{-1}\no{JV_\beta}\). Since
+\(\partial_w V_\beta=\beta\no{JV_\beta}\), this is exactly \((z-w)^{-1}\partial_wV_\beta\) — the correct
+descendant term, which confirms the sign of W1. Had we chosen \(\varphi\varphi\sim-\tfrac12\log\), this term
+would have come out as \(-\partial V_\beta\), an immediate contradiction. <em>The descendant term is the
+sign-checker.</em></p>
+<p><b>(iii) Background charge.</b>
+\(\alpha\,\partial_z J(z)V_\beta(w)\sim\alpha\beta\,\partial_z\big[\tfrac{1/2}{z-w}\big]V_\beta
+=-\tfrac{\alpha\beta}{2}(z-w)^{-2}V_\beta\).</p>
+<p>Hence</p>
+\[
+T(z)V_\beta(w)\sim\frac{h_\beta}{(z-w)^2}V_\beta(w)+\frac{\partial_wV_\beta(w)}{z-w},
+\qquad
+\boxed{\,h_\beta=\frac{\beta^{2}}{4}-\frac{\alpha\beta}{2}\,}
+\]
+</div>
+
+<div class="env def"><span class="tag">Definition D2 — screening condition</span>
+<p>\(Q=\oint dz\,V_\beta(z)\) commutes with all modes of \(T\) iff \(V_\beta\) has weight one, i.e. the singular
+part of \(T V_\beta\) is a total derivative. Therefore</p>
+\[
+h_\beta=1
+\quad\Longleftrightarrow\quad
+\beta^{2}-2\alpha\beta-4=0 .
+\tag{$F^{\rm rel}$}
+\]
+</div>
+
+<h3 id="s3-2"><span class="num">3.2</span>The two branches, and where \(b+1/b\) lives</h3>
+
+<div class="env der"><span class="tag">Derivation 3.2 — branch structure <span class="stat s-der">derived</span></span>
+<p>The quadratic \(F^{\rm rel}\) has two roots \(\beta_\pm=\alpha\pm\sqrt{\alpha^2+4}\), obeying</p>
+\[
+\beta_+\beta_-=-4,\qquad \beta_++\beta_-=2\alpha .
+\]
+<p>Parametrising \(\beta_+=2b\) and \(\beta_-=-2/b\) — which is consistent, since
+\((2b)(-2/b)=-4\) automatically — the sum relation gives</p>
+\[
+\alpha=b-\frac1b,
+\qquad\text{and hence}\qquad
+c=1-6\alpha^{2}=1-6\Big(b-\frac1b\Big)^{2},
+\]
+<p>which matches the standard Coulomb-gas central charge <em>after the real-form continuation of W1</em>
+(see the qualification in the intuition box below); it is a convention match, not an identity with every
+Liouville normalisation.<span class="cite"><a href="#DF84">[DF84]</a>,<a href="#BS93">[BS93]</a></span>
+This is the <b>validation of the whole normalisation dictionary</b>: an independent, well-known relation is
+reproduced with no free parameters. Our conventions are the standard ones in disguise.</p>
+<p><b>Notation reserved from here on.</b> The symbol \(b\) denotes the <em>Toda coupling</em> and nothing
+else, related to the single-field screening momentum by \(\beta_+=2b\). The symbol \(\beta\) (with
+subscripts \(\beta_1,\beta_3\) after contraction) denotes the <em>full single-field momentum</em>, i.e. the
+root of \(F^{\rm rel}\). The two differ by a factor of two and must never be substituted for one another:
+\(\beta^2-2\alpha\beta-4=0\) but \(b^2-\alpha b-1=0\).</p>
+</div>
+
+<div class="env intu"><span class="tag">Physical intuition — what the two branches are</span>
+<p>A Coulomb-gas boson with a background charge is a free field whose stress tensor has been "tilted" so that
+the vacuum carries charge. The tilt makes exactly two vertex operators marginal: the pair \((b,-1/b)\), dual
+under \(b\to-1/b\). Physically they are the two ways to add a unit of screening charge without disturbing
+conformal symmetry. The familiar Liouville statement — two exponential potentials with \(Q=b+b^{-1}\), the
+second invisible semiclassically — is the <em>same structure in a different real form</em>: our locked
+convention gives \(c=1-6(b-b^{-1})^2\) and \((\beta_+,\beta_-)=(2b,-2/b)\), with a relative minus sign and
+\(b-b^{-1}\) in place of \(b+b^{-1}\), reflecting the \(\varphi=i\phi\) continuation of W1. We therefore state
+this as a Coulomb-gas dual-screening pair rather than importing Liouville formulas, which would require the
+explicit continuation to be written out. The reciprocity
+\(\beta_+\beta_-=-4\) <em>is</em> the "\(b+1/b\)" structure. Remember this: in §7 we will see the Carrollian
+contraction keep one branch and blow up the other — and the blown-up branch does not vanish from the physics,
+it becomes the background charge.</p>
+</div>
+
+<div class="cell" data-lang="py">
+  <div class="cell-head"><span class="lang">python</span><span class="title">Cell 2 — verify the parent weight, the branch relations, and c = 1 − 6(b − 1/b)²</span><button onclick="runCell(this)">Run</button></div>
+  <textarea spellcheck="false">import sympy as sp
+beta, alpha = sp.symbols('beta alpha')
+bsym = sp.Symbol('b', nonzero=True)
+
+h = beta**2/4 - alpha*beta/2                       # Derivation 3.1
+Frel = sp.expand(4*(h - 1))                        # h = 1  ->  beta^2 - 2 alpha beta - 4 = 0
+print("F_rel :", sp.factor(Frel), "= 0")
+
+roots = sp.solve(sp.Eq(h,1), beta)
+print("roots :", [sp.simplify(r) for r in roots])
+print("product of roots (must be -4):", sp.simplify(sp.expand(roots[0]*roots[1])))
+print("sum     of roots (must be 2a):", sp.simplify(sp.expand(roots[0]+roots[1])))
+
+# parametrisation beta_+ = 2b, beta_- = -2/b
+chk_prod = sp.simplify((2*bsym)*(-2/bsym) + 4)
+alpha_of_b = sp.simplify(((2*bsym) + (-2/bsym))/2)
+c_of_b = sp.simplify(1 - 6*alpha_of_b**2)
+print("2b * (-2/b) + 4 =", chk_prod, " (0 means consistent)")
+print("alpha(b)        =", alpha_of_b)
+print("c(b)            =", sp.simplify(sp.expand(c_of_b)),
+      " == 1-6(b-1/b)^2 ?", sp.simplify(c_of_b - (1 - 6*(bsym - 1/bsym)**2)) == 0)</textarea>
+  <div class="out"></div>
+</div>
+
+<h3 id="s3-3"><span class="num">3.3</span>The \(A_{N-1}\) case and the root dictionary</h3>
+
+<div class="env conv"><span class="tag">Convention C5 — roots <span class="stat s-imp">imported</span> <span class="cite"><a href="#FL88">[FL88]</a>,<a href="#BS93">[BS93]</a></span></span>
+<p>The simple roots of \(A_{N-1}\) in the \(N\)-component basis are \(\alpha_i=e_i-e_{i+1}\), \(i=1,\dots,N-1\).
+Since \(\sum_a(\alpha_i)_a=0\), the trace-subtraction in \(\kap\) is invisible on roots:</p>
+\[
+(\alpha_i,\alpha_j)_{\kap}:=\alpha_i^{\,a}\kap_{ab}\,\alpha_j^{\,b}=\alpha_i\cdot\alpha_j=
+\begin{cases} \;\;2 & i=j\\ -1 & |i-j|=1\\ \;\;0&\text{otherwise,}\end{cases}
+\]
+<p>i.e. the \(A_{N-1}\) Cartan matrix. The parent screening currents are
+\(V_i=\no{e^{\mu\,\alpha_i\cdot\varphi}}\), with \(\mu\) the <em>root-basis</em> momentum.</p>
+</div>
+
+<div class="env thm"><span class="tag">Proposition 3.3 — general-root screening weight <span class="stat s-der">derived</span></span>
+<p>In the locked normalisation, \(V_{\mu\alpha_i}\) has \(u_2\)-weight</p>
+\[
+\boxed{\;h(\mu\alpha_i)=\mu^{2}+\alpha\mu\;},
+\qquad\text{so the screening condition is}\qquad
+\mu^{2}+\alpha\mu-1=0 .
+\]
+<p><b>Proof.</b> Three steps, each elementary but each a place where a factor can be lost.</p>
+<p><em>(i) Rewrite the quadratic part.</em> Squaring the traceless constraint \(\sum_aJ_a=0\) gives
+\(\sum_aJ_a^2+2\sum_{a&lt;b}J_aJ_b=0\), hence
+\(-\sum_{a&lt;b}J_aJ_b=\tfrac12\sum_aJ_a^{2}\), and C3 becomes
+\(T=\tfrac12\sum_aJ_a^{2}+\alpha\sum_{j&gt;1}(j-1)\partial J_j\).</p>
+<p><em>(ii) Quadratic contribution.</em> Since \(\lambda=\mu\alpha_i\) is traceless, \(\kap\lambda=\lambda\), so
+by D1 \(J_a(z)V_\lambda(w)\sim\lambda_a(z-w)^{-1}V_\lambda\). Double contraction of
+\(\tfrac12\sum_aJ_a^2\) gives \(\tfrac12\lambda^{2}=\tfrac12\mu^{2}(\alpha_i,\alpha_i)=\mu^{2}\).</p>
+<p><em>(iii) Improvement contribution.</em> One contraction gives
+\(-\alpha\sum_{j&gt;1}(j-1)\lambda_j\). For \(\alpha_i=e_i-e_{i+1}\) one has
+\(\sum_{j&gt;1}(j-1)(\alpha_i)_j=-1\) <em>for every</em> \(i\): for \(i=1\) only \(j=2\) survives, giving
+\(-1\); for \(i\ge2\) one gets \((i-1)-i=-1\). Hence the contribution is \(+\alpha\mu\). \(\blacksquare\)</p>
+<p><b>Consistency with §3.1.</b> At \(N=2\), W2 gives \(\beta^{\rm sf}=-2\mu\), and
+\(\mu^{2}+\alpha\mu=\tfrac{(\beta^{\rm sf})^{2}}{4}-\tfrac{\alpha\beta^{\rm sf}}{2}\) — exactly Derivation 3.1.
+The single-field and root computations are one computation. Cell 2b verifies this.</p>
+</div>
+
+<div class="cell" data-lang="py">
+  <div class="cell-head"><span class="lang">python</span><span class="title">Cell 2b — verify Proposition 3.3: general-root weight and its N=2 reduction</span><button onclick="runCell(this)">Run</button></div>
+  <textarea spellcheck="false">import sympy as sp
+mu, alpha = sp.symbols('mu alpha')
+
+def root_weight(n, i):
+    """h(mu*alpha_i) for A_{n-1}, alpha_i = e_i - e_{i+1}, 1-indexed i."""
+    lam = [0]*n
+    lam[i-1] += mu; lam[i] -= mu                 # lambda = mu*(e_i - e_{i+1})
+    quad  = sp.Rational(1,2)*sum(l**2 for l in lam)          # (1/2) lambda^2
+    impr  = -alpha*sum((j)*lam[j] for j in range(1, n))      # -alpha sum_{j>1}(j-1)lambda_j
+    return sp.expand(quad + impr)
+
+for n in (2,3,4,5):
+    for i in range(1, n):
+        h = root_weight(n, i)
+        assert sp.simplify(h - (mu**2 + alpha*mu)) == 0, (n,i,h)
+    print("A_%d : h(mu alpha_i) = mu^2 + alpha*mu for all simple roots" % (n-1))
+
+# N=2 reduction to the single-field convention, beta_sf = -2 mu
+beta_sf = sp.Symbol('beta_sf')
+h2 = root_weight(2,1).subs(mu, -beta_sf/2)
+print("\nN=2 :", sp.expand(h2), " == beta^2/4 - alpha*beta/2 ?",
+      sp.simplify(h2 - (beta_sf**2/4 - alpha*beta_sf/2)) == 0)
+print("screening condition x4 :", sp.expand(4*(h2-1)), "= 0")
+
+# root-basis F0 by contraction
+e, ap, am, mu1, mu3 = sp.symbols('epsilon alpha^+ alpha^- mu_1 mu_3')
+F = (e*mu1+e**3*mu3)**2 + (ap/e+e*am)*(e*mu1+e**3*mu3) - 1
+print("\nroot-basis F0 :", sp.expand(sp.series(F,e,0,3).removeO().coeff(e,0)), "= 0")</textarea>
+  <div class="out"></div>
+</div>
+
+
+<div class="env thm"><span class="tag">Proposition 3.4 — the parent screening identity, <em>derived</em> <span class="stat s-der">derived</span></span>
+<p>Proposition 3.3 fixed the \(u_2\) weight. The remaining question — whether the <em>same</em> \(\mu\) screens
+the higher currents \(u_k\) — was previously imported from Fateev–Lukyanov. <b>It is now derived directly in
+our conventions, and the import is eliminated.</b></p>
+<p><b>Statement</b> — a computer-assisted proposition over a <em>finite</em> range, not a general-\(N\)
+theorem. For \(A_{N-1}\) with \(N\le4\), every simple root \(\alpha_i\), and every \(k=2,\dots,N\),</p>
+\[
+\boxed{\;
+\Res_{w=z}\Big[u_k(z)\,V_{\mu\alpha_i}(w)\Big]\;=\;
+\big(\mu^{2}+\alpha\mu-1\big)\;\mathcal R_{k,i}(z)\,V_{\mu\alpha_i}(z)\;}
+\]
+<p>where \(\mathcal R_{k,i}\) is a <b>differential</b> polynomial in the currents — for the second \(A_2\)
+simple root the \(u_3\) quotient contains \(\partial J\) terms, so "polynomial in the currents" (an earlier
+wording) is too narrow.</p>
+<p>with \(|z|>|w|\), in the single field order fixed by C3q. <b>The vertex factor is part of the identity.</b>
+The symbolic routine computes the coefficient <em>after</em> factoring \(V\) out, so \(\mathcal R_{k,i}\) is a
+differential polynomial in the currents and the displayed operator identity carries
+\(V_{\mu\alpha_i}(z)\) explicitly; an
+earlier draft omitted it, which contradicted this notebook's own \(k=2\) sanity check, where the residue is
+\((h-1)\,\partial V\).</p>
+<p>for a differential polynomial \(\mathcal R_{k,i}\) in the currents. Hence \([Q_i,u_k]=0\) precisely on the screening
+locus of Proposition 3.3 — <em>the same locus for every \(k\)</em>, which is exactly the content of the
+theorem previously imported from [FL88].</p>
+<p><b>The locus, stated exactly.</b> Every residue above carries an overall factor \(\mu\), so
+\(\Res=0\) holds on the union of two branches:</p>
+\[
+\big\{\,\mu^{2}+\alpha\mu=1\,\big\}\;\cup\;\big\{\,\mu=0\,\big\}.
+\]
+<p>The second is trivial and must be excluded: at \(\mu=0\) the density degenerates to the constant
+\(V_0=1\) and the contour charge vanishes identically, so it screens nothing. <b>The screening locus is
+therefore \(\mu^{2}+\alpha\mu=1\) with \(\mu\neq0\)</b>, and the word "precisely" in the statement above is
+to be read with that exclusion.</p>
+<p><b>How the divisibility is tested (this matters).</b> A previous revision tested divisibility by setting
+\(q:=R_k/F\) and checking \(R_k-Fq=0\) — <em>a tautology, true for every \(R_k\)</em>. That test established
+nothing. The present test checks two independent conditions: that \(\mathrm{cancel}(R_k/F)\) has denominator
+one, i.e. the quotient is polynomial; and that \(R_k\) vanishes identically under
+\(\alpha\to(1-\mu^2)/\mu\), i.e. on the locus itself. A previous revision also differentiated the vertex with
+an independent \(J_N\) after eliminating it; the derivation now uses
+\(\lambda\cdot J=\sum_{a&lt;N}(\lambda_a-\lambda_N)J_a\). The second defect was invisible for
+\(\alpha_1=e_1-e_2\) (where \(\lambda_N=0\)) but did affect the other roots.</p>
+<div class="env conv" style="margin:.8em 0"><span class="tag">Convention C3q — quantum Miura ordering and residue orientation</span>
+<p>Proposition 3.4 is a <em>quantum</em> OPE statement, whereas C3 introduced the Miura operator classically.
+Two things must therefore be fixed before the proposition means anything.</p>
+<p><b>(i) Ordering.</b> The currents \(u_k\) are defined by the same product as C3 with the standard global
+normal ordering on the plane (positive modes to the right), applied to the whole coefficient of each
+\((\alpha\partial)^{N-k}\); this is [FH25]'s quantum Miura transformation, their §4.1 with (4.1). Since the
+only contractions occurring below are between the \(J\)'s of \(u_k\) and the exponent of \(V\) — the \(J\)'s
+inside \(u_k\) are normal-ordered among themselves and do not self-contract — the leftover fields may be
+treated as commuting symbols when extracting the singular coefficients.</p>
+<p><b>(ii) Orientation.</b> All residues are written in the fixed order and region</p>
+\[
+\Res_{w=z}\big[\,u_k(z)\,V(w)\,\big],\qquad |z|&gt;|w|,
+\]
+<p>with the OPE expanded in \((z-w)\) and the contour taken counterclockwise in \(w\) about \(w=z\). The
+criterion \([Q_i,u_k]=0\) is the vanishing of this residue.</p>
+</div>
+<p><b>Method.</b> The criterion is the vanishing of the residue,
+\(\Res_{w=z}=\sum_{p\ge1}\frac{(-1)^p}{(p-1)!}\,\mathcal D^{p-1}\mathcal O_p\), where
+\(\mathrm{Sing}\big[u_k(z)V(w)\big]=\sum_p\mathcal O_p(w)V(w)(z-w)^{-p}\) and
+\(\mathcal D\mathcal O=\partial\mathcal O+\mathcal O\,(\lambda\cdot J)\) is the derivation that also
+differentiates \(V\). The \(\mathcal O_p\) are obtained by Wick contraction: only \(J\)–\(V\) pairings occur
+(the \(J\)'s inside \(u_k\) are already normal-ordered among themselves), with
+\(\partial^mJ_a(z)V(w)\sim\lambda_a(-1)^m m!\,(z-w)^{-m-1}V(w)\), and the uncontracted fields Taylor-expanded
+about \(w\). Sanity check on \(k=2\): the criterion returns \((h-1)\partial V\), reproducing Definition D2.</p>
+<p><b>Explicit results at \(N=3\).</b> For \(\alpha_1=e_1-e_2\),</p>
+\[
+\Res\big[u_2V\big]=\mu\,(J_1-J_2)\,F\,V,
+\qquad
+\Res\big[u_3V\big]=\mu\,(J_1-J_2)(J_1+J_2)\,F\,V,
+\qquad F:=\mu^{2}+\alpha\mu-1,
+\]
+<p>with \(J_1-J_2=\alpha_1\cdot J\) and \(J_1+J_2=-J_3\); and for \(\alpha_2=e_2-e_3\), in the reduced
+variables,</p>
+\[
+\Res\big[u_2V\big]=\mu\,(J_1+2J_2)\,F\,V .
+\]
+<p>Cell 2c performs the computation and applies the genuine divisibility test for \(N=2,3,4\), all simple
+roots, all \(u_k\).</p>
+
+
+<p><b>Consequence for the programme, stated narrowly.</b> Paper 1 is the \(N=3\) case, so it is
+<b>self-contained with respect to the parent screening identity</b>: Propositions 3.3 and 3.4 supply it in the
+locked conventions, and [FL88]/[BS93] are cited for the origin of the general-\(N\) result and for context
+rather than as load-bearing inputs. This is <em>not</em> the claim that the project has "no external dynamical
+input": [FH25] remains load-bearing for the symmetric Carrollian \(W_3\) algebra, [DDF26] for the bulk
+charges, and standard free-field/intertwiner machinery throughout.</p>
+<div class="env check" style="margin:1em 0"><span class="tag">Total-derivative witnesses at \(N=3\) <span class="stat s-der">derived</span></span>
+<p>Residue-vanishing and total-derivative form are equivalent, but the witness is what makes the result
+hand-auditable rather than a black-box divisibility output, so it is displayed here rather than deferred.
+Writing \(\mathrm{Sing}\big[u_k(z)V(w)\big]=\sum_p\mathcal O_p(w)V(w)(z-w)^{-p}\) and solving
+\(\mathcal O_q=\mathcal D\mathcal B_q+(q-1)\mathcal B_{q-1}\) top-down <em>on the locus</em>
+\(\alpha=(1-\mu^2)/\mu\), every residual \(\mathcal O_1-\mathcal D\mathcal B_1\) vanishes identically and
+the witnesses are:</p>
+\[
+\mathrm{Sing}\big[u_2(z)V_i(w)\big]=\partial_w\!\left(\frac{V_i(w)}{z-w}\right)
+\qquad\text{for \emph{both} simple roots,}
+\]
+\[
+\alpha_1:\quad
+\mathrm{Sing}\big[u_3(z)V_1(w)\big]=\partial_w\!\left(\frac{(J_1+J_2)\,V_1(w)}{z-w}\right),
+\]
+\[
+\alpha_2:\quad
+\mathrm{Sing}\big[u_3(z)V_2(w)\big]
+=\partial_w\!\left(-\frac{\alpha\,V_2(w)}{(z-w)^{2}}-\frac{J_1\,V_2(w)}{z-w}\right).
+\]
+<p>The spin-two witness is the familiar one: \(\mathcal O_2=h=\mu^2+\alpha\mu\) equals \(1\) on the locus,
+and \(\mathcal O_1=\lambda\cdot J=\partial V/V\). For \(\alpha_2\) at \(k=3\) the computation returns
+\(\mathcal B_2=\mu-\mu^{-1}\), which is exactly \(-\alpha\) on the locus — a small internal consistency
+check worth noting. Cell 2d computes all four witnesses and verifies that the residuals vanish; the verifier
+repeats the check.</p>
+</div>
+<p><b>Scope.</b> This is the <em>parent relativistic</em> statement. It says nothing about the Carrollian
+contraction, averaged ordering, or the existence of limiting operators; those remain the content of
+Theorems 3–4.</p>
+</div>
+
+<div class="cell" data-lang="py">
+  <div class="cell-head"><span class="lang">python</span><span class="title">Cell 2c — Proposition 3.4: direct residue computation, N = 2,3,4, all simple roots</span><button onclick="runCell(this)">Run</button></div>
+  <textarea spellcheck="false">import sympy as sp
+from itertools import combinations
+al, mu, xx = sp.symbols('alpha mu x')
+
+def miura_u(n):
+    z = sp.Symbol('z'); Js = [sp.Function('J%d'%(a+1))(z) for a in range(n)]; f = sp.Function('f')(z)
+    e = f
+    for a in reversed(range(n)): e = al*sp.diff(e, z) - Js[a]*e
+    e = sp.expand(e); us = {}; rem = sp.expand(e - al**n*sp.diff(f, z, n))
+    for k in range(1, n+1):
+        dk = sp.diff(f, z, n-k)
+        co = sp.expand(rem.coeff(dk)).subs({sp.diff(f, z, j): 0 for j in range(1, n+1)})
+        us[k] = sp.expand(sp.simplify(-co/al**(n-k))); rem = sp.expand(rem + us[k]*al**(n-k)*dk)
+    return us, Js, z
+
+def Pw(a, m): return sp.Symbol('P%d_%d' % (a, m))          # d^m J_a (w)
+
+def to_terms(expr, Js, z, n, maxd=6):
+    expr = sp.expand(expr); atoms = {}
+    for a in range(n):
+        for k in range(maxd): atoms[sp.diff(Js[a], z, k)] = (a, k)
+    out = []
+    for t in sp.Add.make_args(expr):
+        c = sp.S(1); fl = []
+        for fac in sp.Mul.make_args(t):
+            b, e = fac.as_base_exp()
+            if b in atoms: fl += [atoms[b]]*int(e)
+            else: c *= fac
+        out.append((c, fl))
+    return out
+
+def singular(terms, lam, maxpole):
+    A = {p: sp.S(0) for p in range(1, maxpole+1)}
+    for c, fl in terms:
+        L = len(fl)
+        for r in range(1, L+1):
+            for S in combinations(range(L), r):
+                pole = 0; coef = c
+                for i in S:
+                    a, k = fl[i]; coef *= lam[a]*(-1)**k*sp.factorial(k); pole += k+1
+                rest = [fl[i] for i in range(L) if i not in S]
+                ser = sp.S(1)
+                for (a, k) in rest:
+                    t = sum(Pw(a, k+j)*xx**j/sp.factorial(j) for j in range(pole))
+                    ser = sp.expand(ser*t)
+                    ser = sum(ser.coeff(xx, m)*xx**m for m in range(pole))
+                for m in range(pole):
+                    p = pole - m
+                    if 1 <= p <= maxpole: A[p] += coef*sp.expand(ser).coeff(xx, m)
+    return {p: sp.expand(v) for p, v in A.items()}
+
+def Dder(expr, lam, n, maxm=11):
+    # TRACE-AWARE.  J_N has been eliminated via sum_a J_a = 0, so the independent
+    # fields are J_1..J_{N-1} and the vertex derivative must use
+    #     lam . J = sum over a &lt; N of (lam_a - lam_N) J_a ,
+    # NOT sum over all a of lam_a J_a with an independent J_N.
+    out = sp.S(0)
+    for a in range(n-1):
+        for m in range(maxm):
+            d = sp.diff(expr, Pw(a, m))
+            if d != 0: out += d*Pw(a, m+1)
+    lam_dot_J = sum((lam[a] - lam[n-1])*Pw(a, 0) for a in range(n-1))
+    return sp.expand(out + expr*lam_dot_J)
+
+def residue(A, lam, n, maxpole):
+    Rr = sp.S(0)
+    for p in range(1, maxpole+1):
+        t = A[p]
+        for _ in range(p-1): t = Dder(t, lam, n)
+        Rr += sp.Rational((-1)**p, sp.factorial(p-1))*t
+    return sp.expand(Rr)
+
+screen = mu**2 + al*mu - 1
+for N in (2, 3, 4):
+    us, Js, z = miura_u(N)
+    sub = {sp.diff(Js[N-1], z, j): -sum(sp.diff(Js[a], z, j) for a in range(N-1)) for j in range(7)}
+    for i in range(N-1):
+        lam = [sp.S(0)]*N; lam[i] = mu; lam[i+1] = -mu
+        res = []
+        for k in range(2, N+1):
+            expr = sp.expand(us[k].subs(sub)); mp = k+1
+            A = singular(to_terms(expr, Js, z, N), lam, mp)
+            Rk = sp.expand(residue(A, lam, N, mp))
+            # GENUINE divisibility test.  NOTE: writing q = cancel(Rk/screen) and then
+            # checking Rk - screen*q == 0 is a TAUTOLOGY (true for every Rk) and was the
+            # defect in an earlier revision.  We test two independent things:
+            #   (t1) the quotient is a polynomial  (denominator cancels to 1);
+            #   (t2) Rk vanishes identically on the screening locus alpha = (1-mu^2)/mu.
+            qq = sp.cancel(Rk/screen); num, den = sp.fraction(sp.together(qq))
+            t1 = sp.simplify(den - 1) == 0
+            t2 = sp.simplify(Rk.subs(al, (1-mu**2)/mu)) == 0
+            t3 = sp.simplify(sp.expand(Rk - screen*sp.expand(num))) == 0
+            res.append((k, t1 and t2 and t3))
+        print('N=%d  root alpha_%d :' % (N, i+1),
+              '  '.join('u_%d %s' % (k, 'PASS' if ok else 'FAIL') for k, ok in res))
+
+# explicit N=3 residues
+us, Js, z = miura_u(3)
+sub = {sp.diff(Js[2], z, j): -(sp.diff(Js[0], z, j) + sp.diff(Js[1], z, j)) for j in range(7)}
+lam = [mu, -mu, sp.S(0)]
+print()
+for k in (2, 3):
+    A = singular(to_terms(sp.expand(us[k].subs(sub)), Js, z, 3), lam, k+1)
+    print('Res[u_%d V] / V =' % k, sp.factor(sp.simplify(residue(A, lam, 3, k+1))))</textarea>
+  <div class="out"></div>
+</div>
+
+<div class="cell" data-lang="py">
+  <div class="cell-head"><span class="lang">python</span><span class="title">Cell 2d — total-derivative witnesses at N=3, both simple roots</span><button onclick="runCell(this)">Run</button></div>
+  <textarea spellcheck="false">import sympy as sp
+# reuses miura_u, to_terms, singular, Dder, Pw from Cell 2c
+onF = {al: (1-mu**2)/mu}                      # the screening locus
+
+def witnesses(N, root):
+    us, Js, z = miura_u(N)
+    sub = {sp.diff(Js[N-1], z, r): -sum(sp.diff(Js[a], z, r) for a in range(N-1)) for r in range(10)}
+    lam = [sp.S(0)]*N; lam[root] = mu; lam[root+1] = -mu
+    for k in range(2, N+1):
+        A = singular(to_terms(sp.expand(us[k].subs(sub)), Js, z, N), lam, k+1)
+        A = {p: sp.simplify(sp.expand(v.subs(onF))) for p, v in A.items()}
+        Pmax = max(A); B = {p: sp.S(0) for p in range(0, Pmax+2)}
+        for q in range(Pmax, 1, -1):
+            B[q-1] = sp.simplify(sp.expand((A[q] - Dder(B[q], lam, N).subs(onF))/(q-1)))
+        residual = sp.simplify(sp.expand(A[1] - Dder(B[1], lam, N).subs(onF)))
+        wit = ", ".join("B_%d = %s" % (p, sp.simplify(B[p])) for p in range(1, Pmax+1) if B[p] != 0)
+        print("  u_%d :  %s   |  residual O_1 - D(B_1) = %s" % (k, wit, residual))
+        assert residual == 0, (N, root, k, residual)
+
+for root, lbl in ((0, 'alpha_1'), (1, 'alpha_2')):
+    print("N=3, root %s  (Sing = d_w[ sum_p B_p V /(z-w)^p ])" % lbl)
+    witnesses(3, root)
+print("\nAll residuals vanish: the singular parts ARE total derivatives on the locus.")
+print("Note B_2 = mu - 1/mu for alpha_2, k=3, which equals -alpha on F=0.")</textarea>
+  <div class="out"></div>
+</div>
+
+<div class="env warn"><span class="tag">Convention trap W2 — two incompatible meanings of \(\beta\)</span>
+<p>At \(N=2\) the constraint gives \(\varphi_1=-\varphi_2\), so \(\alpha_1\cdot\varphi=\varphi_1-\varphi_2=-2\varphi\)
+with \(\varphi:=\varphi_2\). Hence the root-language momentum \(\beta^{\rm root}\) and the single-field momentum
+\(\beta^{\rm sf}\) of §3.1 are related by</p>
+\[
+\beta^{\rm sf}=-2\,\beta^{\rm root}.
+\]
+<p>Consistency check on the propagator: \(\langle(\alpha_1\cdot\varphi)^2\rangle=(\alpha_1,\alpha_1)_\kap\log=2\log\),
+and directly \(\langle(-2\varphi)^2\rangle=4\kap_{22}\log=2\log\). ✓ <b>Every numerical statement below carries an
+explicit superscript.</b> Confusing the two is the single most likely arithmetic error in this project.</p>
+</div>
+
+<!-- ============================ 4 ============================ -->
+<h2 id="s4"><span class="num">4</span>The Carrollian contraction</h2>
+
+<h3 id="s4-1"><span class="num">4.1</span>Carroll-compatible combinations</h3>
+
+<div class="env conv"><span class="tag">Convention C6 <span class="stat s-verb">verbatim</span> [FH25] (3.7)–(3.10)</span>
+\[
+U^{+}_k=\frac{\eps^{k}}{2}\big(u_k+\bar u_k\big),\qquad
+U^{-}_k=\frac{\eps^{k-2}}{2}\big(u_k-\bar u_k\big),
+\]
+\[
+J^{+}_i=\frac{\eps}{2}\big(J_i+\bar J_i\big),\qquad
+J^{-}_i=\frac{\eps^{-1}}{2}\big(J_i-\bar J_i\big),
+\qquad
+\ap=\frac{\eps}{2}(\alpha+\bar\alpha),\qquad
+\am=\frac{\eps^{-1}}{2}(\alpha-\bar\alpha),
+\]
+<p>with the inverse relations</p>
+\[
+u_k=\eps^{-k}U^+_k+\eps^{2-k}U^-_k,\qquad
+\bar u_k=\eps^{-k}U^+_k-\eps^{2-k}U^-_k,
+\]
+\[
+J_i=\eps^{-1}J^+_i+\eps J^-_i,\qquad
+\bar J_i=\eps^{-1}J^+_i-\eps J^-_i,
+\qquad
+\alpha=\eps^{-1}\ap+\eps\am,\qquad
+\bar\alpha=\eps^{-1}\ap-\eps\am .
+\]
+</div>
+
+<div class="env conv"><span class="tag">Convention C7 — modes and contracted brackets <span class="stat s-verb">verbatim</span> [FH25] (3.13), (3.15)</span>
+\[
+J^{+}_{i,n}=\frac{\eps}{2}\big(J_{i,n}+\bar J_{i,-n}\big),
+\qquad
+J^{-}_{i,n}=\frac{\eps^{-1}}{2}\big(J_{i,n}-\bar J_{i,-n}\big),
+\]
+\[
+[J^{(i)+}_m,J^{(j)+}_n]^{\rm cl}=0,\qquad
+[J^{(i)-}_m,J^{(j)-}_n]^{\rm cl}=0,\qquad
+[J^{(i)-}_m,J^{(j)+}_n]^{\rm cl}=\frac{m}{2}\,\delta_{m,-n}\,\kap^{ij}.
+\]
+<p>Note the <em>mode reversal</em> \(\bar J_{i,-n}\) in the barred sector: this is the ultrarelativistic
+contraction as opposed to the Galilean one, and it is the origin of the averaged ordering in §5.</p>
+</div>
+
+<h3 id="s4-2"><span class="num">4.2</span>A structural fact: the Heisenberg sector does not contract</h3>
+
+<div class="env der"><span class="tag">Observation 4.1 <span class="stat s-der">derived</span> — \(\eps\)-exactness of the <em>oscillator brackets</em></span>
+<p>The three brackets of C7 hold <em>identically for every</em> \(\eps\neq0\), not merely in the limit
+\(\eps\to0\). The Heisenberg algebra of the Carroll-compatible modes is \(\eps\)-independent; only the
+composite currents \(U^\pm_k\) and the background charges \(\ap,\am\) carry \(\eps\).</p>
+<p>This is an immediate algebraic consequence of [FH25] (3.13)–(3.15) rather than a new theorem; it is recorded because it is used repeatedly and because its <em>limits</em> are easy to overstate.</p>
+<p><b>Proof.</b> Insert C7 into C1, using \([J,\bar J]=0\) (independent copies) and
+\([\bar J_{i,m},\bar J_{j,n}]=m\kap_{ij}\delta_{m,-n}\):</p>
+\[
+[J^+_{i,m},J^+_{j,n}]=\frac{\eps^2}{4}\Big([J_{i,m},J_{j,n}]+[\bar J_{i,-m},\bar J_{j,-n}]\Big)
+=\frac{\eps^2}{4}\Big(m\kap_{ij}\delta_{m,-n}+(-m)\kap_{ij}\delta_{m,-n}\Big)=0,
+\]
+<p>where the crucial cancellation is the sign flip \((-m)\) produced by the mode reversal. Identically,
+\([J^-,J^-]=\tfrac{\eps^{-2}}{4}(m-m)\kap\delta=0\). For the crossed bracket the \(\eps\)-factors cancel between
+the two prefactors:</p>
+\[
+[J^-_{i,m},J^+_{j,n}]=\frac{\eps^{-1}}{2}\cdot\frac{\eps}{2}\Big(m\kap_{ij}\delta_{m,-n}-(-m)\kap_{ij}\delta_{m,-n}\Big)
+=\frac{m}{2}\kap_{ij}\delta_{m,-n}. \qquad\blacksquare
+\]
+<p><b>What this does and does not give.</b> It gives one bounded algebraic fact: a <em>common formal
+oscillator algebra</em> may be chosen once and for all, independent of \(\eps\), so that the \(\eps\)-dependence
+of the construction sits entirely in the composite currents \(U^\pm_k\) and the background charges
+\(\ap,\am\). That is genuinely convenient, and it is all that is claimed.</p>
+<p><b>It does not give representation rigidity, and the earlier draft of this notebook wrongly said it did.</b>
+The map \((J,\bar J)\mapsto(J^+,J^-)\) of C7 is a <em>singular</em> \(\eps\)-dependent linear transformation:
+it need not be implementable by a unitary, the parent Fock vacua need not map to a common vacuum, the
+normal-ordering prescription is manifestly <em>not</em> preserved (that is the entire content of §5.1–5.2), and
+the zero-mode sector can and does change. Whether a common module exists on which the limiting operators
+act is a separate construction, begun in §6 and completed in Notebook II. No argument in §7 may lean on
+"rigidity".</p>
+<p><b>Falsifiable content.</b> If any of the three brackets acquired \(\eps\)-dependence, the observation is
+false. Cell 3 verifies all three on the delta support.</p>
+</div>
+
+<div class="env check"><span class="tag">Check 4.2 — symmetry of the crossed pairing <span class="stat s-der">derived</span></span>
+<p>[FH25] states the crossed bracket in the order \([J^-,J^+]\) in (3.15) but in the order \([J^+,J^-]\) in
+(2.11). These are consistent, and not by accident: from
+\([J^-_m,J^+_n]=\tfrac m2\kap\delta_{m,-n}\) and antisymmetry,
+\([J^+_{m},J^-_{n}]=-\tfrac{n}{2}\kap\delta_{m,-n}=+\tfrac{m}{2}\kap\delta_{m,-n}\), because \(n=-m\) on the
+support of the delta. <b>The crossed pairing is symmetric under exchange of the \(\pm\) labels.</b> At \(N=2\),
+\(\kap_{22}=\tfrac12\) gives \([J^+_m,J^-_n]=\tfrac m4\delta_{m,-n}\), exactly [FH25] (2.11). ✓</p>
+</div>
+
+<div class="cell" data-lang="py">
+  <div class="cell-head"><span class="lang">python</span><span class="title">Cell 3 — Observation 4.1 on the δ-support (ε-exactness); N=2 specialisation m/4</span><button onclick="runCell(this)">Run</button></div>
+  <textarea spellcheck="false">import sympy as sp
+m, n, e = sp.symbols('m n epsilon', nonzero=True)
+kap = sp.Symbol('kappa_ij')
+
+# parent brackets (FH 3.14) as functions of mode labels; delta support enforced by n = -m
+def par(mm, nn):            # [J_{i,mm}, J_{j,nn}] with delta_{mm,-nn} imposed
+    return mm*kap if sp.simplify(mm + nn) == 0 else 0
+
+# C7 with n = -m so the deltas are saturated
+mp, mn = m, -m
+# [J+_m, J+_n]  = (e^2/4) ( [J_m,J_n] + [Jbar_{-m}, Jbar_{-n}] )
+JpJp = sp.simplify( e**2/4 * ( par(mp,mn) + par(-mp,-mn) ) )
+# [J-_m, J-_n]  = (e^-2/4) ( [J_m,J_n] + [Jbar_{-m}, Jbar_{-n}] )   (signs: (-)(-) = +)
+JmJm = sp.simplify( e**-2/4 * ( par(mp,mn) + par(-mp,-mn) ) )
+# [J-_m, J+_n]  = (e^-1/2)(e/2) ( [J_m,J_n] - [Jbar_{-m}, Jbar_{-n}] )
+JmJp = sp.simplify( sp.Rational(1,4) * ( par(mp,mn) - par(-mp,-mn) ) )
+
+print("[J+_m , J+_-m] =", JpJp, "     (must be 0, for ALL epsilon)")
+print("[J-_m , J-_-m] =", JmJm, "     (must be 0, for ALL epsilon)")
+print("[J-_m , J+_-m] =", JmJp, "     (must be m*kappa/2, epsilon-free)")
+print()
+print("epsilon-free?  ", all(sp.simplify(sp.diff(x, e)) == 0 for x in (JpJp, JmJm, JmJp)))
+# LIMITATION: n = -m is imposed from the start, so this checks the coefficient on the
+# nonzero Kronecker-delta support, not the full distributional commutator.
+print("N=2 value (kappa_22 = 1/2):", sp.simplify(JmJp.subs(kap, sp.Rational(1,2))),
+      " -> matches FH (2.11) m/4:", sp.simplify(JmJp.subs(kap, sp.Rational(1,2)) - m/4) == 0)</textarea>
+  <div class="out"></div>
+</div>
+
+<h3 id="s4-3"><span class="num">4.3</span>The contracted Miura transformation</h3>
+
+<div class="env conv"><span class="tag">Convention C8 — Carrollian Miura transformation <span class="stat s-verb">verbatim</span> [FH25] (1.1)–(1.2), = (3.23)/(3.26)</span>
+\[
+(\ap\partial-J^+_1)\cdots(\ap\partial-J^+_N)=(\ap\partial)^N-\sum_{k=2}^{N}U^+_k(\ap\partial)^{N-k},
+\]
+\[
+\sum_{j=1}^{N}(\ap\partial-J^+_1)\cdots J^-_j\cdots(\ap\partial-J^+_N)
+=\sum_{k=2}^{N}\Big(U^-_k-\am\frac{\partial}{\partial\ap}U^+_k\Big)(\ap\partial)^{N-k},
+\]
+<p>where in the second line the \(j\)-th factor is replaced by \(J^-_j\), and \(\sum_iJ^\pm_i=0\)
+<span class="eqref">(3.27)</span>.</p>
+</div>
+
+<div class="env intu"><span class="tag">Physical intuition — a differential operator and its first jet</span>
+<p>C8 says something clean that is easy to lose in the indices. The \(+\) sector is an ordinary Miura
+factorisation with background charge \(\ap\): it defines the currents \(U^+_k\) exactly as in the relativistic
+case, but built from <em>commuting</em> fields. The \(-\) sector is the <em>derivative</em> of that structure: the
+left-hand side is the first-order variation of the product under \(J^+_j\to J^+_j+\delta J^-_j\), and the
+right-hand side is correspondingly the variation of the invariants, corrected by
+\(\am\,\partial_{\ap}U^+_k\) because the background charge is varied too. The Carrollian \(W_N\)-algebra therefore has a <em>Takiff-like first-jet structure</em> over the abelian
+\(+\)-sector, with \(U^-\) playing the role of a fibre coordinate. (This is an organising interpretation; no
+Lie- or vertex-algebra isomorphism to a Takiff double is claimed or proved here.) Every structural fact below — the one-\(J^-\) filtration, the screening doublet, the Jordan-block
+pattern — is a shadow of this single statement.</p>
+</div>
+
+<div class="env conv"><span class="tag">Convention C9 — identification of \(T,M\) and central charges <span class="stat s-verb">verbatim</span> [FH25] (3.28)–(3.31)</span>
+\[
+T=\sum_n L_ne^{in\theta}=2U^-_2,\qquad
+M=\sum_n M_ne^{in\theta}=2U^+_2,
+\]
+\[
+c^{\rm cl}_L=-4(N-1)N(N+1)\ap\am,\qquad
+c^{\rm cl}_M=-2(N-1)N(N+1)(\ap)^2 .
+\]
+</div>
+
+<h3 id="s4-4"><span class="num">4.4</span>The \(N=2\) currents, explicitly</h3>
+
+<div class="env conv"><span class="tag">Convention C10 <span class="stat s-verb">verbatim</span> [FH25] (3.32), (3.34)</span>
+<p>With \(J^\pm:=J^\pm_2=-J^\pm_1\),</p>
+\[
+M=2U^+_2=2\,J^+J^++2\ap\,\partial J^+,
+\qquad
+T=2U^-_2=4\,J^+J^-+2\ap\,\partial J^-+2\am\,\partial J^+ .
+\]
+</div>
+
+<div class="env check"><span class="tag">Check 4.3 — recovering C10 from the parent by contraction <span class="stat s-der">derived</span></span>
+<p>[FH25] verify this in their (3.36)–(3.41): substituting
+\(J=\eps^{-1}J^++\eps J^-\), \(\bar J=\eps^{-1}J^+-\eps J^-\) into \(T=JJ+\alpha\partial J\),
+\(\bar T=\bar J\bar J+\bar\alpha\partial\bar J\), and forming \(\eps^2(T+\bar T)/1\) resp. \(T-\bar T\).
+Cell 4 reproduces both, including the cancellation of the \(\eps^{-2}\) and \(\eps^{-1}\) divergences.</p>
+</div>
+
+<div class="cell" data-lang="py">
+  <div class="cell-head"><span class="lang">python</span><span class="title">Cell 4 — CLASSICAL/commuting contraction of T, T̄ vs FH (3.32),(3.34); no ordering content</span><button onclick="runCell(this)">Run</button></div>
+  <textarea spellcheck="false">import sympy as sp
+zz = sp.Symbol('z'); e = sp.Symbol('epsilon', positive=True)
+Jp = sp.Function('Jp')(zz); Jm = sp.Function('Jm')(zz)
+apS, amS = sp.symbols('alpha^+ alpha^-')
+
+J    =  Jp/e + e*Jm                      # FH (3.10b)
+Jbar =  Jp/e - e*Jm
+al   =  apS/e + e*amS                    # FH (3.10c)
+albar=  apS/e - e*amS
+
+T    = J*J    + al*sp.diff(J, zz)        # FH (3.35)
+Tbar = Jbar*Jbar + albar*sp.diff(Jbar, zz)
+
+M_field = sp.expand(e**2*(T + Tbar))     # = 2 U^+_2   (FH 3.36)
+T_field = sp.expand(T - Tbar)            # = 2 U^-_2   (FH 3.39)
+
+M_lim = sp.simplify(sp.limit(M_field, e, 0))
+T_lim = sp.simplify(sp.limit(T_field, e, 0))
+
+M_target = 2*Jp**2 + 2*apS*sp.diff(Jp, zz)                                   # FH (3.32)
+T_target = 4*Jp*Jm + 2*apS*sp.diff(Jm, zz) + 2*amS*sp.diff(Jp, zz)           # FH (3.34)
+
+print("M limit :", sp.simplify(M_lim))
+print("  == FH (3.32)?", sp.simplify(M_lim - M_target) == 0)
+print("T limit :", sp.simplify(T_lim))
+print("  == FH (3.34)?", sp.simplify(T_lim - T_target) == 0)
+print()
+# check that T - Tbar has NO negative powers of epsilon at all (exact cancellation)
+ser    = sp.expand(T_field)
+negpow = [t for t in ser.as_ordered_terms()
+          if sp.Add(*[sp.S(ex) for bs, ex in t.as_powers_dict().items() if bs == e] or [sp.S(0)]) < 0]
+print("terms of T-Tbar with negative powers of epsilon:",
+      negpow if negpow else "none  (exact cancellation)")</textarea>
+  <div class="out"></div>
+</div>
+
+<!-- ============================ 5 ============================ -->
+<h2 id="s5"><span class="num">5</span>The quantum layer: ordering, and the filtration lemma</h2>
+
+<h3 id="s5-1"><span class="num">5.1</span>Flipped versus symmetric</h3>
+
+<p>[FH25] distinguish two quantum contractions. In the <em>flipped</em> construction the time direction — and
+therefore the normal-ordering prescription — is reversed in one copy; the result is isomorphic to the quantum
+<em>Galilean</em> \(W_N\)-algebra, with central charges<span class="cite"><a href="#FH25">[FH25]</a></span>
+<span class="eqref">(1.3)</span></p>
+\[
+\tilde c_L=(N-1)\big[2-4N(N+1)\ap\am\big],\qquad
+\tilde c_M=-2(N-1)N(N+1)(\ap)^2 .
+\]
+<p>In the <em>symmetric</em> construction the time direction is kept in both copies; the price is that one must
+use an averaged ordering, and the reward is that the central charges coincide with the classical ones
+<span class="eqref">(1.4)</span>:</p>
+\[
+c_L=-4(N-1)N(N+1)\ap\am,\qquad
+c_M=-2(N-1)N(N+1)(\ap)^2 .
+\]
+
+<div class="env warn"><span class="tag">Which algebra this project is about</span>
+<p><b>The symmetric one.</b> The flipped/Galilean algebra is a different object with different central charges
+and it already has free-field screening literature in the \(W(2,2)\) guise<span class="cite"><a href="#AR16">[AR16]</a></span>.
+Our novelty claim is specifically about the <em>proper symmetric</em> algebra with averaged ordering. Every
+statement in the paper must say "symmetric" explicitly; a referee who reads "Carrollian" as "Galilean" will
+believe the result is known.</p>
+</div>
+
+<h3 id="s5-2"><span class="num">5.2</span>Averaged ordering</h3>
+
+<div class="env conv"><span class="tag">Convention C11 — averaged ordering <span class="stat s-verb">verbatim</span> [FH25] (2.14), (4.29)–(4.31)</span>
+\[
+\av{J^+_mJ^-_{-m}}=\tfrac12\big(J^+_mJ^-_{-m}+J^-_{-m}J^+_m\big),
+\]
+<p>and for a general product containing exactly one \(J^-\),</p>
+\[
+\av{J^-_{j,n}J^+_{[<n]}J^+_{[\ge n]}}
+=\tfrac12\Big(J^-_{j,n}J^+_{[<n]}J^+_{[\ge n]}+J^+_{[<n]}J^+_{[\ge n]}J^-_{j,n}\Big),
+\]
+<p>i.e. for one-\(J^-\) products, averaged ordering is "put the \(J^-\) once at the far left and once at the far
+right, and average". The rewriting is legitimate because
+\(\big[J^+_{[<n]},[J^-_{j,n},J^+_{[\ge n]}]\big]=0\) <span class="eqref">(4.30)</span>.</p>
+</div>
+
+<div class="env conv"><span class="tag">Convention C12 — the filtration <span class="stat s-verb">verbatim</span> [FH25], §4.4</span>
+<p>"The fields \(U^+_j\) are built only from \(J^+_i\), which all commute and do not require an ordering
+prescription. The fields \(U^-_j\) are built as sums of products of \(J^+\) fields and at most a single \(J^-\)
+field."</p>
+</div>
+
+<div class="env intu"><span class="tag">Physical intuition — why averaging removes the quantum corrections</span>
+<p>Normal ordering is a choice of what "positive frequency" means, i.e. a choice of time. The Carrollian
+contraction squeezes the light cone flat, so there is no longer a preferred time to make that choice with.
+Averaging normal and anti-normal ordering is the honest response: it is the symmetric prescription
+<em>selected by the two-copy contraction</em> — not proved to be the unique consistent one. [FH25]'s remarkable observation is that this symmetric
+prescription is <em>closed</em> — commutators of averaged one-\(J^-\) expressions come out already averaged
+<span class="eqref">(4.32)–(4.34)</span> — so no reordering is needed and the classical structure constants
+survive quantisation untouched. A heuristic for why: in the Takiff-like picture of §4.3 there is no
+quadratic-in-fibre sector for quantum corrections to live in. <b>This is intuition only</b> — it is not a proof,
+and in particular it must not be used to pre-judge \(F_1\) or the \(U^\pm_3\) ordering question, both of which
+are open.</p>
+</div>
+
+<h3 id="s5-3"><span class="num">5.3</span>The filtration lemma, proved before any OPE</h3>
+
+<p>The following is the structural fact that makes the whole project a finite computation. It is proved here
+<em>abstractly</em>, from the commutation relations alone — not verified case by case on OPEs, which would
+prove nothing general.</p>
+
+<div class="env thm"><span class="tag">Lemma 5.1 (Filtration / Truncation) <span class="stat s-nov">formulated here</span></span>
+<p>Let \(\mathcal F^{r}\) denote the span of averaged-ordered products of the \(J^\pm_i\) and their derivatives
+containing at most \(r\) factors of \(J^-\) (counting <em>fields</em>, not parameters). Let</p>
+\[
+\Scr^{(0)}=\no{e^{\beta\,\alpha_i\cdot\vp}},\qquad
+\Scr^{(1)}=\no{\big(A\,\alpha_i\cdot\vm+B\,\alpha_i\cdot\vp\big)e^{\beta\,\alpha_i\cdot\vp}} .
+\]
+<p>Define the degree map \(d(+)=0\), \(d(-)=1\). Then, with \(U^+_k\in\mathcal F^0\) and
+\(U^-_k\in\mathcal F^{\le1}\) (C12), the number of Wick <em>pairings</em> contributing to
+\(U^{\sigma}_k(z)\,\Scr^{(a)}(w)\) is bounded by \(d(\sigma)+a\). The bound counts pairings; it is not a
+bound on the pole order, nor on the number of terms:</p>
+\[
+\begin{array}{c|c|c}
+ & \Scr^{(0)} & \Scr^{(1)}\\\hline
+U^{+}_k & 0 & 1\\
+U^{-}_k & 1 & 2
+\end{array}
+\]
+<p><b>Proof.</b> The only nonvanishing pairing is the crossed one (C7), so a contraction requires one \(J^-\)-type
+object and one \(J^+\)-type object. The exponent of \(\Scr^{(a)}\) contains only \(\vp\); the prefactor of
+\(\Scr^{(1)}\) contains at most one \(\vm\) and at most one \(\vp\). Hence:</p>
+<ul>
+<li><em>\(U^+_k\Scr^{(0)}\):</em> both sides are pure \(+\); \([\vp,\vp]=0\) gives zero contractions, so the OPE is
+<b>regular</b>.</li>
+<li><em>\(U^-_k\Scr^{(0)}\):</em> the unique \(J^-\) can pair with the exponent; nothing else can pair. One contraction.</li>
+<li><em>\(U^+_k\Scr^{(1)}\):</em> the \(J^+\)'s can pair only with the single \(\vm\) in the prefactor. One contraction.</li>
+<li><em>\(U^-_k\Scr^{(1)}\):</em> the unique \(J^-\) pairs with exponent or with the \(\vp\) prefactor (one
+contraction), and one \(J^+\) pairs with the \(\vm\) prefactor (a second). No third pairing exists.</li>
+</ul>
+<p>Moreover, because \([J^-,\vp]\) is <em>central</em>, the Baker–Campbell–Hausdorff series terminates exactly:</p>
+\[
+\big[J^-_{a,m},\,\no{e^{\beta\alpha_i\cdot\vp}}\big]
+=\beta\,\big[J^-_{a,m},\,\alpha_i\cdot\vp\big]\;\no{e^{\beta\alpha_i\cdot\vp}},
+\]
+<p>with no higher terms, since \(\big[J^-,[J^-,\vp]\big]=0\). \(\blacksquare\)</p>
+</div>
+
+<div class="env rem"><span class="tag">Remark 5.2 — three caveats, stated honestly</span>
+<p><b>(i) Degree counts fields, not parameters.</b> In C10, \(T\) contains \(2\am\partial J^+\): this term carries
+\(\am\) but lies in \(\mathcal F^0\). Hence \(U^-_k\in\mathcal F^{\le1}\), not "\(=\mathcal F^1\)". Getting this
+wrong would produce spurious contractions in §7.2.</p>
+<p><b>(ii) The improvement over the relativistic case is a bound, not a category change.</b> A relativistic spin-\(k\)
+current also truncates, at \(\le k\) contractions. What is genuinely special here is the drop to \(\{0,1,2\}\)
+<em>and</em> the vanishing of exponent self-contractions.</p>
+<p><b>(iii) The vanishing of self-contractions is the qualitatively new fact.</b> Since \(\vp\vp\sim0\), the product
+\(\Scr^{(0)}_i(z)\Scr^{(0)}_j(w)\) carries no branch factor \((z-w)^{\#}\) <em>from the oscillators</em>: the
+leading screenings are <b>oscillator-local</b>, with no Felder contour prescription needed for that
+part<span class="cite"><a href="#Fel89">[Fel89]</a></span>. Zero-mode cocycles (D4(4)) are a separate question
+and are not settled by this.
+This does <em>not</em> extend to the doublet: \(\vm\vp\sim\log\) makes \(\Scr^{(1)}\Scr^{(0)}\) and
+\(\Scr^{(1)}\Scr^{(1)}\) logarithmic, a Takiff/logarithmic extension rather than an ordinary vertex algebra.
+This is why the screening-screening algebra is deferred (§8.3).</p>
+</div>
+
+<!-- ============================ 6 ============================ -->
+<h2 id="s6"><span class="num">6</span>Potentials, zero modes, and the module</h2>
+
+<div class="env conv"><span class="tag">Convention C7p — the contracted algebra on the plane <span class="stat s-imp">adopted</span></span>
+<p>§§3 and 7.2 are plane radial-OPE calculations (see the scope decision below), so they need the contracted
+algebra in <em>plane</em> form. We adopt it explicitly, in exact parallel with C1:</p>
+\[
+J^{+}_i(z)J^{+}_j(w)\sim0,\qquad
+J^{-}_i(z)J^{-}_j(w)\sim0,\qquad
+J^{-}_i(z)J^{+}_j(w)\sim\frac{\kap_{ij}/2}{(z-w)^{2}},
+\]
+<p>together with the plane forms of \(T=2U^-_2\) and \(M=2U^+_2\) of C10. <b>This is an adoption, not a
+derivation.</b> It is the plane counterpart of the cylinder brackets C7 — legitimate because Observation 4.1
+shows those brackets are \(\eps\)-exact, so nothing in them is a contraction artefact — but the statement
+that the plane and cylinder realisations describe the same fields is exactly the bridge that Notebook I does
+<em>not</em> establish. Marking C7p as adopted is what makes Route B of §7.2 a computation inside one
+convention system rather than a silent crossing between two.</p>
+</div>
+
+<div class="env def"><span class="tag">Definition D3 — Carrollian potentials <span class="stat s-der">derived</span> from C7p + W1</span>
+<p>Define \(\vp_i,\vm_i\) by \(J^\pm_i=\partial\varphi^\pm_i\). From C7p and W1,</p>
+\[
+\vp_i(z)\vp_j(w)\sim0,\qquad
+\vm_i(z)\vm_j(w)\sim0,\qquad
+\vm_i(z)\vp_j(w)\sim \tfrac12\kap_{ij}\log(z-w).
+\]
+<p>At \(N=2\) this gives \(\vm(z)\vp(w)\sim\tfrac14\log(z-w)\), hence \(J^-(z)\vp(w)\sim\tfrac{1/4}{z-w}\),
+consistent with \(J^+(z)J^-(w)\sim\tfrac{1/4}{(z-w)^2}\) and with [FH25] (2.11).</p>
+</div>
+
+<div class="env def"><span class="tag">Definition D4 — free-field module data (to be completed) <span class="stat s-der">derived</span> / <span class="stat s-open">open</span></span>
+<p>The word "intertwiner" is meaningless until the following data are fixed. <b>What is specified here:</b>
+the algebraic carrier — index space, oscillators, crossed zero modes, charge lattice and momentum-sector index
+set. <b>What is enumerated but not completed here:</b> the cocycle, the logarithmic residue defining
+\(Q^{(1)}\), the common operator domain, and the proof that the limiting operators are affiliated to the
+structure. An earlier draft said the module data "are fixed here"; that overstated (4)–(6) below.</p>
+<p><b>What Paper 1 nevertheless requires.</b> Full screening–screening closure may be deferred to Paper 3, but
+a <em>minimal</em> explicitly defined category and domain — enough to make \(Q^{(1)}\) an intertwiner and to
+state its commutators with \(U^\pm_k\) — cannot be. Supplying that minimal category is a Notebook II
+deliverable, not a Paper 3 one.</p>
+<p><b>(1) Index space.</b> All fields live on the traceless subspace
+\(\mathfrak h:=\{\lambda\in\mathbb{C}^{N}:\sum_a\lambda_a=0\}\), of dimension \(N-1\), on which
+\(\kap=\mathbb 1-\tfrac1N\mathbb{1}\mathbb{1}^{\!\top}\) acts as the identity. On all of
+\(\mathbb{C}^{N}\), \(\kap\) is a rank-\((N-1)\) projector, \(\kap^2=\kap\); the simple roots satisfy
+\(\kap\alpha_i=\alpha_i\). <b>The Heisenberg algebra is defined on \(\mathfrak h\), not on the
+unconstrained \(\mathbb{C}^{N}\)</b>; Cell 4b verifies the projector properties. Indices are raised and
+lowered with the induced Euclidean form on \(\mathfrak h\), so \(\kap^{ij}\) and \(\kap_{ij}\) are
+identified there and only there.</p>
+<p><b>(2) Oscillators.</b> For \(n\neq0\), \(J^{\pm}_{i,n}\) with the brackets of C7, and no others.</p>
+<p><b>(3) Mode expansions, the plane–cylinder map, and crossed zero modes.</b> These must be
+<em>derived</em> from \(J=\partial\varphi\), not guessed, and the two coordinate systems use
+<em>different</em> mode labels.</p>
+<div class="env warn" style="margin:.8em 0"><span class="tag">Erratum E1 — the mode map, corrected <span class="stat s-der">derived</span></span>
+<p>A previous revision of this notebook asserted a mode <em>reversal</em> \(a_n=J_{-n}\) between the plane
+modes \(J_{\rm pl}(z)=\sum_na_nz^{-n-1}\) and [FH25]'s cylinder modes. <b>That is false, and it has a
+one-line falsifier.</b> The plane OPE \(J_{\rm pl}J_{\rm pl}\sim\kap(z-w)^{-2}\) requires
+\([a_m,a_n]=m\kap\,\delta_{m+n,0}\); under \(a_n=J_{-n}\),</p>
+\[
+[a_m,a_n]=[J_{-m},J_{-n}]=-m\kap\,\delta_{m+n,0},
+\]
+<p>the wrong sign. <b>There is no mode reversal in the unbarred sector.</b></p>
+<p><b>What E1 does and does not settle.</b> It settles a <em>negative</em>: no mode reversal. It does
+<b>not</b> fix the bridge, because the overall sign and the placement of [FH25]'s explicit factor of \(i\) are
+separate conventions that must be transported together with \(\varphi,\alpha,\beta\), the Miura factors and
+the barred contour. Two internally consistent candidates illustrate the residual freedom:</p>
+\[
+\text{(i)}\quad z=e^{-i\theta},\;\;J_{\rm cyl}=\tfrac{dz}{d\theta}J_{\rm pl}=-izJ_{\rm pl}
+\;\Longrightarrow\; J_n=-a_n ;
+\]
+\[
+\text{(ii)}\quad w=\tau-i\theta,\;\;z=e^{w},\;\;J_{w}=\tfrac{dz}{dw}J_{\rm pl}=zJ_{\rm pl},\;\;
+J_{\rm FH}=i\,J_{w}\;\Longrightarrow\; J_n=+a_n .
+\]
+<p>Candidate (ii) treats [FH25]'s \(i\) as belonging to their reality convention \(J=i\partial\phi^{\rm FH}\)
+rather than to the Jacobian, and reproduces their cylinder dependence \(e^{-n\tau+in\theta}\) exactly; it is
+the leading candidate and is <em>recommended</em> for Notebook II §II.1. <b>Neither is adopted here.</b> Both
+preserve the bracket \(([a_m,a_n]=m\kap\delta_{m+n,0}\) is invariant under \(a_n\to\pm a_n\)); only the
+reversal is excluded. Cell 4c tests all three candidates and rejects the reversal.</p>
+<p><b>What survives regardless of which candidate is chosen.</b> The cylinder expansion below is derived from
+\(\partial_\theta\varphi=i\sum_nJ_ne^{in\theta}\) alone, with no plane input, so the zero-mode term
+\(iJ_0\theta\), the monodromy condition, the half-shift and the base-point analysis are unaffected by the
+residual sign freedom.</p>
+</div>
+<div class="env conv" style="margin:.8em 0"><span class="tag">Scope decision — two realisations, kept separate</span>
+<p>An earlier draft asserted that the whole notebook was formulated on the equal-time cylinder. <b>That was
+false</b>: §3 (parent screening weights, Proposition 3.4) and Route B of §7.2 are plane radial-OPE and residue
+calculations. The accurate layer statement, which governs the whole notebook, is three-fold:</p>
+<ul>
+<li><b>Plane realisation.</b> The quantum Heisenberg algebra \(J_{\rm pl}J_{\rm pl}\sim\kap(z-w)^{-2}\), the
+quantum Miura realisation, the vertex operators and all residues of §3 and §7.2 are formulated in an
+<em>independently adopted</em> plane free-field realisation. It is not claimed to be derived from the cylinder
+data below.</li>
+<li><b>Cylinder realisation.</b> The Carrollian contraction (§4), the averaged ordering (§5) and the zero-mode
+bookkeeping (§6) are formulated on the equal-time cylinder in [FH25]'s conventions.</li>
+<li><b>The bridge between them is NOT asserted here.</b> Fixing it requires transporting \(J\), \(\varphi\),
+\(\alpha\), \(\beta\), the Miura factors and the barred contour <em>together</em>, which Erratum E1 does not
+do — E1 establishes only what the bridge <em>cannot</em> be. The complete map is Notebook II §II.1.</li>
+</ul>
+<p><b>What this costs and what it does not.</b> Results proved wholly inside one realisation stand:
+\(h_\beta\), \(h(\mu\alpha_i)\), \(\beta_+\beta_-=-4\) and Proposition 3.4 are plane statements; the
+contraction identities, the filtration lemma and the averaged-ordering analysis are cylinder statements.
+<b>Both routes to \(F_0\) in §7.2 are plane calculations</b> — Route A contracts a parent plane relation,
+Route B uses the adopted contracted plane algebra C7p — so their agreement is an internal cross-check inside
+one adopted realisation. Neither route proves the plane–cylinder bridge, and nothing here licenses an argument
+that silently crosses between the two realisations.</p>
+</div>
+<p><em>Cylinder.</em> [FH25] (3.11)–(3.12) fix \(J_{\rm cyl}(\theta)=i\sum_nJ_ne^{in\theta}\) with
+\(J=\partial_\theta\varphi\). Integrating term by term,</p>
+\[
+\boxed{\;\varphi(\theta)=q+i\,J_0\,\theta+\sum_{n\neq0}\frac{J_n}{n}e^{in\theta}\;}
+\]
+<p><b>The zero-mode term is \(i\,J_0\theta\), not \(J_0\theta\)</b>; an earlier draft dropped the \(i\),
+which changes the monodromy (see layer (ii) of Proposition 6.1). Writing \(p^\pm_i:=J^\pm_{i,0}\), C7 at
+\(m=0\) gives no bracket among the \(p\)'s, so the conjugate pairs are part of the module data, fixed by
+consistency with \(\vm\vp\sim\tfrac12\kap\log\) of the <em>adopted plane</em> convention C7p.
+<b>This is adopted module data, not a cylinder derivation.</b> C7 says nothing about the conjugate
+\(q\)-operators: at \(m=0\) its brackets vanish identically. We state the convention rather than appeal to a
+"standard rule": for \(\varphi\varphi\sim A\log(z-w)\) the zero-mode sector must supply the \(A\log z\) piece,
+which requires \([p,q]=A\) (equivalently \([q,p]=-A\)). Hence, explicitly, we <em>adopt</em></p>
+\[
+[\,p^{-}_i,\;q^{+}_j\,]=[\,p^{+}_i,\;q^{-}_j\,]=\tfrac12\kap_{ij},
+\qquad
+[p^{+},q^{+}]=[p^{-},q^{-}]=[p^{+},p^{-}]=[q^{+},q^{-}]=0 .
+\]
+<p>equivalently \([q^+_j,p^-_i]=[q^-_j,p^+_i]=-\tfrac12\kap_{ij}\). Within this adopted module convention the
+factor \(\tfrac12\) is <em>fixed by compatibility with D3</em>; it is not inherited through a plane–cylinder
+bridge, since that bridge is deliberately unresolved. Under \(\varphi=i\phi\) (W1) these are \(i\) times the real-boson brackets, which is where
+the reality conditions enter.</p>
+<p><b>(4) Charge lattice and cocycle.</b> By (3), the screening charges shift \(\lambda^-\) by
+\(\tfrac{\beta_1}{2}\kap\alpha_i\), so the relevant lattice is</p>
+\[
+\Lambda:=\bigoplus_{i=1}^{N-1}\mathbb{Z}\,\tfrac{\beta_1}{2}\kap\alpha_i\;\subset\;\mathfrak h ,
+\]
+<p>with the factor \(\tfrac12\) as in (3). Note \(\Lambda\) is generically <em>not</em> an integral lattice, since
+\(\beta_1\) is fixed by \(F_0\) in terms of \(\ap\) and need not be rationally related to the root norms.
+Regarding the cocycle: because \(\vp\vp\sim0\), the oscillator part of
+\(\Scr^{(0)}_i\Scr^{(0)}_j\) contributes no braiding at all (Remark 5.2(iii)), so <b>the trivial cocycle
+\(\varepsilon\equiv1\) may well suffice</b> — unlike the ordinary lattice-VOA situation, where a nontrivial
+central extension is forced by the oscillator monodromy. We therefore do not posit a cocycle; we record that
+the central extension of the \(\Lambda\)-group algebra and the locality requirement it is meant to enforce
+<b>must be specified before any statement about mutual locality</b>, and that the natural first guess here is
+the trivial one. This is an open item, not a completed definition.</p>
+<p><b>(5) Module, index set and domain.</b> Fix base momenta
+\((\lambda^+_0,\lambda^-_0)\in\mathfrak h\times\mathfrak h\) and set</p>
+\[
+\mathcal H_{(\lambda^+_0,\lambda^-_0)}:=\bigoplus_{\nu\in\Lambda}\mathcal F_{\lambda^+_0,\;\lambda^-_0+\nu},
+\]
+<p>an algebraic direct sum (no completion) over the <em>coset</em> \(\lambda^-_0+\Lambda\) only — not over all
+of \(\mathfrak h\times\mathfrak h\) — with \(\mathcal F_{\lambda^+,\lambda^-}\) the Fock space generated by
+negative-mode oscillators on a vector of definite \((p^+,p^-)\)-eigenvalue. This index set is closed under the
+half-shifts of (3)–(4) by construction, and \(\lambda^+\) is <em>not</em> shifted by the screenings, so it is a
+fixed label constrained by the integrality condition of Proposition 6.1(ii). Charges act as <em>formal
+residues</em> on this algebraic module.</p>
+<p><b>Caveat on the residue.</b> \(Q^{(0)}_i=\Res_z\Scr^{(0)}_i(z)\) is an ordinary Laurent residue. For the
+tangent screening this is <em>not</em> available as stated: \(\Scr^{(1)}\) contains \(\vm\), which pairs
+logarithmically with \(\vp\), so \(\Scr^{(1)}\) is not an ordinary Laurent field and \(Q^{(1)}\) requires a
+logarithmic-residue or base-point prescription (cf. layer (iii) of Proposition 6.1). Supplying it is part of
+the deferred operator layer.</p>
+<p><b>(6) Status, and the split between Notebook II and Paper 3.</b> This is an <em>algebraic induced
+module</em>. It is not claimed to be a vertex-algebra module in the ordinary sense: by Remark 5.2(iii) the pair
+\(\{\Scr^{(0)},\Scr^{(1)}\}\) is not mutually local (logarithmic \(\vm\vp\) pairings), so the ambient
+category is logarithmic/Takiff. Two different things must not be conflated:</p>
+<ul>
+<li><b>Required for Paper 1, and assigned to Notebook II:</b> a <em>minimal</em> explicitly defined category
+and common domain — just enough to make \(Q^{(1)}\) an intertwiner and to state its commutators with
+\(U^\pm_k\). Paper 1 cannot be written without it.</li>
+<li><b>Deferred to Paper 3:</b> the <em>full</em> screening–screening logarithmic algebra, its closure onto the
+composite charges, and the identification of the complete logarithmic/Takiff category with its braiding and
+quantum-group structure.</li>
+</ul>
+</div>
+
+<div class="cell" data-lang="py">
+  <div class="cell-head"><span class="lang">python</span><span class="title">Cell 4b — projector properties of κ and the traceless subspace (D4.1)</span><button onclick="runCell(this)">Run</button></div>
+  <textarea spellcheck="false">import sympy as sp
+for Nv in (2,3,4):
+    one = sp.ones(Nv,1)
+    kap = sp.eye(Nv) - one*one.T/Nv
+    roots = [sp.Matrix([1 if j==i else (-1 if j==i+1 else 0) for j in range(Nv)])
+             for i in range(Nv-1)]
+    print("N =", Nv,
+          "| kappa^2 = kappa:", sp.simplify(kap*kap - kap) == sp.zeros(Nv,Nv),
+          "| rank:", kap.rank(), "(= N-1)",
+          "| kappa*alpha_i = alpha_i:", all(sp.simplify(kap*r - r) == sp.zeros(Nv,1) for r in roots))
+# Cartan matrix in the kappa form
+Nv = 3
+one = sp.ones(Nv,1); kap = sp.eye(Nv) - one*one.T/Nv
+a1 = sp.Matrix([1,-1,0]); a2 = sp.Matrix([0,1,-1])
+C = sp.Matrix([[ (x.T*kap*y)[0,0] for y in (a1,a2)] for x in (a1,a2)])
+print("\nA_2 Cartan matrix from (alpha_i, kappa alpha_j):"); sp.pprint(C)</textarea>
+  <div class="out"></div>
+</div>
+
+<div class="cell" data-lang="py">
+  <div class="cell-head"><span class="lang">python</span><span class="title">Cell 4c — zero-mode BCH: the half-shift, and the cylinder mode expansion</span><button onclick="runCell(this)">Run</button></div>
+  <textarea spellcheck="false">import sympy as sp
+
+# ---- (a) the half-shift.  [p-_i, q+_j] = (1/2) kappa_ij  is CENTRAL, so
+#          p exp(X) = exp(X) (p + [p,X]).
+b1, ka = sp.symbols('beta_1 (kappa_alpha)_i')
+central = sp.Rational(1,2)*ka                 # [p^-_i, q^+_j] alpha_j  ->  (1/2)(kappa alpha)_i
+shift   = sp.simplify(b1*central)             # [p^-_i, beta_1 alpha.q^+]
+print("momentum shift =", shift, "   (must be beta_1*(kappa alpha)_i / 2, NOT beta_1*(kappa alpha)_i)")
+assert sp.simplify(shift - b1*ka/2) == 0
+assert sp.simplify(shift - b1*ka) != 0
+print("half-shift confirmed; naive full shift excluded")
+
+# ---- (b) cylinder zero mode carries an i.
+#      FH (3.11)-(3.12):  J(theta) = i * sum_n J_n exp(i n theta),  and J = d/dtheta phi.
+th, J0 = sp.symbols('theta J_0')
+n  = sp.Symbol('n', nonzero=True, integer=True)
+Jn = sp.Symbol('J_n')
+zero_mode_integrand = sp.I*J0                       # n = 0 term of J(theta)
+osc_integrand       = sp.I*Jn*sp.exp(sp.I*n*th)     # n != 0 term
+print("\nintegral of n=0 term  :", sp.integrate(zero_mode_integrand, th), "  -> i*J_0*theta")
+print("integral of n!=0 term :", sp.simplify(sp.integrate(osc_integrand, th)), "  -> J_n exp(i n theta)/n")
+assert sp.simplify(sp.integrate(zero_mode_integrand, th) - sp.I*J0*th) == 0
+assert sp.simplify(sp.integrate(osc_integrand, th) - Jn*sp.exp(sp.I*n*th)/n) == 0
+
+# ---- (b2) plane <-> cylinder map: REJECT the mode reversal.  NOTE: this cell
+#      certifies ONLY the negative statement a_n != J_{-n}.  The overall sign and the
+#      full bridge are NOT fixed in Notebook I; they are Notebook II.1 deliverables.
+#      Falsifier: plane OPE requires [a_m,a_n] = m kappa delta_{m+n,0}.
+kk = sp.Symbol('kappa', nonzero=True)
+def brJ(r, s): return r*kk if sp.simplify(r+s) == 0 else 0     # FH (3.14)
+print("\n[a_m,a_-m] under a_n = J_{-n} :", brJ(-m, m), "  (WRONG SIGN -> rejected)")
+assert sp.simplify(brJ(-m, m) + m*kk) == 0
+print("[a_m,a_-m] under a_n = -J_n   :", brJ(m, -m), "  (correct)")
+assert sp.simplify(brJ(m, -m) - m*kk) == 0
+
+#      Coordinate map, with the Jacobian kept:  J_cyl = (dz/dtheta) J_pl
+an = sp.Symbol('a_n')
+for lab, zz in (("z = exp(+i theta)", sp.exp(sp.I*th)), ("z = exp(-i theta)", sp.exp(-sp.I*th))):
+    jac  = sp.diff(zz, th)
+    term = sp.simplify(jac*an*zz**(-n-1))
+    print("  %s : dz/dtheta = %s z ;  J_cyl term = %s"
+          % (lab, sp.simplify(jac/zz), sp.simplify(term/an)))
+print("  -> z = exp(-i theta) with THIS Jacobian gives J_n = -a_n;")
+print("     assigning FH's explicit i to their reality convention instead gives J_n = +a_n.")
+print("     BOTH preserve the bracket; only the reversal a_n = J_{-n} is excluded.")
+print("     Notebook I adopts NEITHER sign.  See Erratum E1 and Notebook II.1.")
+
+# ---- (c) monodromy of the leading screening
+lamp = sp.Symbol('lambda^+')
+mono = sp.simplify(sp.exp(b1*(sp.I*lamp*(th+2*sp.pi)))/sp.exp(b1*sp.I*lamp*th))
+print("\nmonodromy factor      :", sp.simplify(mono), " -> single-valued iff beta_1*alpha.lambda^+ in Z")</textarea>
+  <div class="out"></div>
+</div>
+
+<div class="env der"><span class="tag">Proposition 6.1 — the three-layer zero-mode dictionary <span class="stat s-der">derived</span> (layers i–ii) / <span class="stat s-nov">formulated here</span> (layer iii)</span>
+<p><b>Status split.</b> Layers (i) and (ii) — the momentum half-shift
+\(\lambda^-\mapsto\lambda^-+\tfrac{\beta_1}{2}\kap\alpha_i\) and the monodromy condition
+\(\beta_1\,\alpha_i\cdot\lambda^+\in\mathbb{Z}\) — are derived <em>within the adopted zero-mode module
+convention of D4(3)</em>, which is chosen data rather than a consequence of C7. Layer (iii), the identification of
+base-point changes, ordering changes and flag covariance, is a <em>structurally motivated triangular
+correspondence</em>: the three ambiguities are all strictly lower-triangular on
+\((\Scr^{(0)},\Scr^{(1)})\), which is what they demonstrably share, but the explicit maps between them are
+not constructed here. It must not be used as a derived input.</p>
+<p>Three logically distinct zero-mode issues are routinely conflated. They must be separated, because they
+have different resolutions and only the third is genuinely dangerous.</p>
+<p><b>Layer (i) — which momentum is shifted.</b> By D4(3) the conjugate of \(q^+\) is \(p^-\). Hence
+\(\Scr^{(0)}=e^{\beta\alpha_i\cdot q^+}\) shifts the <em>minus</em> momentum:</p>
+\[
+Q^{(0)}_i:\;\mathcal F_{\lambda^+,\lambda^-}\longrightarrow
+\mathcal F_{\lambda^+,\;\lambda^-+\frac{\beta_1}{2}\kap\alpha_i}.
+\]
+<p><b>The factor \(\tfrac12\) is forced and an earlier draft omitted it.</b> Since
+\([p^-_i,\,\beta_1\alpha_j\cdot q^+]=\tfrac{\beta_1}{2}(\kap\alpha)_i\) is central,</p>
+\[
+p^-_i\,e^{\beta_1\alpha\cdot q^+}=e^{\beta_1\alpha\cdot q^+}\Big(p^-_i+\tfrac{\beta_1}{2}(\kap\alpha)_i\Big),
+\]
+<p>so the shift is \(\tfrac{\beta_1}{2}\kap\alpha_i\), not \(\beta_1\kap\alpha_i\). Cell 4c verifies this.</p>
+<p>The screening charge is therefore an <b>intertwiner between momentum sectors</b>, not an endomorphism of a
+single Fock space; the commutant statement \([Q,U]=0\) is an identity of intertwiners on
+the coset module \(\mathcal H_{(\lambda^+_0,\lambda^-_0)}=\bigoplus_{\nu\in\Lambda}
+\mathcal F_{\lambda^+_0,\lambda^-_0+\nu}\) of D4(5) — <em>not</em> an unrestricted sum over all
+\((\lambda^+,\lambda^-)\), which an earlier draft wrote here. This is standard in the
+Coulomb gas<span class="cite"><a href="#TK86">[TK86]</a>,<a href="#BS93">[BS93]</a></span> but must be stated, not assumed.</p>
+<p><b>Layer (ii) — single-valuedness.</b> By D4(3), \(\vp(\theta)\supset q^++i\,p^+\theta\), so under
+\(\theta\to\theta+2\pi\),</p>
+\[
+\Scr^{(0)}_i(\theta)\;\longrightarrow\;e^{\,2\pi i\,\beta_1\,\alpha_i\cdot\lambda^{+}}\;\Scr^{(0)}_i(\theta),
+\qquad\text{so single-valuedness}\iff \beta_1\,\alpha_i\cdot\lambda^{+}\in\mathbb{Z}.
+\]
+<p>This is a clean <em>integrality</em> condition on the \(\lambda^+\)-support, and it is available only because
+the \(i\) of D4(3) is kept; with the erroneous \(q^++p^+\theta\) one would obtain a real exponential and no
+periodicity condition at all. Under \(\varphi=i\phi\) (W1) it is the familiar quantisation of a real-boson
+momentum, which is why the redefinition cannot be treated as cosmetic. We sidestep the analytic version in Paper 1 by working on the
+algebraic module of D4, whose architectural precedent is the lattice-extended
+\(\Pi(0)=M(1)\otimes\mathbb{C}[\mathbb{Z}c]\) of Adamović–Radobolja<span class="cite"><a href="#AR19">[AR19]</a></span>
+— the <em>2019</em> continuation, which is where the lattice extension and the logarithmic modules live;
+[AR16] is the earlier local screening-kernel paper and is the \(N=2\) benchmark of §9, not the module template.
+That is a rank-one construction with an ordinary (uncrossed) pairing: it is a template for the <em>architecture</em>
+— lattice extension, intertwining operators, logarithmic modules — and cannot be imported unchanged to rank
+\(N-1\) with the crossed pairing and averaged ordering.</p>
+<p><b>Layer (iii) — base-point dependence of the tangent screening, and its unification with ordering.</b>
+The tangent prefactor is itself \(\theta\)-linear — and by D4(3) with the same \(i\) as the leading sector,
+\(\vm(\theta)\supset q^-+i\,p^-\theta\) — so \(\Scr^{(1)}\) is
+quasi-periodic and \(Q^{(1)}\) depends on a base point. <b>This is not a quantum artefact.</b> The classical
+bulk charges [DDF26] (5.26c–d) contain undifferentiated \(\bar\psi\), and shifting
+\(\bar\psi\to\bar\psi+{\rm const}\) shifts \(S_{\kappa_2}\) by a multiple of \(S_{\kappa_8}\). Simultaneously,
+reordering \(\vm e^{\beta\vp}\) produces only a c-number times \(e^{\beta\vp}\), because the crossed commutator
+is central. Hence <em>three</em> apparently unrelated ambiguities are one and the same:</p>
+\[
+\underbrace{\text{classical base-point shift}}_{\text{[DDF26] }\phi_0}
+\;\;\Longleftrightarrow\;\;
+\underbrace{\text{quantum ordering shift}}_{\Scr^{(1)}\to\Scr^{(1)}+\lambda\Scr^{(0)}}
+\;\;\Longleftrightarrow\;\;
+\underbrace{\text{flag covariance}}_{\text{§7.3}} .
+\]
+<p><b>Precision.</b> These three are related by explicit maps, not literally identical, and the paper must
+exhibit the maps rather than assert the equivalence: the classical base-point shift is a choice of lower limit
+in \(\int^\phi_{\phi_0}\); the ordering shift is a c-number determined by a chosen prescription; the flag
+covariance is the induced ambiguity in a basis of a two-step filtration. Each is a triangular (strictly
+lower-triangular) transformation of the pair \((\Scr^{(0)},\Scr^{(1)})\), which is what they share.</p>
+</div>
+
+<div class="env thm"><span class="tag">Lemma 6.2 (Scheme covariance) <span class="stat s-nov">formulated here</span></span>
+<p>The line \(\mathbb{C}\,\Scr^{(0)}\subset{\rm span}\{\Scr^{(0)},\Scr^{(1)}\}\) is independent of the ordering
+prescription; only the <em>flag</em>, not the individual operator \(\Scr^{(1)}\), is well defined. Consequently
+the doublet is canonically a two-step filtration, and any statement about \(\Scr^{(1)}\) must be invariant
+under \(\Scr^{(1)}\to\Scr^{(1)}+\lambda\Scr^{(0)}\).</p>
+<p><b>Proof.</b> The basic bracket \([\vm,\vp]\) is a c-number kernel. It does <em>not</em> follow that the
+commutator of a \(\vm\)-mode with a <em>function</em> of \(\vp\) is central — an earlier draft said so, and that
+sentence was false. What is true, and is all that is needed, is that the c-number bracket makes the
+Baker–Campbell–Hausdorff series terminate at first order:</p>
+\[
+\big[\vm,\,e^{\beta\vp}\big]=\beta\,[\vm,\vp]\,e^{\beta\vp},
+\]
+<p>i.e. a <em>scalar kernel multiplying the same exponential</em> — not a central operator, but an element of
+\(\mathbb{C}\,\Scr^{(0)}\). Hence reordering the prefactor against the exponent changes \(\Scr^{(1)}\) by a
+scalar multiple of \(\Scr^{(0)}\), and cannot generate \(\vp e^{\beta\vp}\). \(\blacksquare\)</p>
+<p><b>Corollary.</b> The coefficient \(B\) of \(\vp e^{\beta\vp}\) is <em>not</em> an ordering ambiguity: it is
+determined by the contraction (§7.3). The ordering ambiguity lives entirely in the \(C\,\Scr^{(0)}\) direction.</p>
+<p><b>Caveat — the lemma is conditional, not an unconditional operator theorem.</b> At coincident points the
+c-number is a formally divergent coincidence limit, so the lemma holds <em>relative to a fixed
+regularisation</em> (point splitting or mode subtraction), which Notebook I does not select. Centrality guarantees that the
+mixing is <em>triangular</em>; it does not by itself guarantee that the coefficient is finite or
+scheme-independent. Fixing the scheme is part of the deferred operator layer.</p>
+</div>
+
+<!-- ============================ 7 ============================ -->
+<h2 id="s7"><span class="num">7</span>The formal screening jet and the parameter hierarchy</h2>
+
+<h3 id="s7-1"><span class="num">7.1</span>The jet expansion</h3>
+
+<p>We now contract the parent screenings. Potentials contract as the currents do (C6):
+\(\varphi=\eps^{-1}\vp+\eps\vm\), \(\bar\varphi=\eps^{-1}\vp-\eps\vm\). The parent momenta are expanded as follows. Under the hypotheses that (a) the limit is a nonzero
+local operator in the fixed field \(\vp\) and (b) the expansion is analytic and odd in \(\eps\), the leading
+momentum must scale as \(O(\eps)\); we adopt</p>
+\[
+\beta=\eps\beta_1+\eps^{3}\beta_3+O(\eps^5),
+\qquad
+\bar\beta=\eps\bar\beta_1+\eps^{3}\bar\beta_3+O(\eps^5).
+\]
+
+<div class="env der"><span class="tag">Derivation 7.1 — the formal jet <span class="stat s-der">derived (formal, commuting symbols)</span></span>
+<p><b>Status of this computation.</b> What follows is an expansion of <em>commuting</em> exponentials: it computes the associated-graded jet of the screening densities. It does <b>not</b> transport normal ordering, the barred sector's radial/mode reversal, zero-mode factors or cocycles. Every statement below is therefore a statement about formal densities; promoting it to a statement about operators is the deferred operator layer and Notebook II.</p>
+\[
+\beta\,\varphi=\beta_1\vp+\eps^{2}\big(\beta_1\vm+\beta_3\vp\big)+O(\eps^4),
+\qquad
+\bar\beta\,\bar\varphi=\bar\beta_1\vp+\eps^{2}\big(-\bar\beta_1\vm+\bar\beta_3\vp\big)+O(\eps^4).
+\]
+<p>For the two channels to produce a doublet built on the <em>same</em> exponential we need
+\(\bar\beta_1=\beta_1\) — which §7.2 shows is automatic, not an assumption. Then</p>
+\[
+\lim_{\eps\to0}\tfrac12\Big(e^{\beta\varphi}+e^{\bar\beta\bar\varphi}\Big)=\Scr^{(0)}:=\no{e^{\beta_1\vp}},
+\]
+\[
+\lim_{\eps\to0}\frac{1}{2\eps^{2}}\Big(e^{\beta\varphi}-e^{\bar\beta\bar\varphi}\Big)
+=\Scr^{(1)}:=\no{\Big(\beta_1\vm+\tfrac{\beta_3-\bar\beta_3}{2}\vp\Big)e^{\beta_1\vp}} .
+\]
+<p>So \(A=\beta_1\) is <b>fixed by the contraction</b> and only \(B=\tfrac{\beta_3-\bar\beta_3}{2}\) remains to be
+determined. Treating \(A\) and \(B\) as two independent unknowns overparametrises the problem; the honest
+parameter set is \((\beta_1,\beta_3,\bar\beta_3)\).</p>
+</div>
+
+<div class="env der"><span class="tag">Proposition 7.2 — classification of the even jet <span class="stat s-der">derived</span></span>
+<p>The sum channel also has an \(O(\eps^2)\) piece,
+\(Q_2:=\oint\tfrac{\beta_3+\bar\beta_3}{2}\,\vp e^{\beta_1\vp}
+=\tfrac{\beta_3+\bar\beta_3}{2}\,\partial_{\beta_1}Q_0\), and one might hope for a third screening.
+An earlier draft of this notebook dismissed it on the grounds that the required subtraction is not itself a
+parent screening at finite \(\eps\). <b>That argument was invalid</b> — a coefficient in an \(\eps\)-family of
+commuting operators need not be a parent screening in order to be meaningful. The correct classification is
+obtained by differentiating the full commutant relation.</p>
+<p><b>Setup.</b> Both parent charges commute with both copies of the currents, so for either channel
+\(\;[\,Q^{\rm ch}(\eps),\,U^{\sigma}_k(\eps)\,]=0\) <em>exactly</em>, for all \(\eps\neq0\). Expand both
+factors in \(\eps^{2}\):</p>
+\[
+Q^{\rm ch}=Q^{\rm ch}_0+\eps^{2}Q^{\rm ch}_2+\cdots,
+\qquad
+U^{\sigma}_k(\eps)=U^{\sigma}_{k,0}+\eps^{2}U^{\sigma}_{k,2}+\cdots
+\]
+<p>(the currents carry \(\eps\)-corrections because C8 is the \(\eps\to0\) limit of
+<span class="eqref">(3.16)–(3.17)</span>).</p>
+<p><b>Sum channel.</b> Here \(Q^{\rm sum}_0=Q_0\neq0\), so the two lowest orders read</p>
+\[
+O(\eps^{0}):\;\;[Q_0,U^{\sigma}_{k,0}]=0,
+\qquad
+O(\eps^{2}):\;\;[Q_2,U^{\sigma}_{k,0}]+[Q_0,U^{\sigma}_{k,2}]=0 .
+\]
+<p>The second relation is <em>inhomogeneous</em>. It gives \([Q_2,U^{\sigma}_{k,0}]=-[Q_0,U^{\sigma}_{k,2}]\)
+and <b>nothing more</b>: both sides may vanish. An earlier draft concluded from it that \(Q_2\) "is not a
+screening", which does not follow. The defensible statement is conditional:</p>
+\[
+Q_2\ \text{lies in the commutant}\quad\Longleftrightarrow\quad [Q_0,U^{\sigma}_{k,2}]=0 .
+\]
+<p><b>What can be settled now.</b> For \(\sigma=+\) the condition holds and \(Q_2\) <em>does</em> commute:
+\(U^+_k\) and all its \(\ap\)-derivatives are built solely from \(J^+\), which has no pairing with \(\vp\),
+so both terms vanish separately. The question is therefore entirely about \(\sigma=-\), where
+\([Q_0,U^-_{k,0}]=0\) holds only on the locus \(F_0\) and the compensating term is not known to vanish.
+<b>Computing \([Q_0,U^-_{k,2}]\) is a concrete task for Notebook II.</b> Note what this does and does not
+count. At the <em>formal coefficient</em> level the difference channel yields two candidate commutant
+directions, \(Q_0\) and \(Q^{(1)}\); their realisation as two nonzero <em>independent operator
+intertwiners</em> is conditional on Gate 2 of Notebook II — a common finite-\(\eps\) comparison domain, the
+barred contour and orientation map, a logarithmic-residue or coefficient-limit prescription, the cocycle and
+zero-mode data, and existence and non-vanishing of the limit. Saying "at least two independent commutant
+elements" without that conditional is stronger than anything proved here.</p>
+<p><b>Difference channel.</b> Here the \(O(\eps^{0})\) term cancels identically, so
+\(\tfrac12(Q-\bar Q)=\eps^{2}Q^{(1)}+O(\eps^{4})\) and the rescaled charge is
+\(Q^{\rm diff}=Q^{(1)}+O(\eps^{2})\). The leading order of the commutant relation is therefore
+<em>homogeneous</em>:</p>
+\[
+O(\eps^{0}):\;\;[Q^{(1)},U^{\sigma}_{k,0}]=0 .
+\]
+<p><b>Conclusion.</b> The asymmetry between the channels is structural, not accidental: the difference channel
+starts at order \(\eps^{2}\), so rescaling puts its leading commutant equation at homogeneous order, while the
+sum channel starts at order \(\eps^{0}\), so its \(\eps^{2}\) coefficient sits at inhomogeneous order. Hence
+<em>formally</em>, and conditional on (i) existence of the finite-\(\eps\) operator family on a common
+comparison domain, (ii) the barred contour map selecting this difference channel, and (iii) existence and
+non-vanishing of the coefficient limit, the contraction delivers <b>two commutant elements per root</b>
+(\(Q_0\) and \(Q^{(1)}\)), and a possible third, \(Q_2\), whose status is decided by
+\([Q_0,U^-_{k,2}]\). Structurally \(Q_2\propto\partial_{\beta_1}Q_0\) is a
+momentum/background-charge derivative rather than a new direction — if it does commute, it is a tangent to the
+screening family, and the honest statement is then that the commutant contains a parameter-derivative
+direction, not that a third independent screening exists. Either way, the <em>formal multiplicity pattern</em> of §7.4 rests on
+\(Q_0,Q^{(1)}\) alone and is unaffected — pattern, not established commutant multiplicity, which awaits
+Gate 2.</p>
+<p><b>Caveat.</b> This argument is formal at the level of \(\eps\)-expansions of operators; it presupposes that
+the expansions exist on a common domain, which is the content of the deferred operator layer below and of Notebook II.</p>
+</div>
+
+<div class="env warn"><span class="tag">Missing data — contours, orientation, and charges versus densities</span>
+<p>Derivation 7.1 adds <em>densities</em>. Adding <em>charges</em> requires data not yet fixed, and the relative
+sign of the sum/difference channels depends on it:</p>
+<ul>
+<li>the parent charges are \(Q=\oint dz\,V(z)\) and \(\bar Q=\oint d\bar z\,\bar V(\bar z)\), the second
+anti-holomorphic;</li>
+<li>the Carrollian contraction reverses modes in the barred sector, \(\bar J_{i,-n}\) in C7, which on the
+cylinder is the map \(\theta\mapsto-\theta\) at equal time; the induced orientation reversal of the barred
+contour contributes a sign to the difference channel;</li>
+<li>[FH25] warn explicitly that reversing radial time \(\bar z\to1/z\) acts nontrivially on the \(u_k\)
+because they are not quasi-primary; the same caution applies to \(\bar V\).</li>
+</ul>
+<p>Until the cylinder coordinates, contour orientations and the equal-time mode map are fixed, the labels
+"sum" and "difference" are placeholders for combinations to be determined. <b>This does not affect \(F_0\)</b>,
+which is derived per-copy (Route A) and directly from the Carrollian current (Route B), but it does affect the
+identification of which combination is \(\Scr^{(0)}\) and which is \(\Scr^{(1)}\), and hence the sign of
+\(B\). Fixed in Notebook II before any \(A_2\) computation.</p>
+</div>
+
+<h3 id="s7-2"><span class="num">7.2</span>\(F_0\), computed two independent ways</h3>
+
+<p>This is the central computation of the notebook. We obtain the leading screening condition twice: once by
+contracting the relativistic condition, and once by a direct Carrollian OPE. They must agree, and they do.</p>
+
+<div class="env der"><span class="tag">Route A — contraction of the relativistic condition <span class="stat s-der">derived</span></span>
+<p>Insert \(\beta=\eps\beta_1+\eps^3\beta_3\) and \(\alpha=\eps^{-1}\ap+\eps\am\) into
+\(F^{\rm rel}:\;\beta^{2}-2\alpha\beta-4=0\) (D2, single-field convention):</p>
+\[
+\underbrace{-2\ap\beta_1-4}_{O(\eps^0)}
++\eps^{2}\underbrace{\Big(\beta_1^{2}-2\ap\beta_3-2\am\beta_1\Big)}_{O(\eps^2)}+O(\eps^4)=0 .
+\]
+<p>Hence</p>
+\[
+\boxed{\;F_0:\quad \ap\,\beta_1=-2\;}
+\qquad\text{and}\qquad
+F_1:\quad \ap\beta_3=\tfrac12\beta_1^{2}-\am\beta_1 .
+\]
+<p>The barred copy has \(\bar\alpha=\eps^{-1}\ap-\eps\am\), giving at \(O(\eps^0)\) the identical relation
+\(\ap\bar\beta_1=-2\), so \(\bar\beta_1=\beta_1\) automatically — the assumption of Derivation 7.1 is
+<em>discharged</em>, given \(\ap\neq0\) and the choice of the same regular branch in both copies — and at \(O(\eps^2)\), \(\ap\bar\beta_3=\tfrac12\beta_1^2+\am\beta_1\).</p>
+</div>
+
+<div class="env der"><span class="tag">Route B — direct Carrollian OPE <span class="stat s-der">derived</span></span>
+<p>Use C10 and D3. For \(M=2J^+J^++2\ap\partial J^+\): no contraction with \(\vp\) exists, so
+\(M(z)\Scr^{(0)}(w)\) is <b>regular</b> and \([M_n,Q^{(0)}]=0\) for every \(\beta_1\).
+For \(T=4J^+J^-+2\ap\partial J^-+2\am\partial J^+\), using \(J^-(z)\vp(w)\sim\tfrac{1/4}{z-w}\):</p>
+<ul>
+<li>\(4J^+J^-\), single contraction via \(J^-\):
+\(4\beta_1\cdot\tfrac{1}{4(z-w)}\no{J^+\Scr^{(0)}}=\tfrac{1}{z-w}\partial_w\Scr^{(0)}\). ✓ correct descendant term.</li>
+<li>\(2\ap\partial J^-\): \(2\ap\beta_1\,\partial_z\tfrac{1}{4(z-w)}=-\tfrac{\ap\beta_1/2}{(z-w)^2}\).</li>
+<li>\(2\am\partial J^+\): no contraction. Regular.</li>
+<li>Double contraction: impossible — only one \(J^-\) (Lemma 5.1). <b>No \(\beta^2\) term.</b></li>
+</ul>
+\[
+\Rightarrow\quad h^{(T)}_{\beta_1}=-\frac{\ap\beta_1}{2},
+\qquad
+h^{(T)}=1\;\Longleftrightarrow\;\ap\beta_1=-2 .
+\]
+</div>
+
+<div class="env thm"><span class="tag">Proposition 7.3b — \(F_0\) is ordering-independent <span class="stat s-nov">formulated here</span></span>
+<p>The condition \(h^{(T)}=1\) of Route B is unchanged if \(U^-_2\) is taken in normal rather than averaged
+ordering. Hence \(F_0\) is insensitive to the prescription that distinguishes the symmetric Carrollian algebra
+from the Galilean one.</p>
+<p><b>Proof.</b> The proposition rests on (i) alone, which is complete. Item (ii) is recorded as a
+<em>conjectural corroboration only</em>, not as coequal support; its mode-level version belongs to Notebook II.
+<em>(i)</em> The double pole in
+\(T(z)\Scr^{(0)}(w)\) arises exclusively from the term \(2\ap\partial J^-\), which is <em>linear</em> in the
+currents and therefore carries no ordering ambiguity whatsoever; the bilinear \(4J^+J^-\) can contract only
+once with \(\Scr^{(0)}\) (Lemma 5.1) and so contributes only to the simple pole. <em>(ii)</em> More generally,
+the two prescriptions differ on one-\(J^-\) products by a c-number, since \([J^-,J^+]\) is central (C7); a
+c-number differs from zero only in the mode \(L_0\) — this is [FH25]'s own observation that ordering is
+"only relevant for the zero mode", their (4.23) — and a constant added to \(L_0\) commutes with everything,
+so every bracket \([L_n,Q]\) is unaffected. Argument (ii) is stated at the level of mode sums and should be
+written out mode-explicitly before it is relied on; (i) alone suffices for \(U^\pm_2\). \(\blacksquare\)</p>
+<p><b>Scope.</b> This is a statement about \(U^\pm_2\). At \(N=3\) the currents \(U^\pm_3\) admit two
+contractions against \(\Scr^{(1)}\), and no analogue of (i) is available; ordering-independence there must be
+checked, not assumed.</p>
+</div>
+
+<div class="keybox"><div class="inner">
+<span class="tag">Result 7.3 — the leading screening condition <span class="stat s-der">derived; two routes, both inside the adopted plane realisation</span></span>
+\[
+\boxed{\;F_0:\;\;\ap\,\beta_1^{\rm sf}=-2
+\qquad\Longleftrightarrow\qquad
+\ap\,\beta_1^{\rm root}=+1\;}
+\]
+<p>(the second form via W2, \(\beta^{\rm sf}=-2\mu\), consistent with Proposition 3.3 whose root-basis
+condition \(\mu^2+\alpha\mu=1\) contracts to \(\ap\mu_1=1\)). Both forms require \(\ap\neq0\).
+Route A and Route B agree exactly.</p>
+<p><b>What the agreement does and does not establish.</b> Both routes are now computations inside the
+<em>adopted plane realisation</em> (C1 for the parent, C7p for the contracted algebra), so their agreement is
+a genuine internal cross-check: Route A contracts a parent plane relation, Route B evaluates a plane OPE of
+the contracted currents, and they are not the same computation. What the agreement does <em>not</em> do is
+certify that this plane realisation is the image of [FH25]'s cylinder construction — that is the unbridged
+question of §6, and it is why C7p is marked adopted rather than derived. An earlier draft called these "two
+independent exact routes" without that qualification. The
+condition is <b>linear in \(\beta_1\)</b> — there is no \(\beta^2\) term, because exponent self-contractions
+vanish — but it is a <b>reciprocal relation</b> between \(\ap\) and \(\beta_1\), not a statement that the
+quantum shift has disappeared.</p>
+</div></div>
+
+<div class="env novel"><span class="tag">Interpretation 7.4 <span class="stat s-nov">formulated here</span> — the background charge is the divergent branch</span>
+<p>\(F_0\) is the contracted remnant of the relativistic reciprocity \(\beta_+\beta_-=-4\). Concretely: if
+\(\beta_+\) is the regular branch (the full single-field root, <em>not</em> the Toda coupling \(b=\beta_+/2\)),
+with \(\beta_+=\eps\beta_1+O(\eps^3)\to0\), then the dual branch
+\(\beta_-=-4/\beta_+\sim-4/(\eps\beta_1)\) <em>diverges</em>. Since
+\(\alpha=\tfrac12(\beta_++\beta_-)\), the finite Carrollian background charge is</p>
+\[
+\ap=\lim_{\eps\to0}\eps\,\alpha=\lim_{\eps\to0}\frac{\eps}{2}\Big(\eps\beta_1-\frac{4}{\eps\beta_1}\Big)=-\frac{2}{\beta_1},
+\]
+<p>which is exactly \(F_0\). <b>Physical statement:</b> in the Carrollian limit the two Coulomb-gas screenings
+separate completely — one survives as a local screening operator, and the other is entirely converted into the
+background charge. The "\(b+1/b\)" quantum structure is not lost; it is <em>re-encoded</em> as the reciprocal
+relation \(\ap\beta_1=-2\). Anyone expecting the naive statement "the Carrollian background charge is
+unshifted" is misreading the limit; anyone expecting the shift to survive as an additive \(1/b\) is also
+misreading it.</p>
+<p><b>Falsifiable content and its exact scope.</b> If a second <em>local</em> screening per root existed at
+leading order, this interpretation would fail. Within the class of limits considered here — regular local
+limits on the algebraic Fock module of D4 — the divergence of \(\beta_-\) forbids it, since no scalar
+rescaling \(r(\eps)\) can make \(e^{\beta_-\varphi}\) finite when the exponent itself blows up.
+<b>This does not exclude distributional or nonregular limits</b>, in which an exponential of a divergent
+argument may retain meaning; that is precisely the regime of [FPT26], and it is flagged as a possible route to
+a second sector in Paper 3 rather than excluded.</p>
+</div>
+
+<div class="cell" data-lang="py">
+  <div class="cell-head"><span class="lang">python</span><span class="title">Cell 5 — F₀ and F₁ by contraction; agreement with the direct OPE; the divergent-branch identity</span><button onclick="runCell(this)">Run</button></div>
+  <textarea spellcheck="false">import sympy as sp
+e   = sp.Symbol('epsilon', positive=True)
+apS, amS = sp.symbols('alpha^+ alpha^-')
+B1, B3, B3b = sp.symbols('beta_1 beta_3 beta_3bar')
+
+def expand_condition(sexp, aexp, order=4):
+    """F_rel = beta^2 - 2*alpha*beta - 4, expanded in epsilon (beta = single-field momentum)."""
+    F = sp.expand(sexp**2 - 2*aexp*sexp - 4)
+    return sp.series(F, e, 0, order).removeO().expand()
+
+# --- unbarred copy
+beta_un  = e*B1 + e**3*B3
+a_un  = apS/e + e*amS
+F_un  = expand_condition(beta_un, a_un)
+# --- barred copy
+beta_bar = e*B1 + e**3*B3b
+a_bar = apS/e - e*amS
+F_bar = expand_condition(beta_bar, a_bar)
+
+F0     = sp.expand(F_un.coeff(e, 0))
+F1_un  = sp.expand(F_un.coeff(e, 2))
+F1_bar = sp.expand(F_bar.coeff(e, 2))
+print("O(eps^0) [unbarred] :", F0, "= 0   ->  F0")
+print("O(eps^0) [barred]   :", sp.expand(F_bar.coeff(e,0)), "= 0   (identical -> beta_1bar = beta_1)")
+print("O(eps^2) [unbarred] :", F1_un, "= 0")
+print("O(eps^2) [barred]   :", F1_bar, "= 0")
+print()
+
+# solve
+sol_b1  = sp.solve(sp.Eq(F0,0), B1)[0]
+sol_b3  = sp.solve(sp.Eq(F1_un ,0), B3 )[0]
+sol_b3b = sp.solve(sp.Eq(F1_bar,0), B3b)[0]
+print("F0  ->  beta_1  =", sol_b1, "      i.e.  alpha^+ * beta_1 = -2")
+print("F1  ->  beta_3  =", sp.simplify(sol_b3))
+print("F1b ->  b3bar   =", sp.simplify(sol_b3b))
+print()
+
+# --- Route B: direct Carrollian OPE gave h = -(alpha^+ beta_1)/2 ; set h = 1
+routeB = sp.Eq(-apS*B1/2, 1)
+print("Route B condition :", routeB, " -> beta_1 =", sp.solve(routeB, B1)[0])
+print("Routes A and B agree:", sp.simplify(sp.solve(routeB,B1)[0] - sol_b1) == 0)
+print()
+
+# --- Interpretation 7.4 : alpha^+ from the divergent dual branch
+bp = e*B1                      # regular branch
+bm = -4/bp                     # dual branch, from beta_+ beta_- = -4
+ap_from_branches = sp.simplify(sp.limit(e*(bp + bm)/2, e, 0))
+print("alpha^+ from branches :", ap_from_branches,
+      "   == -2/beta_1 ?", sp.simplify(ap_from_branches + 2/B1) == 0)</textarea>
+  <div class="out"></div>
+</div>
+
+<h3 id="s7-3"><span class="num">7.3</span>\(F_1\), and the determination of \(B\)</h3>
+
+<div class="env der"><span class="tag">Derivation 7.5 — the tangent coefficient <span class="stat s-der">derived</span></span>
+<p>Subtracting the two \(O(\eps^2)\) relations of Route A,</p>
+\[
+\ap\big(\beta_3-\bar\beta_3\big)=-2\am\beta_1
+\quad\Longrightarrow\quad
+B=\frac{\beta_3-\bar\beta_3}{2}=-\frac{\am\beta_1}{\ap}
+\;\overset{F_0}{=}\;\frac{\am\beta_1^{2}}{2}.
+\]
+<p>This is a <b>formal jet-coefficient relation</b>: it becomes a statement about an operator coefficient only
+after the operator layer is discharged. Hence, up to overall normalisation and modulo the flag ambiguity of Lemma 6.2,</p>
+\[
+\boxed{\;\Scr^{(1)}\;\propto\;\no{\Big(\vm-\frac{\am}{\ap}\,\vp\Big)e^{\beta_1\vp}}\;}
+\]
+<p>In particular, <b>if \(\am=0\) the tangent screening is purely \(\vm e^{\beta_1\vp}\)</b>, with no \(\vp\)
+prefactor.</p>
+</div>
+
+<div class="env check"><span class="tag">Resolution R1 — the bulk locus is \(\am=0\) <span class="stat s-der">derived</span> (was open item O1)</span>
+<p>An earlier draft left this open. It is not open, and three independent lines of evidence agree.</p>
+<p><b>(i) Central charges.</b> Three-dimensional asymptotically flat Einstein gravity has
+\(c_L=0,\;c_M=3/G\neq0\) for \(\mathfrak{bms}_3\). Comparing with C9,</p>
+\[
+c^{\rm cl}_L=-4(N-1)N(N+1)\ap\am=0,
+\qquad
+c^{\rm cl}_M=-2(N-1)N(N+1)(\ap)^{2}\neq0
+\]
+<p>forces \(\am=0\) with \(\ap\neq0\). This is the whole of it: the flat-space locus is the vanishing of one
+of the two contracted background charges, and \(\ap\neq0\) is exactly the condition \(F_0\) already needs.</p>
+<p><b>(ii) Structure of the bulk charges.</b> At \(\am=0\) Derivation 7.5 gives \(B=-\am\beta_1/\ap=0\), so
+the tangent screening is purely \(\vm e^{\beta_1\vp}\), with no \(\vp\) prefactor — which is precisely the
+form of [DDF26] (5.26c–d), whose prefactors are built only from barred fields. The absence of an unbarred
+prefactor in the bulk is therefore <em>explained</em>, not merely observed.</p>
+<p><b>(iii) Primary source, now verified <span class="stat s-verb">verbatim</span>.</b> [DDF26] states it
+explicitly. Their general Miura formula (6.51) is followed by footnote&nbsp;9, which reads: <em>"In [32], this
+corresponds to \(\alpha^-=0\)."</em> — reference [32] being [FH25]. The body text gives the reason in their
+own terms: their expression coincides with [FH25]'s "in the case where one of the central charges vanishes,
+\(c_1=0\)". That is precisely line (i) above: their \(c_1\) is our \(c_L\). The earlier draft recorded this
+as unconfirmed; it is confirmed, and lines (i)–(ii) are independent confirmations of it rather than
+substitutes.</p>
+<p><b>Consequences, now mandatory downstream.</b> The Carrollian screening problem relevant to flat higher-spin
+holography sits at \(\am=0\); there \(c_L=0\), \(B=0\), \(F_1\) collapses to
+\(\ap\beta_3=\ap\bar\beta_3=\tfrac12\beta_1^{2}\), and the <em>formal density doublet</em> is
+\(\{\,e^{\beta_1\vp},\;\vm e^{\beta_1\vp}\,\}\) — densities, not yet operators: existence, contour
+definition and the coefficient limit remain Notebook II gates. The general-\(\am\) formulas are retained above because
+the algebra exists off the bulk locus and the paper should state the general result, but every comparison with
+[DDF26] must be made at \(\am=0\).</p>
+</div>
+
+<div class="env check"><span class="tag">Dictionary D5 — bulk-side source data and the open normalisation matching problem <span class="stat s-verb">verbatim transcription</span> + <span class="stat s-open">open matching</span></span>
+<p>The same passage that settles \(\am=0\) also fixes most of the dictionary that Theorem 5 needs, and it was
+not used in the previous revision. In [DDF26], the symbol \(\theta\) in (6.49) is the <em>nilpotent
+dual-number generator</em>, not the angular coordinate used elsewhere in this notebook. To prevent a genuine
+notation collision, we rename that source symbol \(\vartheta\) here and impose explicitly</p>
+\[
+\vartheta^2=0,\qquad \vartheta\neq\theta_{\rm cyl}.
+\]
+<p>With this notational renaming only, [DDF26] identify the diagonal entries as</p>
+\[
+D_{jj}=\frac{1}{\sqrt{\pi\kappa\alpha_s}}\Big(i\,\vec\epsilon_j\cdot\vec\psi\,'+i\,\vartheta\,\vec\epsilon_j\cdot\vec{\bar\psi}\,'\Big),
+\qquad
+\vec\epsilon_i\cdot\vec\epsilon_j=\delta_{ij}-\frac1s,\quad\sum_j\vec\epsilon_j=0,
+\]
+<p>and write the invariant operator as \(\big(\alpha\partial+i\vec\epsilon_1\cdot\vec\psi\,'\big)\cdots\)
+with \(\alpha=\sqrt{\pi\kappa\alpha_s}\), \(\alpha_s=12/(s(s^2-1))\), and (flat space)
+\(\kappa=1/(8\pi G)\). Three consequences:</p>
+<ul>
+<li><b>Their weight pairing is our \(\kap\).</b> \(\vec\epsilon_i\cdot\vec\epsilon_j=\delta_{ij}-\tfrac1s\)
+is literally C1's \(\kap_{ij}\). No translation needed.</li>
+<li><b>The background charge is fixed only up to a matching constant.</b> [DDF26] say their operator
+coincides with [FH25]'s <em>"up to normalization factors"</em>. We therefore do <b>not</b> identify the two
+directly. Introduce matching constants and solve for them:</li>
+</ul>
+\[
+\ap_{\rm FH}=c_\alpha\,\alpha_{\rm DDF},
+\qquad
+J^+_j=c_J\big(-i\,\vec\epsilon_j\cdot\vec\psi\,'\big),
+\qquad
+J^-_j=c_-\big(-i\,\vec\epsilon_j\cdot\vec{\bar\psi}\,'\big),
+\]
+<p>with \((c_\alpha,c_J,c_-)\) determined by matching four things: the crossed brackets C7 against [DDF26]
+(5.23)/(6.23); the coefficients of the Miura operator; \(c_M\) against the bulk Newton constant; and the chosen
+real form. <b>Until that system is solved, no numerical value of \(\ap\) is claimed.</b> An earlier draft
+asserted \(\ap=1/(4\sqrt G)\) and \(\mu_1=4\sqrt G\); those are withdrawn.</p>
+<div class="env open" style="margin:1em 0"><span class="tag">Real-form diagnostic — <em>conditional</em>, not an obstruction theorem <span class="stat s-open">conditional inference</span></span>
+<p><b>Status first.</b> An earlier draft presented this as a derived obstruction. It is not: the argument
+presupposes that the two central generators have already been matched with <em>positive real</em> relative
+normalisation, which is exactly what D5 leaves open. In general \(c^{\rm FH}_M=\lambda\,c^{\rm DDF}_2\) with
+\(\lambda\) part of the unsolved matching problem, and the sign and phase of \(\lambda\) are what the
+conclusion turns on. The correct statement is conditional:</p>
+<p style="border-left:3px solid var(--ochre);padding-left:14px"><em>If</em> the [FH25] and [DDF26] central
+generators are identified with positive real relative normalisation (\(\lambda>0\)), <em>then</em> \(\ap\) is
+imaginary in the [FH25] real form and \(c_\alpha\) is imaginary.</p>
+<p>Under that hypothesis, from C9 at the rank relevant to Paper 1 and to the [DDF26] higher-spin comparison,
+\(N=3\), \(c_M=-2(N-1)N(N+1)(\ap)^2=-48(\ap)^2\) (consistent with the spin-three value
+\(\alpha_s=\tfrac12\)); and three-dimensional asymptotically flat gravity has \(c_M>0\) (in [DDF26]'s
+normalisation (4.23), \(c_2=3/G\)), so</p>
+\[
+(\ap)^{2}=-\frac{c^{\rm FH}_M}{48}=-\frac{\lambda\,c^{\rm DDF}_2}{48}<0
+\qquad\Longrightarrow\qquad
+\ap\ \text{is imaginary in the [FH25] convention,}
+\]
+<p>the denominator being the \(N=3\) coefficient of C9, rather than the distinct \(N=2\) coefficient. With [DDF26]'s displayed normalisation
+\(c^{\rm DDF}_2=3/G\) this reads \((\ap)^2=-\lambda/(16G)\). <b>No numerical value is claimed:</b> only under
+the additional choice \(\lambda=1\) would this give \(\ap=\pm i/(4\sqrt G)\), and \(\lambda\) is precisely
+what the open matching problem must supply. What survives without \(\lambda\) is the sign conclusion, for any
+\(\lambda>0\) real.</p>
+<p>whereas \(\alpha_{\rm DDF}=\sqrt{\pi\kappa\alpha_s}\) is manifestly real in the displayed classical
+parametrisation, giving an imaginary \(c_\alpha\) — a real-form rotation rather than a mere rescaling. This
+is a <em>useful diagnostic</em>, consistent with (and suggestive of the same \(i\) as) the \(\varphi=i\phi\)
+bridge of W1 seen from the gravity side, but it is not yet forced. Note also that \(F_0:\ \ap\beta_1=-2\) then makes \(\beta_1\) imaginary too, so that
+\(\beta_1\varphi^+=\beta_1(i\phi^+)\) is real — internally consistent. <b>The precise numerical factor is
+normalisation-dependent</b> (it turns on how \(c_M\) versus \(c_2\) are normalised between the two papers) and
+must come out of the matching system, not from an assumed identification.</p>
+</div>
+<p><b>Root-<em>pattern</em> identification</b> — not a completed root-to-exponent map. What is established
+is which exponent <em>combinations</em> occur and how they are organised by the root system; the exact
+correspondence \(\beta_1\alpha_i\cdot\vp\leftrightarrow-\psi_{(L)}\mp2\psi_{(W)}\) still requires the
+normalisation matrix and real-form constants that Notebook IV is tasked to determine. With
+\(\alpha_i=\vec\epsilon_i-\vec\epsilon_{i+1}\), the exponents of the pure-gauge parameters (5.16) are
+\(-\psi_{(L)}\mp2\psi_{(W)}\) for the two <em>simple</em> roots and \(-2\psi_{(L)}\) for the
+<em>highest</em> root \(\alpha_1+\alpha_2\) — and indeed [DDF26] (5.16a) contains precisely
+\(\epsilon^{-2}_{(W)}=\kappa_1e^{-2\psi_{(L)}}\). This also explains the composite charges: the highest-root
+constants are \(\kappa_1,\kappa_7\), which are exactly the labels of the two composite charges (5.27a–b).
+The Takiff assignment of Derivation 8.1 is thereby corroborated from the bulk side.</p>
+<p><b>Status summary for D5</b>, so that it cannot conflict with O1\(^\prime\) or Observation 7.6:
+<em>established</em> — the pairing \(\vec\epsilon_i\cdot\vec\epsilon_j=\kap_{ij}\), and the root
+<em>pattern</em> (two simple-root exponents plus a highest-root exponent \(-2\psi_{(L)}\), matching the
+constants \(\kappa_{1},\kappa_{7}\) of the composite charges). <em>Open</em> — the normalisation constants
+\((c_\alpha,c_J,c_-)\), the real-form map, the explicit basis matrix reconciling \(8\pi G\) with
+\(6\pi G\), and therefore every numerical value and the exact root-to-exponent correspondence. These are
+O1\(^\prime\) and Theorem 5, assigned to Notebook IV.</p>
+</div>
+
+<div class="env open"><span class="tag">What genuinely remains open here — O1&#8242;</span>
+<p>Not <em>whether</em> \(\am=0\), but the exact dictionary at that locus: the map from
+\((\psi_{(L)},\psi_{(W)})\) to the root basis \(\alpha_i\cdot\vp\); the reconciliation of the two bulk
+normalisations \(8\pi G\) (spin two) and \(6\pi G\) (spin three) in [DDF26] (5.23) with the single
+\(\kap_{ij}\) of C1; the overall constants \(\kappa_n\); and the identification of \(\ap\) with
+\(G,\alpha_s\). This is Theorem 5.</p>
+</div>
+
+<div class="cell" data-lang="py">
+  <div class="cell-head"><span class="lang">python</span><span class="title">Cell 6 — FORMAL associated-graded jet (commuting symbols); coefficients A, B</span><button onclick="runCell(this)">Run</button></div>
+  <textarea spellcheck="false">import sympy as sp
+e = sp.Symbol('epsilon', positive=True)
+pp, pm = sp.symbols('varphi^+ varphi^-')          # COMMUTING symbols: this is a FORMAL
+# associated-graded jet. It cannot see BCH terms, cocycles, zero modes, or averaged ordering.
+B1, B3, B3b = sp.symbols('beta_1 beta_3 beta_3bar')
+apS, amS = sp.symbols('alpha^+ alpha^-')
+
+phi     = pp/e + e*pm
+phibar  = pp/e - e*pm
+beta_un    = e*B1 + e**3*B3
+beta_bar   = e*B1 + e**3*B3b
+
+Eun  = sp.series(sp.exp(beta_un*phi ),  e, 0, 4).removeO().expand()
+Ebar = sp.series(sp.exp(beta_bar*phibar), e, 0, 4).removeO().expand()
+
+S0   = sp.simplify(sp.limit((Eun + Ebar)/2, e, 0))
+diff = sp.simplify(sp.expand((Eun - Ebar)/(2*e**2)))
+S1   = sp.simplify(sp.limit(diff, e, 0))
+summ = sp.simplify(sp.limit(sp.expand((Eun + Ebar)/2 - sp.exp(B1*pp))/e**2, e, 0))
+
+print("S^(0) =", sp.simplify(S0))
+print("S^(1) =", sp.factor(sp.simplify(S1/sp.exp(B1*pp))), " * exp(beta_1 phi^+)")
+print("sum-channel O(eps^2) piece =", sp.factor(sp.simplify(summ/sp.exp(B1*pp))), " * exp(...)")
+print()
+
+# now impose F1 to eliminate beta_3, beta_3bar
+b3_sol  = sp.solve(sp.Eq(B1**2 - 2*apS*B3  - 2*amS*B1, 0), B3 )[0]
+b3b_sol = sp.solve(sp.Eq(B1**2 - 2*apS*B3b + 2*amS*B1, 0), B3b)[0]
+A_coef  = B1
+B_coef  = sp.simplify((b3_sol - b3b_sol)/2)
+print("A =", A_coef, "   (fixed by the contraction)")
+print("B =", sp.simplify(B_coef), "  = -alpha^- beta_1 / alpha^+ ?",
+      sp.simplify(B_coef + amS*B1/apS) == 0)
+print("with F0 (alpha^+ = -2/beta_1):  B =", sp.simplify(B_coef.subs(apS, -2/B1)))
+print("normalised tangent operator:  (phi^-  +  (B/A) phi^+) exp(beta_1 phi^+),  B/A =",
+      sp.simplify(B_coef/A_coef))</textarea>
+  <div class="out"></div>
+</div>
+
+<h3 id="s7-4"><span class="num">7.4</span>Branch counting: 8 → 4</h3>
+
+<div class="env novel"><span class="tag">Observation 7.6 <span class="stat s-nov">formulated here</span> — the multiplicity and organisation match the bulk (evidence)</span>
+<p>Count the relativistic \(A_2\) screenings: \(2\) simple roots \(\times\;2\) Toda branches \(\times\;2\) chiral
+copies \(=8\). The contraction keeps one branch per root (Interpretation 7.4) and folds the two chiral copies
+into the jet doublet, giving</p>
+\[
+2\ \text{roots}\;\times\;1\ \text{regular branch}\;\times\;2\ \text{jet components}\;=\;4 ,
+\]
+<p>which is exactly the number of elementary Carrollian screening charges found in the bulk, [DDF26] (5.26a–d):
+two pure exponentials and two polynomial-times-exponential partners. Their \(\mp2\) pattern in \(e^{-\psi_{(L)}\mp2\psi_{(W)}}\) is <em>plausibly</em> the two simple roots of
+\(A_2\) written in the bulk weight basis, but that identification requires the explicit weight-basis map and
+the reconciliation of the \(8\pi G\) and \(6\pi G\) normalisations of [DDF26] (5.23); it is a target
+(Theorem 5), not an established dictionary.</p>
+<p><b>Status discipline.</b> This predicts the number of <em>jet components</em>; it does not prove the
+existence of two quantum screening <em>operators</em>, which is Gate 2 of Notebook II. It is a multiplicity and
+organisation match, and belongs in the introduction as <em>evidence</em>. It is not a derivation: it does not
+fix the root dictionary, normalisations, relative signs, which branch survives in the bulk frame, or possible
+cocycle sectors. Those are Theorem 5, and <b>Notebook IV</b>.</p>
+</div>
+
+<!-- ============================ 8 ============================ -->
+<h2 id="s8"><span class="num">8</span>The bulk targets</h2>
+
+<h3><span class="num">8.1</span>The classical Carrollian Coulomb gas</h3>
+
+<div class="env conv"><span class="tag">Convention C13 — bulk Poisson structure <span class="stat s-verb">verbatim</span> [DDF26] (5.23)</span>
+\[
+\{\psi'_{(L)}(\phi),\bar\psi_{(L)}(\phi')\}=\{\bar\psi'_{(L)}(\phi),\psi_{(L)}(\phi')\}=8\pi G\,\delta(\phi-\phi'),
+\]
+\[
+\{\psi'_{(W)}(\phi),\bar\psi_{(W)}(\phi')\}=\{\bar\psi'_{(W)}(\phi),\psi_{(W)}(\phi')\}=6\pi G\,\delta(\phi-\phi').
+\]
+</div>
+
+<div class="env conv"><span class="tag">Convention C14 — the four elementary bulk screening charges <span class="stat s-verb">verbatim</span> [DDF26] (5.26a–d)</span>
+\[
+S_{\kappa_8}=\frac{\kappa_8}{8\pi G}\int d\phi\;e^{-\psi_{(L)}-2\psi_{(W)}},
+\qquad
+S_{\kappa_9}=\frac{\kappa_9}{8\pi G}\int d\phi\;e^{-\psi_{(L)}+2\psi_{(W)}},
+\]
+\[
+S_{\kappa_2}=-\frac{\kappa_2}{8\pi G}\int d\phi\;\big(\bar\psi_{(L)}+2\bar\psi_{(W)}\big)e^{-\psi_{(L)}-2\psi_{(W)}},
+\]
+\[
+S_{\kappa_3}=-\frac{\kappa_3}{8\pi G}\int d\phi\;\big(\bar\psi_{(L)}-2\bar\psi_{(W)}\big)e^{-\psi_{(L)}+2\psi_{(W)}} .
+\]
+</div>
+
+<div class="env conv"><span class="tag">Convention C15 — the two composite charges <span class="stat s-rew">rewrite</span> of [DDF26] (5.27a–b)</span>
+<p>Writing \(e_\mp:=e^{-\psi_{(L)}\mp2\psi_{(W)}}\) and \(\bar\chi_\mp:=\bar\psi_{(L)}\pm2\bar\psi_{(W)}\),</p>
+\[
+S_{\kappa_7}=-\frac{\kappa_7}{2\pi G}\int d\phi\Big[e_-\!\!\int_{\phi_0}^{\phi}\!\!d\phi' e_+
+-\,e_+\!\!\int_{\phi_0}^{\phi}\!\!d\phi' e_-\Big],
+\]
+\[
+S_{\kappa_1}=-\frac{\kappa_1}{2\pi G}\int d\phi\Big[e_-\bar\chi_-\!\!\int_{\phi_0}^{\phi}\!\!d\phi' e_+
+-\,e_+\bar\chi_+\!\!\int_{\phi_0}^{\phi}\!\!d\phi' e_-\Big].
+\]
+<p>These are obtained from Poisson brackets of the elementary four, and carry an explicit base point \(\phi_0\).</p>
+</div>
+
+<h3><span class="num">8.2</span>The Takiff grading, and which bracket makes which composite</h3>
+
+<div class="env der"><span class="tag">Structural inference 8.1 — sector-by-sector matching <span class="stat s-open">inference</span> from the field content of C13–C15</span>
+<p><b>Status.</b> What follows is an argument from field content and the crossed Poisson pairing, not an
+evaluated bracket. Promoting it to "derived" requires writing at least one representative Poisson bracket in
+full, with its signs, the primitive of the delta function, the lower limit \(\phi_0\), and the constants
+\(\kappa_n\). That is a Notebook IV task; the corroboration from the bulk root structure in D5 is
+independent supporting evidence, not a substitute.</p>
+<p>C13 pairs \(\psi\) only with \(\bar\psi\); there is no \(\psi\psi\) or \(\bar\psi\bar\psi\) pairing. Three
+consequences follow immediately, and they line up exactly with the quantum structure of §5.3:</p>
+<ul>
+<li><b>Leading × leading vanishes.</b> \(S_{\kappa_8},S_{\kappa_9}\) depend only on \(\psi\), so
+\(\{S_{\kappa_8},S_{\kappa_9}\}=0\). The quantum counterpart requires care and an earlier draft overstated
+it: what follows unconditionally from \(\vp\vp\sim0\) (Remark 5.2(iii)) is that <b>the oscillator parts of
+the leading screenings commute</b> — their OPE is regular, with no anomalous branch power. The
+<em>charge</em>-level statement \([Q^{(0)}_i,Q^{(0)}_j]=0\) additionally requires the zero-mode group-algebra
+cocycle of D4(4) to be trivial, or to be a compatible commuting central extension; D4(4) explicitly leaves
+that open. The correct reading is therefore: <em>the oscillator parts commute; with the trivial cocycle the
+integrated leading charges commute.</em> This matters most for the two \(A_2\) simple-root intertwiners,
+where compatibility of the two cocycle sectors is precisely what must be checked.</li>
+<li><b>Tangent × leading \(\to\) \(S_{\kappa_7}\).</b> The single \(\bar\psi\) of the tangent charge is consumed by
+the bracket, leaving a purely exponential expression; the nested \(\int_{\phi_0}^{\phi}\) arises because C13
+pairs \(\bar\psi\) with \(\psi'\), so recovering \(\{\bar\psi,\psi\}\) requires integrating a delta — which is
+precisely where the base point enters.</li>
+<li><b>Tangent × tangent \(\to\) \(S_{\kappa_1}\).</b> One \(\bar\psi\) is consumed, one survives, giving the
+polynomial-times-exponential nested structure.</li>
+</ul>
+<p>This is the correct Takiff pattern for the pair, and it corrects a natural but wrong guess that both
+composites come from tangent × leading.</p>
+</div>
+
+<h3 id="s8-3"><span class="num">8.3</span>Why the composite layer is deferred</h3>
+
+<div class="env open"><span class="tag">Deferral O2 — with precedent</span>
+<p>Quantising the elementary four is one problem; proving that their commutators close onto quantum versions of
+C15 is a second, harder one, involving logarithmic kernels, ordered contours, periodic Green functions, contact
+terms and base-point dependence. The precedent is decisive: in the structurally <em>simpler</em>
+Heisenberg–Virasoro/\(W(2,2)\) setting, the local screening of Adamović–Radobolja<span class="cite"><a href="#AR16">[AR16]</a></span>
+and the nonlocal bosonic formula for it<span class="cite"><a href="#AR19">[AR19]</a></span> — with explicit
+logarithmic kernels, and a conjectural Kazhdan–Lusztig-dual quantum group — required two separate papers.
+We therefore treat this as Paper 3, not as a gate on Paper 1.</p>
+</div>
+
+<!-- ============================ 9 ============================ -->
+<h2 id="s9"><span class="num">9</span>The problem, precisely stated</h2>
+
+<div class="keybox"><div class="inner">
+<span class="tag">What Notebooks II, III and IV must establish</span>
+<p><b>Notebook II gate</b> (\(A_1\) operator layer) — all seven of: the barred equal-time map and contour
+orientation with no unresolved sign; a common algebraic domain or explicit embeddings \(I_\eps\);
+\(Q^{(0)}\) finite and nonzero with an explicit momentum-sector map; \(Q^{(1)}\) finite and nonzero with a
+stated base point and flag covariance; the \(A_1\) commutators reproducing \(F_0\) exactly; \(F_1\), \(B\),
+multiplicative normalisation and triangular \(C\)-mixing separately identified; and the even jet classified.
+Passing only the first three supports a leading-screening paper, not a doublet paper.</p>
+<p><b>Notebook III gate</b> (\(A_2/W_3\)) — items (a)–(c) below, on an explicitly named module, with all
+singular OPE terms displayed, every nonzero singular part written as a total derivative, no unexplained
+contact term, no hidden ordering change, the exact parameter locus stated, and the two simple-root
+computations cross-checked against one another.</p>
+<p><b>Notebook IV gate</b> (bulk match) — items (d)–(e) below: the matching constants
+\(c_\alpha,c_+,c_-\), the \(8\pi G\) vs \(6\pi G\) reconciliation by an explicit basis matrix, the
+\(G\to0\) scaling with what is held fixed, and the four-charge match.</p>
+<p><b>(a)</b> Lemma 5.1 at \(A_2\) with \(U_3^\pm\), in the primary basis
+\(\mathcal U^+_3=U^+_3-\tfrac{\ap}{2}\partial U^+_2\),
+\(\mathcal U^-_3=U^-_3-\tfrac{\am}{2}\partial U^+_2-\tfrac{\ap}{2}\partial U^-_2\).<br>
+<b>(b)</b> \([Q^{(a)}_i,U^{\sigma}_{k,n}]=0\) for \(k=2,3\), \(a=0,1\), \(\sigma=\pm\), on the module of
+Proposition 6.1, in averaged ordering.<br>
+<b>(c)</b> The full hierarchy \(F_0,F_1\) at \(A_2\), including whether the classical relations of §7.2 receive
+quantum corrections from the averaged-ordering reordering terms.<br>
+<b>(d)</b> The dictionary to C13–C14 at the locus \(\am=0\), completing D5: the root-to-\((L,W)\) map, the
+\(8\pi G\) vs \(6\pi G\) normalisation non-uniformity, and the constants \(\kappa_n\) (item O1&#8242;).<br>
+<b>(e)</b> The \(N=2\) cross-checks against [AR16] and against the Carrollian Liouville couplings of
+[HVZ26].</p>
+</div></div>
+
+<div class="env warn"><span class="tag">Exactly what §7 has and has not established</span>
+<p>An earlier draft called both routes to \(F_0\) "essentially classical". <b>That was wrong</b>, and the
+correction matters because it changes which question is open.</p>
+<p><b>What is established.</b> \(F_0\) is a <em>quantum</em> relation on both routes: Route A contracts a
+condition obtained from the normal-ordered parent stress tensor, and Route B is a radial-ordered OPE with the
+quantum current \(U^-_2\). By Proposition 7.3b it is moreover <em>ordering-independent</em>. Therefore, once
+the vertex convention (W1) is fixed, \(F_0:\ \ap\beta_1=-2\) is exact as a <b>parameter relation</b>,
+subject only to \(\ap\neq0\).</p>
+<p><b>What is not established, and is the actual content of Theorem 4.</b> Three things, none of which is a
+statement about \(F_0\) as an equation:</p>
+<ul>
+<li><b>Existence.</b> That the parent vertex operators possess a limit as averaged-ordered operators on a
+common module — including finite multiplicative normal-ordering renormalisations, cocycles, and the zero-mode
+domain. Until this is done, \(\Scr^{(0)},\Scr^{(1)}\) are formal densities, not operators (operator layer; D4(4)–(5)).</li>
+<li><b>\(F_1\).</b> Unlike \(F_0\), the subleading relation involves the tangent operator, whose ordering is
+<em>not</em> immaterial. \(B=-\am\beta_1/\ap\) is so far a formal jet coefficient, and what is open is whether
+the tangent operator <em>exists</em> as an averaged-ordered limit and with what multiplicative normalisation.
+<b>It cannot receive a triangular scheme shift</b>: by Lemma 6.2 the ordering ambiguity moves
+\(\Scr^{(1)}\to\Scr^{(1)}+\lambda\Scr^{(0)}\) and therefore changes only the \(C\)-direction, never the
+coefficient of \(\vp e^{\beta_1\vp}\). The earlier draft asserted the opposite and contradicted its own
+lemma.</li>
+<li><b>\(N=3\).</b> Whether the \(U^\pm_3\) singular parts are total derivatives, where the one-\(J^-\)
+filtration permits two contractions and averaging is genuinely operative.</li>
+</ul>
+</div>
+
+<div class="cell" data-lang="js">
+  <div class="cell-head"><span class="lang">javascript</span><span class="title">Cell 7 — scratchpad (JS): numerical sanity check of the branch limit</span><button onclick="runCell(this)">Run</button></div>
+  <textarea spellcheck="false">// numerical illustration of Interpretation 7.4:
+// alpha = (beta_+ + beta_-)/2 with beta_+ beta_- = -4 ; alpha^+ = lim eps*alpha
+const b1 = 1.7;                    // choose beta_1
+let out = [];
+for (const eps of [1e-1, 1e-2, 1e-3, 1e-4]) {
+  const bp = eps*b1;               // regular branch
+  const bm = -4/bp;                // dual branch
+  const alpha = (bp + bm)/2;
+  out.push(`eps=${eps.toExponential(0)}  beta_+=${bp.toExponential(3)}  ` +
+           `beta_-=${bm.toExponential(3)}  eps*alpha=${(eps*alpha).toFixed(8)}`);
+}
+out.push(`target -2/beta_1 = ${(-2/b1).toFixed(8)}`);
+return out.join("\n");</textarea>
+  <div class="out"></div>
+</div>
+
+<!-- ============================ 10 ============================ -->
+<h2 id="s10"><span class="num">10</span>Audit ledger</h2>
+
+<p>Every equation used above, its provenance, and how it was checked. Anything not on this list is not
+licensed for use in the paper.</p>
+
+<table>
+<thead><tr><th style="width:22%">Item</th><th style="width:24%">Source / origin</th><th style="width:16%">Status</th><th>Check</th></tr></thead>
+<tbody>
+<tr><td>\([J_{i,m},J_{j,n}]=m\kap_{ij}\delta_{m,-n}\)</td><td>[FH25] (3.14)</td><td><span class="stat s-verb">verbatim</span></td><td>vs (2.10) at \(N=2\) — Check 2.1</td></tr>
+<tr><td>\(\sum_iJ_i=0\)</td><td>[FH25] (3.4)</td><td><span class="stat s-verb">verbatim</span></td><td>—</td></tr>
+<tr><td>Miura operator; \(u_2\); \(c^{\rm cl}\)</td><td>[FH25] (3.1), (3.5), (3.6)</td><td><span class="stat s-verb">verbatim</span></td><td>Cell 1, \(N=2,3,4\)</td></tr>
+<tr><td>\(T=\no{JJ}+\alpha\partial J\), \(c=1-6\alpha^2\)</td><td>[FH25] (2.8)–(2.10)</td><td><span class="stat s-verb">verbatim</span></td><td>Check 2.2</td></tr>
+<tr><td>\(\varphi_i\varphi_j\sim+\kap_{ij}\log\)</td><td>W1, from the <em>adopted</em> plane OPE of C1</td><td><span class="stat s-der">derived</span> from an adopted convention</td><td>descendant term in Der. 3.1; not obtained from the classical cylinder bracket</td></tr>
+<tr><td>\(h_\beta=\tfrac{\beta^2}{4}-\tfrac{\alpha\beta}{2}\)</td><td>Derivation 3.1</td><td><span class="stat s-der">derived</span></td><td>Cell 2</td></tr>
+<tr><td>\(\beta_+\beta_-=-4\); \(c=1-6(b-1/b)^2\)</td><td>Derivation 3.2</td><td><span class="stat s-der">derived</span></td><td>Cell 2 (reproduces standard result)</td></tr>
+<tr><td>\(A_{N-1}\) simple-root conventions \(\alpha_i=e_i-e_{i+1}\)</td><td>C5; [FL88], [BS93] for context</td><td><span class="stat s-imp">imported</span></td><td>root dictionary W2 checked; the screening theorem itself is now Prop. 3.4, not imported</td></tr>
+<tr><td>Contraction C6–C7; Miura C8; \(T,M\), \(c_{L},c_M\) C9; \(N=2\) C10</td><td>[FH25] (3.7)–(3.10), (3.13), (3.15), (1.1)–(1.2), (3.28)–(3.34)</td><td><span class="stat s-verb">verbatim</span></td><td>Cell 4</td></tr>
+<tr><td>\(\eps\)-exactness of the <em>oscillator brackets</em> (no representation claim)</td><td>Observation 4.1</td><td><span class="stat s-der">derived</span></td><td>Cell 3 (δ-support only)</td></tr>
+<tr><td>Symmetry of crossed pairing; \(m/4\) at \(N=2\)</td><td>Check 4.2</td><td><span class="stat s-der">derived</span></td><td>Cell 3</td></tr>
+<tr><td>Averaged ordering; one-\(J^-\) filtration</td><td>[FH25] (2.14), (4.29)–(4.34), §4.4</td><td><span class="stat s-verb">verbatim</span></td><td>—</td></tr>
+<tr><td>Truncation bounds \(0,1,1,2\); BCH termination</td><td>Lemma 5.1</td><td><span class="stat s-nov">formulated here</span></td><td>proof from C7 + C12 only</td></tr>
+<tr><td>Zero-mode half-shift \(\lambda^-\to\lambda^-+\tfrac{\beta_1}{2}\kap\alpha_i\); monodromy \(\beta_1\alpha_i\cdot\lambda^+\in\mathbb Z\)</td><td>Prop. 6.1, layers (i)–(ii)</td><td><span class="stat s-der">derived</span> <em>within</em> the adopted module convention D4(3)</td><td>Cell 4c</td></tr>
+<tr><td>Base-point / ordering / flag-covariance correspondence</td><td>Prop. 6.1, layer (iii)</td><td><span class="stat s-nov">formulated here</span></td><td>triangular structure exhibited; explicit maps not constructed</td></tr>
+<tr><td>Scheme covariance (flag)</td><td>Lemma 6.2</td><td><span class="stat s-nov">formulated here</span></td><td>centrality of \([\vm,\vp]\)</td></tr>
+<tr><td>\(A=\beta_1\) fixed by the contraction (formal jet)</td><td>Derivation 7.1</td><td><span class="stat s-der">derived</span> (formal)</td><td>Cell 6</td></tr>
+<tr><td>Even jet: commutes iff \([Q_0,U^-_{k,2}]=0\); automatic for \(\sigma=+\)</td><td>Proposition 7.2</td><td><span class="stat s-der">derived</span> (formal, conditional)</td><td>open for \(\sigma=-\); Notebook II. Multiplicity claims are conditional on operator existence.</td></tr>
+<tr><td>\(F_0:\ \ap\beta_1^{\rm sf}=-2\)</td><td>Result 7.3, two routes</td><td><span class="stat s-der">derived</span></td><td>Cell 5 (A vs B agree)</td></tr>
+<tr><td>\(F_1\); \(B=-\am\beta_1/\ap\)</td><td>Derivation 7.5</td><td><span class="stat s-der">derived</span> (formal jet only)</td><td>Cell 6; an operator coefficient only after Notebook II</td></tr>
+<tr><td>Background charge = divergent branch</td><td>Interpretation 7.4</td><td><span class="stat s-nov">formulated here</span></td><td>Cell 5, Cell 7</td></tr>
+<tr><td>Branch counting \(8\to4\)</td><td>Observation 7.6</td><td><span class="stat s-nov">formulated here</span></td><td>vs [DDF26] (5.26) multiplicity</td></tr>
+<tr><td>Bulk Poisson structure (5.23) and the four elementary charges (5.26a–d)</td><td>[DDF26]</td><td><span class="stat s-verb">verbatim</span></td><td>transcription only</td></tr>
+<tr><td>The two composite charges, in the abbreviations \(e_\mp,\bar\chi_\mp\)</td><td>C15 from [DDF26] (5.27a–b)</td><td><span class="stat s-rew">rewrite</span></td><td>notation introduced here</td></tr>
+<tr><td>Bulk locus \(\am=0\)</td><td>[DDF26] fn. 9 after (6.51); + C9 with \(c_L=0\)</td><td><span class="stat s-verb">verbatim</span> + <span class="stat s-der">derived</span></td><td>Resolution R1; quoted and cross-derived</td></tr>
+<tr><td>[DDF26] (6.49)–(6.51) as printed: \(\alpha_{\rm DDF}=\sqrt{\pi\kappa\alpha_s}\), \(\vec\epsilon_i\cdot\vec\epsilon_j=\delta_{ij}-\tfrac1s\)</td><td>[DDF26] (6.49)–(6.51)</td><td><span class="stat s-verb">verbatim</span></td><td>transcription only</td></tr>
+<tr><td>Identification of those with \(\ap,\kap_{ij},J^+_j\)</td><td>Dictionary D5</td><td><span class="stat s-open">matching ansatz</span></td><td>source says "up to normalization factors"</td></tr>
+<tr><td>Root <em>pattern</em>: two simple-root exponents + highest root \(e^{-2\psi_{(L)}}\)</td><td>D5, vs [DDF26] (5.16a), (5.27)</td><td><span class="stat s-der">derived</span></td><td>pattern only; the exact root↔exponent map needs the normalisation matrix (Notebook IV)</td></tr>
+<tr><td>Zero-mode half-shift \(\lambda^-\to\lambda^-+\tfrac{\beta_1}{2}\kap\alpha_i\); cylinder \(i\,p\,\theta\); monodromy \(\beta_1\alpha_i\cdot\lambda^+\in\mathbb Z\)</td><td>D4(3)–(4), Prop. 6.1(i)–(ii)</td><td><span class="stat s-der">derived</span></td><td>Cell 4c; corrects a factor-2 error</td></tr>
+<tr><td>Commutant: inclusion only, not equality</td><td>programme box, Theorem 3</td><td><span class="stat s-open">bounded</span></td><td>equality needs a kernel/character theorem</td></tr>
+<tr><td><b>Missing:</b> logarithmic residue for \(Q^{(1)}\)</td><td>D4(5) caveat</td><td><span class="stat s-open">open</span></td><td>\(\Scr^{(1)}\) is not a Laurent field</td></tr>
+<tr><td>Plane–cylinder map: <b>no mode reversal</b>, \(a_n\neq J_{-n}\)</td><td>Erratum E1</td><td><span class="stat s-der">derived</span> (negative statement only)</td><td>Cell 4c falsifies the reversal by bracket sign. <b>The overall sign is NOT fixed here</b>; both \(J_n=\pm a_n\) survive. Bridge = Notebook II.1.</td></tr>
+<tr><td>FH25 (3.3) as printed omits \(m\); (3.14) contains it. We cite (3.14)</td><td>Source note S1</td><td><span class="stat s-verb">verbatim</span></td><td>confirmed by direct inspection of the canonical v3 PDF (digest in the manifest)</td></tr>
+<tr><td>Real-form diagnostic: \(\ap\) imaginary, \(c_\alpha\) imaginary; \(c_M=-48(\ap)^2\) at \(N=3\)</td><td>D5 diagnostic box</td><td><span class="stat s-open">conditional inference</span></td><td>holds only if \(c^{\rm FH}_M=\lambda c^{\rm DDF}_2\) with \(\lambda&gt;0\) real; \(\lambda\) is open</td></tr>
+<tr><td><b>Open:</b> matching constants \(c_\alpha,c_J,c_-\); all numerical values of \(\ap\)</td><td>D5, O1&#8242;</td><td><span class="stat s-open">open</span></td><td>Theorem 5; no numbers claimed</td></tr>
+<tr><td>Composite-sector assignment (tangent×leading, tangent×tangent)</td><td>Structural inference 8.1</td><td><span class="stat s-open">inference</span></td><td>needs one explicit Poisson bracket</td></tr>
+<tr><td>Field redefinition \(\varphi=i\phi\), \(J=i\partial\phi\)</td><td>W1, from [FH25] fn. 3 + (3.11)–(3.12)</td><td><span class="stat s-rew">rewrite</span></td><td>reality conditions stated; momenta transported</td></tr>
+<tr><td>Plane quantum OPE \(J_iJ_j\sim\kap_{ij}(z-w)^{-2}\)</td><td>C1</td><td><span class="stat s-imp">adopted</span></td><td>[FH25]'s quantum normalisation; <em>not</em> a rewrite of the classical cylinder bracket</td></tr>
+<tr><td>Contracted algebra in plane form; plane \(T,M\)</td><td>C7p</td><td><span class="stat s-imp">adopted</span></td><td>plane counterpart of C7; legitimacy rests on Observation 4.1's \(\eps\)-exactness</td></tr>
+<tr><td>General-root weight \(h=\mu^2+\alpha\mu\)</td><td>Proposition 3.3</td><td><span class="stat s-der">derived</span></td><td>Cell 2b, all simple roots, \(N\le5\)</td></tr>
+<tr><td>Total-derivative witnesses at \(N=3\), both simple roots</td><td>witness box, §3.3</td><td><span class="stat s-der">derived</span></td><td>Cell 2d; residuals vanish identically on the locus</td></tr>
+<tr><td>\([Q^{(0)}_i,Q^{(0)}_j]=0\) at charge level</td><td>Structural inference 8.1</td><td><span class="stat s-open">conditional</span></td><td>oscillator parts commute unconditionally; charge level needs the trivial/compatible cocycle (D4(4))</td></tr>
+<tr><td>Same \(\mu\) screens all \(u_k\): \(\Res[u_kV]=(\mu^2+\alpha\mu-1)\mathcal R_{k,i}\)</td><td>Proposition 3.4 (+ C3q ordering)</td><td><span class="stat s-der">derived</span></td><td>Cell 2c, trace-aware \(\mathcal D\), genuine divisibility test, \(N=2,3,4\), all simple roots</td></tr>
+<tr><td>Reserved notation: \(b\) Toda coupling vs \(\beta\) momentum</td><td>§3.2</td><td><span class="stat s-rew">rewrite</span></td><td>\(\beta_+=2b\); \(b^2-\alpha b-1=0\)</td></tr>
+<tr><td>\(F_0\) ordering-independent</td><td>Proposition 7.3b</td><td><span class="stat s-nov">formulated here</span></td><td>two proofs; scope limited to \(U^\pm_2\)</td></tr>
+<tr><td>Traceless index space; coset index set</td><td>D4(1),(5)</td><td><span class="stat s-der">derived</span></td><td>Cell 4b (projector)</td></tr>
+<tr><td>Crossed zero-mode algebra \([p^-_i,q^+_j]=\tfrac12\kap_{ij}\)</td><td>D4(3)</td><td><span class="stat s-imp">adopted</span> module data</td><td>compatible with C7p; <em>not</em> determined by C7, whose \(m=0\) brackets vanish</td></tr>
+<tr><td>Cocycle \(\varepsilon\) and the logarithmic residue for \(Q^{(1)}\)</td><td>D4(4), D4(5) caveat</td><td><span class="stat s-open">open</span></td><td>module data are <em>not</em> complete; Notebook II</td></tr>
+<tr><td>Bulk locus \(\am=0\); \(B=0\); \(c_L=0\)</td><td>Resolution R1</td><td><span class="stat s-der">derived</span></td><td>from C9 + flat-space \(c_L=0\); [DDF26] (5.26c–d)</td></tr>
+<tr><td><b>Hypothesis:</b> \(\ap\neq0\)</td><td>required by \(F_0\)</td><td><span class="stat s-open">hypothesis</span></td><td>stated wherever \(F_0\) is used</td></tr>
+<tr><td><b>Hypothesis:</b> both parent momenta lie in the regular \(O(\eps)\) branch/scaling class</td><td>§7.1 scaling ansatz</td><td><span class="stat s-open">hypothesis</span></td><td>this is where the assumption sits</td></tr>
+<tr><td>\(\bar\beta_1=\beta_1\) <em>inside</em> that class</td><td>§7.2, Route A at \(O(\eps^0)\)</td><td><span class="stat s-der">derived</span></td><td>forced given \(\ap\neq0\); not a separate assumption</td></tr>
+<tr><td><b>Missing data:</b> contour orientation, cylinder-mode map for \(\bar Q\)</td><td>&ldquo;Missing data&rdquo; box, §7.1</td><td><span class="stat s-open">open</span></td><td>fixes the sign of \(B\); Notebook II</td></tr>
+<tr><td><b>Missing data:</b> zero-mode cocycle \(\varepsilon\)</td><td>D4(4)</td><td><span class="stat s-open">open</span></td><td>not determined by the oscillator sector</td></tr>
+<tr><td>Existence of the limiting operators (vs. formal densities)</td><td>Derivation 7.1 status note; §9</td><td><span class="stat s-open">open</span></td><td>Notebook II — Theorem 4</td></tr>
+<tr><td>Quantum corrections to \(F_1\) from averaging</td><td>§9</td><td><span class="stat s-open">open</span></td><td>Notebook II — Theorem 4</td></tr>
+<tr><td>Averaging corrections at \(N=3\) (nonlinear \(U^\pm_3\))</td><td>§9</td><td><span class="stat s-open">open</span></td><td>Notebook III — Theorem 3</td></tr>
+</tbody>
+</table>
+
+<!-- ============================ 11 ============================ -->
+<div class="env conv"><span class="tag">Reproducibility and offline verification <span class="stat s-rew">rewrite</span></span>
+<p>This interactive page fetches fonts, MathJax, Pyodide and SymPy from CDNs and therefore is not, by itself,
+an archival rendering. The package now also ships <code class="inl">Notebook_I_Setup_Static.pdf</code>, a
+static rendering that requires no network or browser runtime. <b>What is mechanically certified is the
+source-and-verifier package and the byte identity of that static companion, not visual equivalence between the
+interactive and static renderings.</b> The <em>versioned, checkable</em> objects are the HTML source, static PDF,
+offline verifier, mechanical freeze check, shared divisibility predicate, mutation regression, pinned
+environment and manifest. ("Frozen" is reserved for \(G_{0,\rm sci}\); see the gate statement below.) Seven
+companion components travel with the notebook:</p>
+<ul>
+<li><code class="inl">Notebook_I_Setup_Static.pdf</code> — a self-contained static rendering for archival
+reading. It contains no executable notebook runtime; the HTML source and offline Python verifier remain the
+computational artifacts of record.</li>
+<li><code class="inl">verify_notebook_I.py</code> — a standalone verifier, no browser and no network, exiting
+nonzero on any failure. <b>Its scope is exactly:</b> the embedded SymPy identity checks (classical Miura
+polynomials, root-weight algebra, oscillator brackets on the \(\delta\)-support, the \(N=2\) contraction,
+\(F_0/F_1\), the zero-mode half-shift, the projector identities) and the formal commuting-symbol jet checks.
+<b>It does verify</b>, within its adopted symbolic model, the \(N=3\) total-derivative witnesses (§10b) and
+the cylinder monodromy formula (§8). <b>It does not verify</b> source transcription, independent validation of
+the Wick/OPE implementation, averaged ordering, the filtration proof, cocycles, contour construction, operator
+domains, the even-jet commutant question, or the bulk dictionary. Those are prose or open.</li>
+<li>A pinned environment for the authoritative check: Python \(\ge\) 3.10 with <b>SymPy 1.14.0</b>, enforced
+— the verifier now <em>exits nonzero</em> on a version mismatch (override with
+<code class="inl">--allow-any-sympy</code> for exploratory use only). <b>The in-page runtime is not pinned:</b>
+the browser loads whatever SymPy is bundled with Pyodide 0.26.4, which need not be 1.14.0. The embedded
+cells are therefore <em>illustrative and convenient</em>; the offline verifier is the artefact of record, and
+any discrepancy between them is resolved in favour of the verifier.</li>
+<li><code class="inl">SOURCE_MANIFEST.sha256</code> — SHA-256 fingerprints. <b>Actively hash-checked
+lines:</b> all eight distributed artifacts — this HTML, the static PDF, <code class="inl">verify_notebook_I.py</code>,
+<code class="inl">freeze_check.py</code>, <code class="inl">divisibility.py</code>,
+<code class="inl">test_freeze_gate_mutations.py</code>, <code class="inl">requirements.txt</code> and
+<code class="inl">ROADMAP.md</code>. <b>Not package-checked:</b> the three primary-source PDFs. They are ordinary
+arXiv-generated PDFs with text layers; their SHA-256 digests have been independently recomputed by two
+separate parties and agree exactly with the values recorded in the manifest. They remain provenance
+<em>comments</em> rather than active entries for one reason only: <b>third-party source files are not
+redistributed as part of this package</b>. If a freeze bundle does include them, promote the three comment
+lines to active hash lines.</li>
+</ul>
+<ul>
+<li><code class="inl">divisibility.py</code> — the single divisibility predicate used by the <b>offline gate
+components</b> (the browser cell reimplements the test for convenience), with positive, negative and
+contract controls.</li>
+<li><code class="inl">test_freeze_gate_mutations.py</code> — a negative control for the gate itself. It breaks
+the shared predicate three ways: an always-true return, replacement of the cancelled quotient by the
+unevaluated quotient \(R/F\), and removal of the polynomiality rejection. It then stages the <b>whole
+package</b> and applies nine single-component bypasses: five in the verifier (including valid early-green and
+disabled-accumulator cases), two in the freeze checker, and two in the mutation runner. The manifest is
+regenerated after each mutation, so the test measures behavioural detection rather than a hash mismatch.
+Return code, a distinct completion sentinel and the reported PASS count must all agree. Every subprocess is
+bounded, and independent package mutations are evaluated concurrently in isolated temporary directories.</li>
+<li><code class="inl">freeze_check.py</code> — a <em>behavioural</em> freeze gate. Its predecessor searched for
+reassuring strings and was defeated by a mutation that kept the strings while disabling the tests; it now runs
+the controls, self-tests its own result accumulator, executes the verifier in ordinary and negative-control
+modes, validates their sentinels and check counts, validates the mutation runner's distinct sentinel and exact
+case count, and performs document-control scans (which are legitimately textual). A caller-side recursion guard
+prevents staged child gates from launching the mutation suite again.</li>
+</ul>
+<p><b>The gate.</b> In a clean extracted directory, all four of</p>
+<pre style="background:var(--code-bg);padding:10px 14px;border-radius:3px;font-size:13px;overflow:auto">sha256sum -c SOURCE_MANIFEST.sha256
+python3 verify_notebook_I.py
+python3 test_freeze_gate_mutations.py
+python3 freeze_check.py</pre>
+<p>must return zero. This is <b>\(G_{0,\rm mech}\)</b>, the mechanical gate. It is <em>not</em> the
+scientific freeze:</p>
+\[
+\begin{aligned}
+G_{0,\rm mech}&=\text{manifest}+\text{verifier}+\text{mutation regression}+\text{freeze checker},\\
+G_{0,\rm sci}&=G_{0,\rm mech}+\text{human scientific sign-off}.
+\end{aligned}
+\]
+<p>The direct mutation-regression command and the freeze checker are deliberately cross-witnessed: the former
+mutates the latter, while the latter rejects a silent or sentinel-forging mutation runner. <b>Only
+\(G_{0,\rm sci}\) authorises the word "frozen".</b> The four commands returning zero establish
+\(G_{0,\rm mech}\) and nothing more. <b>What the gate certifies is bounded:</b>
+document control, regression against previously-found defects, the behavioural divisibility controls, and the
+successful execution of the verifier and mutation regression. The verifier certifies <em>only the symbolic
+identities it lists</em> — not source transcription, operator existence, averaged ordering, cocycles, contour
+signs, or the bulk normalisation map. <b>A green gate is not a scientific freeze certificate for anything the
+ledger marks open.</b> <b>Cell numbering.</b> In-page cells run 0, 1, 2, 2b, 2c, 2d, 3, 4, 4b, 4c,
+5, 6 in document order — twelve Python cells — plus one JavaScript scratchpad; the lettered cells were inserted in revision and the
+numbering is kept stable rather than renumbered, so that references in the audits remain valid.</p>
+</div>
+
+<h2 id="s11"><span class="num">11</span>References</h2>
+
+<div class="bib">
+<div><span class="key" id="FH25">[FH25]</span> S. Fredenhagen and L. Hörl, <em>Free-field construction of Carrollian \(W_N\)-algebras</em>, arXiv:2509.14441v3 [hep-th]; JHEP <b>02</b> (2026) 218. <em>Primary source for the current and Miura
+conventions of §§2, 4, 5. Author and journal data confirmed via [DDF26] ref. [32].</em></div>
+<div><span class="key" id="DDF26">[DDF26]</span> E. D'Arcy, A. Delfante and S. Fredenhagen, <em>Holographic realization of higher-spin Carrollian free fields</em>, arXiv:2604.27068v1 [hep-th]. <em>Primary source for §8 and D5; eqs. (5.16a), (5.23), (5.26a–d), (5.27a–b),
+(6.23), (6.27), (6.49)–(6.51) and footnote 9. Authors verified: Ethan D'Arcy, Arnaud Delfante, Stefan Fredenhagen.</em></div>
+<div><span class="key" id="FPT26">[FPT26]</span> S. Fredenhagen, S. Prohazka and R. Tiefenbacher, <em>Carrollian quantum states and flat space holography</em>, arXiv:2604.22745v2 [hep-th]. <em>Nonregular states; relevant to Prop. 6.1 layer (ii) and to Paper 3.</em></div>
+<div><span class="key" id="FL88">[FL88]</span> V. A. Fateev and S. L. Lukyanov, <em>The models of two-dimensional conformal quantum field theory with \(Z_n\) symmetry</em>, Int. J. Mod. Phys. A <b>3</b> (1988) 507. <em>Parent screening currents; the statement imported in C5.</em></div>
+<div><span class="key" id="DF84">[DF84]</span> Vl. S. Dotsenko and V. A. Fateev, <em>Conformal algebra and multipoint correlation functions in 2D statistical models</em>, Nucl. Phys. B <b>240</b> (1984) 312. <em>Coulomb-gas background charge and screening.</em></div>
+<div><span class="key" id="BS93">[BS93]</span> P. Bouwknegt and K. Schoutens, <em>\(W\)-symmetry in conformal field theory</em>, Phys. Rept. <b>223</b> (1993) 183, arXiv:hep-th/9210010. <em>Standard reference for Miura, screenings, Fock resolutions.</em></div>
+<div><span class="key" id="Fel89">[Fel89]</span> G. Felder, <em>BRST approach to minimal models</em>, Nucl. Phys. B <b>317</b> (1989) 215. <em>Contour/BRST structure that Remark 5.2(iii) shows is not needed for the leading sector.</em></div>
+<div><span class="key" id="TK86">[TK86]</span> A. Tsuchiya and Y. Kanie, <em>Fock space representations of the Virasoro algebra — intertwining operators</em>, Publ. RIMS <b>22</b> (1986) 259. <em>Screenings as intertwiners; Prop. 6.1 layer (i).</em></div>
+<div><span class="key" id="AR16">[AR16]</span> D. Adamović and G. Radobolja, <em>On free field realizations of \(W(2,2)\)-modules</em>, SIGMA <b>12</b> (2016) 113, arXiv:1605.08608 [math.QA]. <em>\(N=2\) benchmark: the <em>local</em> screening operator whose kernel is the \(W(2,2)\) vertex algebra. The \(\Pi(0)\) module template is [AR19], not this paper.</em></div>
+<div><span class="key" id="AR19">[AR19]</span> D. Adamović and G. Radobolja, <em>Self-dual and logarithmic representations of the twisted Heisenberg–Virasoro algebra at level zero</em>, Commun. Contemp. Math. <b>21</b> (2019) 1850008, arXiv:1703.00531 [math.QA]. <em>Nonlocal bosonic screening formula with logarithmic kernels (their eq. (7.26)); <b>source of the lattice-extended module \(\Pi(0)=M(1)\otimes\mathbb{C}[\mathbb{Z}c]\) used as the architectural template in D4</b>; precedent for the deferral O2; \(BMS_3\) contact at \(c_L=26\).</em></div>
+<div><span class="key" id="AR15">[AR15]</span> D. Adamović and G. Radobolja, <em>Free field realization of the twisted Heisenberg–Virasoro algebra at level zero and its applications</em>, J. Pure Appl. Algebra <b>219</b> (2015) 4322, arXiv:1405.1707 [math.QA].</div>
+<div><span class="key" id="HVZ26">[HVZ26]</span> D. Hidalgo, S. Vandoren and H. Zeng, <em>\(BMS_3\) invariant field theories</em>, arXiv:2607.06826 [hep-th]. <em>Electric/magnetic/canonical \(BMS_3\) scalars and Carrollian limits of Liouville theory; action-level \(N=2\) anchor.</em></div>
+<div><span class="key" id="Rad21">[Rad21]</span> G. Radobolja, <em>Galilean \(W_3\) algebra</em>, J. Math. Phys. <b>62</b> (2021) 081701. <em>Galilean (flipped) counterpart — the algebra our novelty claim must be distinguished from.</em></div>
+</div>
+
+<div class="env open"><span class="tag">Reference hygiene — status by item</span>
+<p><b>Equation-level verified against the primary PDF.</b> [FH25]: (1.1)–(1.4), (2.8)–(2.14), (3.1)–(3.18),
+(3.23), (3.26)–(3.34), (3.36)–(3.41), (4.1), (4.20)–(4.34), §4.4. [DDF26]: (5.23), (5.26a–d), (5.27a–b),
+(6.19)–(6.27), (6.33)–(6.37).</p>
+<p><b>Corrected and verified in this revision.</b> The initials of [FH25] and [FPT26] were previously wrong
+("M. Hörl", "M. Tiefenbacher"). <b>"L. Hörl" is now verified</b>: [DDF26] cites the paper as its reference [32],
+"S. Fredenhagen and L. Hörl, <em>Free-field construction of Carrollian \(W_N\)-algebras</em>, JHEP 02 (2026) 218
+[2509.14441]", which also confirms the journal data. [DDF26]'s own authors are likewise confirmed as
+Ethan D'Arcy, Arnaud Delfante and Stefan Fredenhagen. "R. Tiefenbacher" is confirmed by independent review against the title page of arXiv:2604.22745v2.</p>
+<p><b>No longer load-bearing.</b> [FL88] was previously the sole external dynamical input of Paper 1. That
+dependence is <b>eliminated</b> by Proposition 3.4, which derives the parent screening identity directly in the
+conventions C1/C3 for \(N\le4\), covering the \(N=3\) case of Paper 1. [FL88] and [BS93] are now cited for the
+origin of the general-\(N\) result and for context only, and their bibliographic details need routine
+verification rather than an equation-level pin. [DF84], [BS93], [Fel89], [TK86], [AR15], [Rad21] are contextual and
+require routine bibliographic verification.</p>
+<p><b>Now verified.</b> [DDF26] footnote 9, attached to eq. (6.51): "In [32], this corresponds to
+\(\alpha^-=0\)." Together with (6.49)–(6.51) this supplies the bulk-side fields, Miura factors and screening data
+<em>from which D5 is to be solved</em> — not the completed dictionary, whose constants
+\(c_\alpha,c_+,c_-\) and \(8\pi G\)/\(6\pi G\) basis reconciliation remain open (Notebook IV). Verified
+against arXiv:2604.27068v1 on 1 August 2026, and independently confirmed by direct inspection of the
+canonical PDF whose SHA-256 is recorded in the manifest.</p>
+<p><b>Source manifest.</b> Record the SHA-256 and version dates of the exact [FH25] and [DDF26] PDFs used, so
+that equation numbers can be re-checked against the same versions. [FH25] is cited at v3.</p>
+</div>
+
+<div class="footer">
+Notebook I of the Carrollian screening programme (Volume I of IV). Volume II: the operator layer and the
+\(A_1\) commutation theorem in averaged ordering on the module of D4. Volume III: the \(A_2/W_3\) commutation
+theorem with \(U_3^\pm\) in the primary basis. Volume IV: holographic matching at \(\am=0\) and the \(N=2\)
+cross-checks. The authoritative programme map, gates and risk register are in
+<code>ROADMAP.md</code>, which travels with this package under the manifest.
+All scientific content, choices of direction, and responsibility for correctness rest with the author;
+this notebook is a computational and organisational instrument.
+</div>
+
+</main>
+</div>
+
+<noscript><div style="background:#f9eee9;border:1px solid #8d3b1e;padding:10px 14px;margin:16px 6vw;">
+<b>JavaScript is disabled.</b> Mathematics will not render and the executable cells will not run. The
+mathematical content is present in the page source; a standalone offline verifier
+(<code>verify_notebook_I.py</code>) reproduces the embedded symbolic identities without a browser; see the
+reproducibility section for its exact scope.</div></noscript>
+<div id="pystatus">Python: not loaded</div>
+
+<script>
+/* ---------------- TOC scroll-spy ---------------- */
+(function(){
+  const links = Array.from(document.querySelectorAll('#toc a'));
+  const targets = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  function spy(){
+    let best = null, bestTop = -1e9;
+    for (const t of targets){
+      const top = t.getBoundingClientRect().top - 90;
+      if (top <= 0 && top > bestTop){ bestTop = top; best = t; }
+    }
+    links.forEach(a => a.classList.remove('active'));
+    if (best){
+      const a = links.find(x => x.getAttribute('href') === '#' + best.id);
+      if (a){ a.classList.add('active'); }
+    }
+  }
+  window.addEventListener('scroll', spy, {passive:true});
+  window.addEventListener('load', spy);
+})();
+
+/* ---------------- Pyodide ---------------- */
+let pyodideReady = null;
+const statusEl = document.getElementById('pystatus');
+function setStatus(t){ statusEl.textContent = 'Python: ' + t; }
+
+async function ensurePyodide(){
+  if (pyodideReady) return pyodideReady;
+  setStatus('loading runtime…');
+  pyodideReady = (async () => {
+    if (!window.loadPyodide){
+      await new Promise((res, rej) => {
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js';
+        s.onload = res; s.onerror = () => rej(new Error('Could not load Pyodide from CDN.'));
+        document.head.appendChild(s);
+      });
+    }
+    const py = await loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/' });
+    setStatus('loading sympy…');
+    await py.loadPackage('sympy');
+    setStatus('ready');
+    return py;
+  })();
+  return pyodideReady;
+}
+
+async function runCell(btn){
+  const cell = btn.closest('.cell');
+  const lang = cell.getAttribute('data-lang');
+  const src  = cell.querySelector('textarea').value;
+  const out  = cell.querySelector('.out');
+  btn.disabled = true; const label = btn.textContent; btn.textContent = 'running';
+  out.textContent = '';
+  try{
+    if (lang === 'js'){
+      const fn = new Function(src);
+      const r  = fn();
+      out.innerHTML = '<span class="ok">' + escapeHtml(String(r === undefined ? '(no return value)' : r)) + '</span>';
+    } else {
+      const py = await ensurePyodide();
+      py.runPython(
+        'import sys, io\n' +
+        '_buf = io.StringIO()\n' +
+        '_old = sys.stdout\n' +
+        'sys.stdout = _buf\n'
+      );
+      let val;
+      try { val = await py.runPythonAsync(src); }
+      finally {
+        py.runPython('sys.stdout = _old');
+      }
+      let text = py.runPython('_buf.getvalue()');
+      if (val !== undefined && val !== null) text += String(val) + '\n';
+      out.innerHTML = '<span class="ok">' + (text ? escapeHtml(text) : '(no output)') + '</span>';
+    }
+  } catch(err){
+    out.innerHTML = '<span class="err">' + escapeHtml(String(err)) + '</span>';
+  } finally {
+    btn.disabled = false; btn.textContent = label;
+  }
+}
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+
+</body>
+</html>
