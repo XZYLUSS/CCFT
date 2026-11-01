@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Notebook III Gate 3B - Corrected Direct Tangent OPE Closure</title>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+<style>
+:root{--ink:#17212b;--muted:#5b6671;--line:#cfd8df;--blue:#174e76;--pale:#eef5f9;--green:#175f47;--amber:#86520b;--red:#8b2635}
+*{box-sizing:border-box}body{margin:0;background:#f4f6f7;color:var(--ink);font:16px/1.55 Georgia,"Times New Roman",serif}main{max-width:1040px;margin:0 auto;background:#fff;padding:46px 62px 70px;box-shadow:0 0 20px #0001}
+h1,h2,h3{font-family:Inter,Arial,sans-serif;color:#113d5b;line-height:1.18}h1{font-size:2.12rem;margin:.15em 0 .35em}h2{margin-top:2.05em;border-bottom:2px solid #d8e4eb;padding-bottom:.25em}h3{margin-top:1.45em}
+.kicker,.deck,.status,.tag,.footer,table{font-family:Inter,Arial,sans-serif}.kicker{letter-spacing:.12em;text-transform:uppercase;color:var(--blue);font-weight:700}.deck{font-size:1.08rem;color:var(--muted)}.status{display:flex;flex-wrap:wrap;gap:.45em;margin:1.2em 0}.pill{padding:.35em .6em;border-radius:5px;font-weight:700;font-size:.82rem}.pass{background:#dff3ea;color:var(--green)}.warn{background:#fff0cf;color:var(--amber)}.stop{background:#f8dfe4;color:var(--red)}
+.box{border:1px solid var(--line);border-left:5px solid var(--blue);padding:1em 1.15em;margin:1.15em 0;background:#fbfdfe}.theorem{border-left-color:var(--green)}.warning{border-left-color:var(--amber);background:#fffaf0}.boundary{border-left-color:var(--red);background:#fff8f9}.tag{display:block;font-weight:800;color:#244c67;margin-bottom:.4em}
+table{border-collapse:collapse;width:100%;font-size:.92rem;margin:1em 0}th,td{border:1px solid var(--line);padding:.55em .65em;vertical-align:top}th{background:var(--pale);text-align:left}code,pre{font-family:"SFMono-Regular",Consolas,monospace}.cell{border:1px solid #b9c9d5;margin:1.2em 0;background:#f8fbfd}.cell-head{padding:.55em .75em;background:#e8f1f6;font:700 .9rem Inter,Arial,sans-serif}.cell pre{white-space:pre-wrap;margin:0;padding:1em;font-size:.82rem}.small{font-size:.9rem;color:var(--muted)}.footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+@media(max-width:760px){main{padding:28px 20px}h1{font-size:1.7rem}}@media print{body{background:#fff}main{box-shadow:none;max-width:none;padding:0}.cell{break-inside:avoid}h2,h3{break-after:avoid}.status{break-inside:avoid}}
+</style>
+</head>
+<body><main>
+<div class="kicker">Carrollian Screening Programme - Notebook III</div>
+<h1>Gate 3B: Corrected Averaged-Ordered Tangent OPE and Nonlinear Connection Matching</h1>
+<p class="deck">A finite-parent derivation of the \(A_2/W_3\) tangent OPE in which the two ordering orientations, the affine logarithm, the based residue, the barred BCH scalar, and the canonical target frame are kept distinct.</p>
+<div class="status"><span class="pill pass">GATE 3B PASS - CORRECTED</span><span class="pill pass">GATE 3 CLOSES WITH OUTCOME B</span><span class="pill warn">DERIVED ORDERING CONTACT</span><span class="pill stop">NO ORDINARY SECOND SCREENING</span></div>
+<div class="box theorem"><span class="tag">Corrected final result</span>
+<p>For \(i=1,2\) and \(\sigma=\pm\), the coefficient extracted from the two exact finite-parent orientations satisfies</p>
+\[
+\boxed{[Q_i^{[1]},\mathcal U_{3,n}^{\sigma,[0]}]_{\rm PBW}
++\frac12\Delta\mathcal U_{{\rm T},3,n}^{\sigma,[1]}Q_i^{[0]}=0.}
+\]
+<p>The ordinary commutative Wick diagnostic misses a fixed averaged-order contact. Restoring that derived contact accounts for the previously omitted \(w^{-2}\) terms and makes both strict odd OPEs exact total derivatives. There is no ad hoc contact counterterm. \(Q_i^{[1]}\) remains a deformation/connection intertwiner, not an ordinary second screening.</p></div>
+<p class="small"><b>Semantic release ID:</b> <code>G3B-aaef4dfef7d3880e</code>. Corrected freeze release: 4 August 2026 (Europe/Berlin, UTC+02:00). Frozen parents: Gate 3A SHA-256 <code>45e9bfdf2906527ea2175513dff447e9052d06a14c94dd979904d07323962c82</code>; Notebook II Gate 2 SHA-256 <code>522f0a57b5e128bd9fda861d036d30b1ee36f98f98d34cfd4cf5d98862a16481</code>.</p>
+
+<h2>1. Frozen conventions and the corrected total derivative</h2>
+<p>Write \(P_a=J_a^+\), \(N_a=J_a^-\), \(P_3=-P_1-P_2\), \(N_3=-N_1-N_2\), with</p>
+\[
+N_a(z)P_b(w)\sim\frac{\kappa_{ab}/2}{(z-w)^2},\qquad
+[p_a^-,q_b^+]=[p_a^+,q_b^-]=\frac12\kappa_{ab}.
+\]
+<p>For \(\alpha_1=(1,-1,0)\), \(\alpha_2=(0,1,-1)\), set</p>
+\[
+\begin{aligned}
+E_i(w)&=:\!e^{\mu\alpha_i\cdot\varphi^+(w)}\!:,\\
+\alpha^+\mu&=1,\qquad \nu:=\mu_{\rm diff}=-\alpha^-\mu^2,
+\end{aligned}
+\]
+\[
+\mathcal S_{i,{\rm odd}}^{[1]}=:\!(\mu\alpha_i\cdot\varphi^-+\nu\alpha_i\cdot\varphi^+)E_i\!:.
+\]
+<p>On the coefficient algebra the ordinary derivative is fixed by</p>
+\[
+\boxed{\partial_w\log(w/w_0)=w^{-1},\qquad \partial_w(w^{-1})=-w^{-2}.}
+\]
+<p>The second identity is load-bearing. Omitting it produces the false residual cancellation in the superseded archive.</p>
+
+<div class="cell"><div class="cell-head">Cell 1 - corrected inverse-coordinate derivative and residuals</div><pre>import sympy as s
+mu,w,P1,P2,P1p,P2p=s.symbols('mu w P1 P2 P1p P2p', nonzero=True)
+R1=-mu**2*(mu*P1**2+2*mu*P1*P2-P1p-3*mu*P2**2+P2p)/4
+R2= mu**2*(mu*P1**2-P1p-4*mu*P2**2-2*P2p)/4
+Re1=-R1-mu**2*(P1+3*P2)/(4*w)-mu/(4*w**2)
+Re2=-R2+mu**2*(P1-2*P2)/(4*w)+mu/(4*w**2)
+assert s.diff(1/w,w)==-1/w**2
+assert s.simplify(R1+Re1+mu**2*(P1+3*P2)/(4*w)+mu/(4*w**2))==0
+assert s.simplify(R2+Re2-mu**2*(P1-2*P2)/(4*w)-mu/(4*w**2))==0
+print('D(w^-1) and both corrected residuals pass')</pre></div>
+
+<h2>2. Finite-parent ordering lemma</h2>
+<p>Let \(w(X,a)\) be the parent primary obtained from the differential Miura operator,</p>
+\[
+(a\partial-X_1)(a\partial-X_2)(a\partial-X_3),\qquad
+w=u_3-\frac a2\partial u_2.
+\]
+<p>For \(V_\lambda=:\!e^{\lambda\alpha_i\cdot\phi}\!:\), a direct parent Wick expansion gives</p>
+\[
+\operatorname{Sing}[w(z)V_\lambda(w)]
+=\partial_w\!\left[\left(\frac{B_{i,1}}{z-w}+\frac{B_{i,2}}{(z-w)^2}\right)V_\lambda(w)\right]
+\]
+<p>precisely on the parent screening locus</p>
+\[
+\boxed{a\lambda+\lambda^2=1.}
+\]
+<p>The unreduced residual factorizes by \(a\lambda+\lambda^2-1\) for both roots. This parent identity is reconstructed independently in <code>independent_check_III_gate3b.py</code>.</p>
+
+<p>Now substitute the two orientations before taking any OPE coefficient:</p>
+\[
+\begin{array}{lll}
+{\rm u}:&X=P/\varepsilon+\varepsilon N,&a=\alpha^+/\varepsilon+\varepsilon\alpha^-,\quad \lambda=\varepsilon\mu_{\rm u}(t),\\
+{\rm b}:&X=P/\varepsilon-\varepsilon N,&a=\alpha^+/\varepsilon-\varepsilon\alpha^-,\quad \lambda=\varepsilon\mu_{\rm b}(t),
+\end{array}
+\qquad t=\varepsilon^2.
+\]
+<p>The transported barred contour reverses orientation. Consequently it contributes a minus sign to the \(+\) contraction and cancels the explicit minus sign in the \(-\) contraction. Coefficient extraction from these two parent normal orders is exactly the Fredenhagen-Hoerl averaged order of their equations (4.29)-(4.31). Because the parent OPE has finitely many contractions and poles, coefficient extraction commutes with the singular-part map. This is the required reduction lemma: no polynomial factor is replaced by a commuting surrogate.</p>
+
+<p>The branch equations are</p>
+\[
+\begin{aligned}
+t\mu_{\rm u}^2+(\alpha^++t\alpha^-)\mu_{\rm u}&=1,&
+t\mu_{\rm b}^2+(\alpha^+-t\alpha^-)\mu_{\rm b}&=1,\\
+\mu_3&=-\mu^3-\alpha^-\mu^2,&
+\bar\mu_3&=-\mu^3+\alpha^-\mu^2.
+\end{aligned}
+\]
+
+<div class="cell"><div class="cell-head">Cell 2 - two finite-parent orientations</div><pre>import sympy as s
+e,mu,am=s.symbols('e mu am', nonzero=True)
+a,l,X1,X2=s.symbols('a l X1 X2')
+P1,P2,N1,N2,Hm,Hp,L=s.symbols('P1 P2 N1 N2 Hm Hp L')
+B=[{2:a*l*(a+l)/2,1:-l*(X1*a*a*l+X1*a*l*l-3*X1*a-2*X1*l-X2*a*a*l-X2*a*l*l-X2*a-2*X2*l)/2},
+   {2:-a*l*(a+l)/2,1:l*(X1*a*a*l+X1*a*l*l-3*X1*a-2*X1*l+2*X2*a*a*l+2*X2*a*l*l-2*X2*a)/2}]
+for i in range(2):
+    branches=[]
+    for sign in (1,-1):
+        m3=-mu**3-sign*am*mu**2
+        sub={a:1/(mu*e)+sign*e*am,l:e*(mu+e**2*m3),X1:P1/e+sign*e*N1,X2:P2/e+sign*e*N2}
+        F=sign*mu*Hm+m3*Hp+mu**2*L
+        branch={}
+        for q in (1,2):
+            parent=s.series(B[i][q].subs(sub),e,0,4).removeO()
+            coefficient=s.expand(e*parent*(1+e**2*F)/2).coeff(e,2)
+            branch[q]=s.factor(coefficient)
+        branches.append(branch)
+    odd={q:s.factor((branches[0][q]-branches[1][q])/2) for q in (1,2)}
+    H=Hm-am*mu*Hp
+    target=({2:(H+am)/4,1:(N1+N2+mu*H*(P1+P2))/2},
+            {2:-(H+am)/4,1:-(N1+mu*H*P1)/2})[i]
+    assert all(s.simplify(odd[q]-target[q])==0 for q in (1,2))
+print('both parent orientations reproduce both averaged odd witnesses')</pre></div>
+
+<h2>3. The (+)-primary OPEs</h2>
+<div class="box theorem"><span class="tag">Theorem 3.1 - unchanged complete singular parts</span>
+\[
+\operatorname{Sing}[\mathcal U_3^+(z)\mathcal S_{1,{\rm odd}}^{[1]}(w)]
+=\partial_w\!\left[\left(\frac{P_1+P_2}{2(z-w)}+\frac{1}{4\mu(z-w)^2}\right)E_1\right],
+\]
+\[
+\operatorname{Sing}[\mathcal U_3^+(z)\mathcal S_{2,{\rm odd}}^{[1]}(w)]
+=\partial_w\!\left[\left(-\frac{P_1}{2(z-w)}-\frac{1}{4\mu(z-w)^2}\right)E_2\right].
+\]
+<p>Since \(\mathcal U_3^+\) contains only commuting \(P\)-fields, these two formulas are unchanged by the ordering repair.</p></div>
+
+<h2>4. The audited commutative diagnostic</h2>
+<p>If the \(N\)-containing averaged products in \(\mathcal U_3^-\) are prematurely replaced by commutative monomials, the strict odd density gives the algebraic residuals</p>
+\[
+R_1=-\frac{\mu^2}{4}\left[\mu P_1^2+2\mu P_1P_2-P_1'-3\mu P_2^2+P_2'\right],
+\]
+\[
+R_2=\frac{\mu^2}{4}\left[\mu P_1^2-P_1'-4\mu P_2^2-2P_2'\right].
+\]
+<p>The common even/affine coefficient</p>
+\[
+\mathcal S_{i,{\rm even}}^{[1]}=:\!\left(-\mu^3\alpha_i\cdot\varphi^++\mu^2\ell\right)E_i\!:,
+\qquad \ell=\log(w/w_0),
+\]
+<p>has the corrected ordinary residuals</p>
+\[
+\boxed{R_{1,{\rm even}}^{\rm comm}=-R_1-\frac{\mu^2}{4w}(P_1+3P_2)-\frac{\mu}{4w^2},}
+\]
+\[
+\boxed{R_{2,{\rm even}}^{\rm comm}=-R_2+\frac{\mu^2}{4w}(P_1-2P_2)+\frac{\mu}{4w^2}.}
+\]
+<p>Thus the commutative unbarred diagnostic retains</p>
+\[
+\mathscr R_1^{\rm comm}=-\frac{\mu^2}{4w}(P_1+3P_2)-\frac{\mu}{4w^2},\qquad
+\mathscr R_2^{\rm comm}=\frac{\mu^2}{4w}(P_1-2P_2)+\frac{\mu}{4w^2}.
+\]
+<div class="box warning"><span class="tag">Correct interpretation</span><p>These expressions falsify the superseded cancellation but are not the averaged-order OPE. They diagnose the contact omitted when the two parent orientations are collapsed to commutative multiplication.</p></div>
+
+<h2>5. Derived averaged-order contact and exact strict odd OPE</h2>
+<p>The two-orientation parent calculation supplies the following correction to the combined unbarred odd-plus-even singular coefficients:</p>
+\[
+\boxed{\alpha_1:\quad \delta\mathcal O_{1,3}=0,\quad
+\delta\mathcal O_{1,2}=\frac{\mu}{4w},\quad
+\delta\mathcal O_{1,1}=\frac{\mu^2}{2w}(P_1+P_2),}
+\]
+\[
+\boxed{\alpha_2:\quad \delta\mathcal O_{2,3}=0,\quad
+\delta\mathcal O_{2,2}=-\frac{\mu}{4w},\quad
+\delta\mathcal O_{2,1}=-\frac{\mu^2}{2w}P_1.}
+\]
+<p>For example, the root-1 witness shift is \(\delta\Omega_{1,1}=\mu/(4w)\). Its derivative contains \(-\mu/(4w^2)\); together with the field part of the derived contact it cancels the full \(\mathscr R_1^{\rm comm}\). Root 2 works with the opposite sign. This tracks, rather than discards, the two terms identified by the audit.</p>
+
+<p>Define</p>
+\[
+H_i:=\alpha_i\cdot\varphi^- -\alpha^-\mu\,\alpha_i\cdot\varphi^+.
+\]
+<div class="box theorem"><span class="tag">Theorem 5.1 - complete averaged-order strict odd OPEs</span>
+\[
+\operatorname{Sing}[\mathcal U_3^-(z)\mathcal S_{i,{\rm odd}}^{[1]}(w)]_{\rm Av}
+=\partial_w\!\left[\left(\frac{\Xi_{i,1}}{z-w}+\frac{\Xi_{i,2}}{(z-w)^2}\right)E_i(w)\right],
+\]
+<p>where</p>
+\[
+\boxed{\Xi_{1,2}=\frac{H_1+\alpha^-}{4},\qquad
+\Xi_{1,1}=\frac{N_1+N_2+\mu H_1(P_1+P_2)}{2},}
+\]
+\[
+\boxed{\Xi_{2,2}=-\frac{H_2+\alpha^-}{4},\qquad
+\Xi_{2,1}=-\frac{N_1+\mu H_2P_1}{2}.}
+\]
+<p>Equivalently, the complete poles are</p>
+\[
+\begin{aligned}
+\mathcal O^{\rm Av}_{1,3}&=\frac{H_1+\alpha^-}{2},\\
+\mathcal O^{\rm Av}_{1,2}&=\frac{\mu H_1(3P_1+P_2)+3N_1+N_2}{4},\\
+\mathcal O^{\rm Av}_{1,1}&=\frac12\big[\mu^2H_1(P_1^2-P_2^2)+\mu H_1(P_1'+P_2')
++2\mu\operatorname{Av}(N_1P_1-N_2P_2)+N_1'+N_2'-\alpha^-\mu^2(P_1^2-P_2^2)\big],
+\end{aligned}
+\]
+\[
+\begin{aligned}
+\mathcal O^{\rm Av}_{2,3}&=-\frac{H_2+\alpha^-}{2},\\
+\mathcal O^{\rm Av}_{2,2}&=-\frac{\mu H_2(3P_1+2P_2)+3N_1+2N_2}{4},\\
+\mathcal O^{\rm Av}_{2,1}&=-\frac12\big[\mu^2H_2(P_1^2+2P_1P_2)+\mu H_2P_1'
++2\mu\operatorname{Av}(N_1P_1+N_1P_2+N_2P_1)+N_1'-\alpha^-\mu^2(P_1^2+2P_1P_2)\big].
+\end{aligned}
+\]
+<p>No remainder survives. The even coefficient is independently exact. With \(K_i=\ell-\mu\alpha_i\cdot\varphi^+\), its witnesses are</p>
+\[
+(\Xi^{\rm even}_{1,1},\Xi^{\rm even}_{1,2})=
+\left(\frac{\mu^2K_1(P_1+P_2)}2,\frac{\mu K_1}4\right),
+\]
+\[
+(\Xi^{\rm even}_{2,1},\Xi^{\rm even}_{2,2})=
+\left(-\frac{\mu^2K_2P_1}2,-\frac{\mu K_2}4\right).
+\]
+<p>The old statement that the even channel cancels \(R_i\) is therefore replaced: the finite-parent average first restores the ordering contact, after which both odd and even coefficients are separately total derivatives.</p></div>
+
+<h2>6. Exact horizontal boundary</h2>
+<p>Let \(\lambda_i^\pm(t)=\alpha_i\cdot\lambda^\pm(t)\) denote the root component of the source momentum. The exact horizontal section is</p>
+\[
+\lambda_i^+=\frac12\left(\frac{m-t\mu_{\rm u}^2}{\mu_{\rm u}}+\frac{m-t\mu_{\rm b}^2}{\mu_{\rm b}}\right),\qquad
+t\lambda_i^-=\frac12\left(\frac{m-t\mu_{\rm u}^2}{\mu_{\rm u}}-\frac{m-t\mu_{\rm b}^2}{\mu_{\rm b}}\right).
+\]
+<p>It solves separately</p>
+\[
+a_{\rm u}=t\mu_{\rm u}^2+\mu_{\rm u}\lambda_i^++t\mu_{\rm u}\lambda_i^- -m=0,
+\]
+\[
+a_{\rm b}=t\mu_{\rm b}^2+\mu_{\rm b}\lambda_i^+-t\mu_{\rm b}\lambda_i^- -m=0.
+\]
+<p>For a weight-one parent field the based boundary is</p>
+\[
+\operatorname{LRes}_{w_0}\partial_w(w^{n+1}V)=
+\frac{e^{2\pi i a}-1}{2\pi i}\,w_0^{n+1}V(w_0).
+\]
+<p>Since both \(a_{\rm u}\) and \(a_{\rm b}\) vanish as exact formal series, each parent boundary vanishes before taking its coefficient. The odd half-difference therefore obeys</p>
+\[
+[\widetilde Q_i^{[1]},\mathcal U_{3,n}^{\sigma,[0]}]_{\rm moving}=0.
+\]
+
+<div class="cell"><div class="cell-head">Cell 3 - exact branch monodromies</div><pre>import sympy as s
+t,m,u,b=s.symbols('t m u b', nonzero=True)
+du,db=t*u**2,t*b**2
+lp=s.Rational(1,2)*((m-du)/u+(m-db)/b)
+tlm=s.Rational(1,2)*((m-du)/u-(m-db)/b)
+au=s.simplify(du+u*lp+u*tlm-m)
+ab=s.simplify(db+b*lp-b*tlm-m)
+assert au==0 and ab==0
+a=s.symbols('a')
+B=(s.exp(2*s.pi*s.I*a)-1)/(2*s.pi*s.I)
+assert B.subs(a,au)==0 and B.subs(a,ab)==0
+print('both exact parent boundaries vanish before coefficient extraction')</pre></div>
+
+<h2>7. Barred BCH subtraction</h2>
+<p>For \((\alpha_i,\alpha_i)=2\), conversion of the transported barred anti-normal vertex to the common normal order gives</p>
+\[
+\bar Z_{t,\rho}=(1-\rho)^{-2t\bar\mu(t)^2}.
+\]
+<p>This factor is scalar and insertion-coordinate independent. Minimal subtraction removes its divergence. A finite subtraction changes \(Q_i^{[1]}\) only by \(c_iQ_i^{[0]}\), which does not alter the four equations because the leading charge screens both leading primaries.</p>
+
+<h2>8. Canonical PBW target frame</h2>
+<p>The raw coefficient maps between moving target fibres whose relative tangent is</p>
+\[
+\Delta\mathbf p_i^+=\mu\alpha_i,\qquad \Delta\mathbf p_i^-=\nu\alpha_i.
+\]
+<p>With</p>
+\[
+\mathsf A_{{\rm T},i}=\mu\alpha_i\cdot q^-+\nu\alpha_i\cdot q^+,
+\qquad
+\boxed{Q_i^{[1]}=\widetilde Q_i^{[1]}-\mathsf A_{{\rm T},i}Q_i^{[0]}},
+\]
+<p>the crossed Weyl brackets and the frozen Gate-3A identity \(\mathfrak d_i^-\mathcal U_3^-=\mathcal A_i\) give</p>
+\[
+[\mathcal U_3^+,\mathsf A_{{\rm T},i}]=\frac\mu2\mathcal A_i,\qquad
+[\mathcal U_3^-,\mathsf A_{{\rm T},i}]=\frac12(\mu\mathcal B_i+\nu\mathcal A_i).
+\]
+<div class="box theorem"><span class="tag">Theorem 8.1 - nonlinear target-frame matching</span>
+\[
+\boxed{[Q_i^{[1]},\mathcal U_{3,n}^{+,[0]}]_{\rm PBW}
+=-\frac\mu2(\mathcal A_i)_nQ_i^{[0]},}
+\]
+\[
+\boxed{[Q_i^{[1]},\mathcal U_{3,n}^{-,[0]}]_{\rm PBW}
+=-\frac12(\mu\mathcal B_i+\nu\mathcal A_i)_nQ_i^{[0]}.}
+\]
+<p>These are exactly \(-\tfrac12\Delta\mathcal U_{{\rm T},3}^{\sigma,[1]}Q_i^{[0]}\). The sign comes from the target-frame derivative and the factor \(1/2\) from the crossed Weyl bracket.</p></div>
+
+<div class="cell"><div class="cell-head">Cell 4 - PBW sign and one-half factor</div><pre>import sympy as s
+U=s.Matrix([[2,0],[0,-1]])
+A=s.Matrix([[0,3],[0,0]])
+Q0=s.eye(2)
+dU=2*(U*A-A*U)
+Qpbw=-A*Q0
+assert U*Qpbw-Qpbw*U == -dU*Q0/2
+print('target-first PBW sign and one-half factor pass')</pre></div>
+
+<h2>9. Gate disposition</h2>
+<table><thead><tr><th>Obligation</th><th>Result</th><th>Witness</th></tr></thead><tbody>
+<tr><td>Correct derivative \(D(w^{-1})=-w^{-2}\)</td><td>PASS</td><td>Section 1 and verifier</td></tr>
+<tr><td>Audited ordinary residuals</td><td>PASS</td><td>Section 4</td></tr>
+<tr><td>Two finite-parent ordering orientations</td><td>PASS</td><td>Section 2 and independent reconstruction</td></tr>
+<tr><td>Derived averaged-order contact</td><td>PASS</td><td>Section 5</td></tr>
+<tr><td>Four complete strict odd OPEs</td><td>PASS</td><td>Theorems 3.1 and 5.1</td></tr>
+<tr><td>Exact horizontal branch boundaries</td><td>PASS</td><td>Section 6</td></tr>
+<tr><td>Barred BCH scalar subtraction</td><td>PASS</td><td>Section 7</td></tr>
+<tr><td>Nonlinear target-frame commutators</td><td>PASS</td><td>Theorem 8.1</td></tr>
+<tr><td>Ad hoc contact counterterm</td><td>NONE</td><td>The contact is forced by parent ordering</td></tr>
+<tr><td>Gate 3B</td><td>PASS</td><td>Corrected Outcome B</td></tr>
+<tr><td>Gate 3</td><td>CLOSED</td><td>Leading theorem plus corrected tangent equation</td></tr>
+</tbody></table>
+
+<h2>10. Claim boundary and references</h2>
+<div class="box boundary"><span class="tag">Authorized conclusion</span><p>Gate 3 closes only in the deformation-intertwiner sense. The calculation does not establish an ordinary second screening, a quantum screening doublet, kernel equality, a BRST complex, a screening-screening algebra, or the bulk normalization match.</p></div>
+<p>The next programme step is Notebook IV: semiclassical bulk normalization and the \(N=2\) anchors, after independent freeze review of this corrected Gate-3B archive.</p>
+<p><b>[FH26]</b> S. Fredenhagen and L. Hoerl, <i>Free-field construction of Carrollian \(W_N\)-algebras</i>, JHEP 02 (2026) 218, arXiv:2509.14441v3. Used for the contracted Miura fields and the symmetric averaged-ordering prescription, especially Section 4.4 and equations (4.29)-(4.31). Equations (4.18)-(4.21) are free-field formulas, not a screening construction.</p>
+<p><b>[FL88]</b> V. A. Fateev and S. L. Lukyanov, <i>The models of two-dimensional conformal quantum field theory with \(Z_n\) symmetry</i>, Int. J. Mod. Phys. A 3 (1988) 507.</p>
+<p><b>[BS93]</b> P. Bouwknegt and K. Schoutens, <i>W-symmetry in conformal field theory</i>, Phys. Rept. 223 (1993) 183-276, arXiv:hep-th/9210010.</p>
+<p><b>[HLZ11]</b> Y.-Z. Huang, J. Lepowsky and L. Zhang, <i>Logarithmic tensor category theory for generalized modules for a conformal vertex algebra, I-II</i>, arXiv:1012.4193 and arXiv:1110.1929. Background only; the based logarithmic residue is defined in frozen Notebook II.</p>
+<div class="footer">Notebook III, Gate 3B - corrected freeze release 4 August 2026 (Europe/Berlin, UTC+02:00). Semantic release G3B-aaef4dfef7d3880e. Gate 3 closes with Outcome B; quantum screening doublet remains unauthorized.</div>
+</main></body></html>
